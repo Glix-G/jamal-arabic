@@ -164,6 +164,84 @@ main { padding-block: 6px 48px; }
   padding: 14px 18px; border-radius: 18px; background: var(--black); color: var(--cream); font-size: 14.5px; line-height: 1.45; box-shadow: 0 20px 40px -12px rgba(0,0,0,0.45);
   opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+/* Alphabet */
+.abc { display: flex; flex-direction: column; gap: 16px; }
+.abc-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 16px; align-items: start; }
+.abc-grid-card { display: flex; flex-direction: column; gap: 16px; }
+.abc-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; direction: rtl; }
+.abc-tile { position: relative; border: 1px solid var(--line); background: rgba(251,246,239,0.7); border-radius: 16px; padding: 6px 2px 7px; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; transition: background 0.2s, transform 0.2s, border-color 0.2s; }
+.abc-tile:hover { background: var(--cream); transform: translateY(-2px); }
+.abc-tile .ar { font-size: 34px; line-height: 1.35; color: var(--wine); font-weight: 700; }
+.abc-tile small { direction: ltr; font-size: 11.5px; color: var(--muted); line-height: 1.1; }
+.abc-tile.nc::after, .dot-nc { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--sun); }
+.abc-tile.nc::after { position: absolute; top: 7px; left: 7px; }
+.abc-tile[aria-pressed="true"] { background: var(--wine); border-color: var(--wine); }
+.abc-tile[aria-pressed="true"] .ar { color: var(--gold); }
+.abc-tile[aria-pressed="true"] small { color: rgba(251,246,239,0.75); }
+.abc-note { margin: 0; font-size: 14px; color: var(--muted); display: flex; gap: 8px; align-items: baseline; }
+.abc-card { background: linear-gradient(165deg, var(--wine-2) 0%, var(--wine) 45%, var(--wine-deep) 100%); color: var(--cream); display: flex; flex-direction: column; gap: 18px; box-shadow: 0 30px 60px -30px rgba(63,16,26,0.6); }
+.abc-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px; align-items: center; }
+.abc-big { font-size: 110px; line-height: 1; color: var(--gold); font-weight: 700; text-shadow: 0 0 30px rgba(235,196,143,0.35); min-width: 90px; text-align: center; }
+.abc-head .eyebrow { color: rgba(251,246,239,0.6); }
+.abc-head h2 { margin: 4px 0 0; font-family: var(--f-disp); font-weight: 600; font-size: 36px; line-height: 1.1; }
+.abc-head h2 .ar { font-size: 0.8em; color: var(--gold); margin-left: 8px; }
+.abc-sound { margin: 6px 0 0; font-size: 16px; }
+.abc-sound b { color: var(--gold); }
+.abc-desc { margin: 4px 0 0; font-size: 14.5px; color: rgba(251,246,239,0.75); line-height: 1.45; }
+.abc-say { align-self: start; }
+.abc-forms { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.abc-form { background: var(--cream); color: var(--wine-deep); border-radius: 18px; padding: 8px 4px 10px; display: flex; flex-direction: column; align-items: center; }
+.abc-form .ar { font-size: 50px; line-height: 1.5; }
+.abc-form small { font-size: 12.5px; color: var(--muted); }
+.abc-warn { margin: 0; font-size: 14px; padding: 10px 14px; border-radius: 14px; background: rgba(238,122,47,0.18); }
+.abc-ex { display: flex; flex-direction: column; gap: 6px; padding-top: 14px; border-top: 1px solid rgba(251,246,239,0.14); }
+.abc-ex .eyebrow { color: rgba(251,246,239,0.6); }
+.abc-ex-row { display: flex; align-items: center; gap: 16px; }
+.abc-ex-row .ar { font-size: 44px; line-height: 1.4; }
+.abc-ex-row .hl { color: var(--gold); }
+.abc-ex-row b { display: block; font-family: var(--f-disp); font-size: 24px; font-weight: 600; line-height: 1.1; }
+.abc-ex-row small { color: rgba(251,246,239,0.65); font-size: 13.5px; }
+.abc-head.enter, .abc-forms.enter { animation: fadeup 0.4s cubic-bezier(.2,.8,.2,1) both; }
+.abc-forms.enter { animation-delay: 0.05s; }
+.abc-build { display: flex; flex-direction: column; gap: 16px; }
+.build-out { min-height: 104px; display: grid; place-items: center; text-align: center; border-radius: 20px; background: var(--sand); }
+.build-out .ar { font-size: 64px; line-height: 1.5; color: var(--wine-deep); }
+.build-out em { font-style: normal; color: var(--muted); font-size: 15px; grid-row: 1; }
+.build-parts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; direction: rtl; min-height: 0; }
+.part { display: flex; flex-direction: column; align-items: center; padding: 4px 10px 6px; border-radius: 14px; border: 1px solid var(--line); background: var(--cream); }
+.part .ar { font-size: 30px; line-height: 1.45; color: var(--wine); }
+.part small { direction: ltr; font-size: 11.5px; color: var(--muted); }
+.build-keys { display: flex; flex-wrap: wrap; gap: 6px; direction: rtl; justify-content: center; }
+.key { width: 44px; height: 48px; border-radius: 12px; border: 1px solid var(--line); background: var(--cream); font-family: var(--f-ar); font-size: 26px; color: var(--wine); cursor: pointer; transition: background 0.15s, transform 0.15s; }
+.key:hover { background: var(--sand-2); transform: translateY(-1px); }
+.key:active { transform: scale(0.95); }
+.build-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.build-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto; }
+.build-presets .ar { font-size: 18px; color: var(--wine); }
+@media (max-width: 960px) {
+  .abc-top { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .nav { width: 100%; }
+  .nav a { flex: 1; text-align: center; padding: 9px 6px; font-size: 13.5px; }
+  .abc-grid-card .counter, .abc-build .counter { display: none; }
+  .abc-grid { gap: 5px; }
+  .abc-tile { border-radius: 12px; }
+  .abc-tile .ar { font-size: 26px; }
+  .abc-tile small { font-size: 9.5px; }
+  .abc-head { grid-template-columns: auto minmax(0, 1fr); }
+  .abc-say { grid-column: 2; justify-self: start; }
+  .abc-big { font-size: 80px; min-width: 64px; }
+  .abc-head h2 { font-size: 30px; }
+  .abc-forms { gap: 6px; }
+  .abc-form .ar { font-size: 38px; }
+  .abc-form small { font-size: 11px; }
+  .build-out .ar { font-size: 48px; }
+  .key { width: 38px; height: 44px; font-size: 22px; }
+  .build-presets { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .abc-head.enter, .abc-forms.enter { animation: none; } .abc-tile, .key { transition: none; } }
 /* Root card */
 .root-card { display: flex; flex-direction: column; gap: 18px; }
 .root-head { display: flex; justify-content: space-between; align-items: center; }
@@ -348,8 +426,9 @@ main { padding-block: 6px 48px; }
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#tree" aria-label="JAMAL Arabic"><img class="logo" src="logo.png" alt="" width="48" height="48"><span class="brand-name">JAMAL<small>Arabic</small></span></a>
+    <a class="brand" href="#abc" aria-label="JAMAL Arabic"><img class="logo" src="logo.png" alt="" width="48" height="48"><span class="brand-name">JAMAL<small>Arabic</small></span></a>
     <nav class="nav" aria-label="Режимы">
+      <a href="#abc" id="tab-abc">Алфавит</a>
       <a href="#tree" id="tab-tree">Созвездие</a>
       <a href="#find" id="tab-find">Найди слово</a>
     </nav>
@@ -358,6 +437,18 @@ main { padding-block: 6px 48px; }
 
 <main class="wrap">
   <div class="loading" id="loading">Загружаю корни…</div>
+
+  <section class="abc" id="view-abc" hidden>
+    <div class="abc-top">
+      <div class="card glass abc-grid-card">
+        <div class="root-head"><span class="eyebrow">Алфавит · 28 букв</span><span class="counter">читается справа налево</span></div>
+        <div class="abc-grid" id="abc-grid"></div>
+        <p class="abc-note"><span class="dot-nc"></span> Эти 6 букв не соединяются со следующей буквой: после них слово как бы «рвётся».</p>
+      </div>
+      <div class="card abc-card" id="abc-card" aria-live="polite"></div>
+    </div>
+    <div class="card white abc-build" id="abc-build"></div>
+  </section>
 
   <section class="bento" id="view-tree" hidden>
     <div class="sky" id="arch" aria-label="Созвездие слов корня"></div>
@@ -495,11 +586,14 @@ main { padding-block: 6px 48px; }
 
   // ---------- Routing ----------
   function route() {
-    const v = location.hash === "#find" || location.hash === "#detective" ? "find" : "tree";
+    const h = location.hash;
+    const v = h === "#find" || h === "#detective" ? "find" : h === "#tree" ? "tree" : "abc";
+    $("#view-abc").hidden = v !== "abc";
     $("#view-tree").hidden = v !== "tree";
     $("#view-find").hidden = v !== "find";
-    ["tree", "find"].forEach(k => { const a = $("#tab-" + k); if (k === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    ["abc", "tree", "find"].forEach(k => { const a = $("#tab-" + k); if (k === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
     if (v === "tree") showRoot(true);
+    else if (v === "abc") renderAlphabet();
     else if (!G || G.fresh) newRound(G && G.preferRoot);
     window.scrollTo(0, 0);
   }
@@ -714,6 +808,134 @@ main { padding-block: 6px 48px; }
     else if (t.dataset.learn) {
       toggleLearn(t.dataset.learn);
     }
+  });
+
+  // ---------- Alphabet ----------
+  // c: letter, n: Arabic name, ru: name in Russian, s: sound (Cyrillic), d: how to say it, j: joins the NEXT letter
+  const LETTERS = [
+    { c: "ا", n: "أَلِف", ru: "алиф", s: "а̄", d: "Долгое «а». В начале слова — опора для короткой гласной.", j: false },
+    { c: "ب", n: "بَاء", ru: "ба", s: "б", d: "Как русское «б».", j: true },
+    { c: "ت", n: "تَاء", ru: "та", s: "т", d: "Как русское «т».", j: true },
+    { c: "ث", n: "ثَاء", ru: "са", s: "с (межзубное)", d: "Кончик языка между зубами, как английское th в think.", j: true },
+    { c: "ج", n: "جِيم", ru: "джим", s: "дж", d: "Как «дж» в слове «джинсы».", j: true },
+    { c: "ح", n: "حَاء", ru: "ха", s: "х (глубокое)", d: "Сильный беззвучный выдох из глубины горла, как когда дышат на стекло.", j: true },
+    { c: "خ", n: "خَاء", ru: "ха", s: "х", d: "Как русское «х» в слове «хор».", j: true },
+    { c: "د", n: "دَال", ru: "даль", s: "д", d: "Как русское «д».", j: false },
+    { c: "ذ", n: "ذَال", ru: "заль", s: "з (межзубное)", d: "Кончик языка между зубами, как английское th в this.", j: false },
+    { c: "ر", n: "رَاء", ru: "ра", s: "р", d: "Раскатистое «р».", j: false },
+    { c: "ز", n: "زَاي", ru: "зай", s: "з", d: "Как русское «з».", j: false },
+    { c: "س", n: "سِين", ru: "син", s: "с", d: "Как русское «с».", j: true },
+    { c: "ش", n: "شِين", ru: "шин", s: "ш", d: "Как русское «ш», но мягче.", j: true },
+    { c: "ص", n: "صَاد", ru: "сад", s: "с (твёрдое)", d: "Твёрдое «с»: язык прижат, звук низкий и «толстый».", j: true },
+    { c: "ض", n: "ضَاد", ru: "дад", s: "д (твёрдое)", d: "Твёрдое «д». Арабский язык называют «языком дада».", j: true },
+    { c: "ط", n: "طَاء", ru: "та", s: "т (твёрдое)", d: "Твёрдое «т», звучит низко.", j: true },
+    { c: "ظ", n: "ظَاء", ru: "за", s: "з (твёрдое межзубное)", d: "Твёрдая пара к ذ: язык между зубами, звук низкий.", j: true },
+    { c: "ع", n: "عَيْن", ru: "‘айн", s: "‘", d: "Гортанный звук, которого нет в русском: сжатие горла, как перед стоном.", j: true },
+    { c: "غ", n: "غَيْن", ru: "гайн", s: "г (картавое)", d: "Картавое «г», как французское r.", j: true },
+    { c: "ف", n: "فَاء", ru: "фа", s: "ф", d: "Как русское «ф».", j: true },
+    { c: "ق", n: "قَاف", ru: "каф", s: "к (глубокое)", d: "«К» из самой глубины горла.", j: true },
+    { c: "ك", n: "كَاف", ru: "кяф", s: "к", d: "Как русское «к».", j: true },
+    { c: "ل", n: "لَام", ru: "лям", s: "л", d: "Как русское «л», чаще мягкое.", j: true },
+    { c: "م", n: "مِيم", ru: "мим", s: "м", d: "Как русское «м».", j: true },
+    { c: "ن", n: "نُون", ru: "нун", s: "н", d: "Как русское «н».", j: true },
+    { c: "ه", n: "هَاء", ru: "ха", s: "h", d: "Лёгкий выдох, как английское h в home.", j: true },
+    { c: "و", n: "وَاو", ru: "вав", s: "в / ӯ", d: "Как английское w, а после «у» — долгое «у».", j: false },
+    { c: "ي", n: "يَاء", ru: "йа", s: "й / ӣ", d: "Как «й», а после «и» — долгое «и».", j: true }
+  ];
+  const ZWJ = "‍";
+  const NON_JOIN = "اأإآدذرزوؤةء";           // letters that never join the letter after them
+  const joinsNext = ch => !NON_JOIN.includes(ch);
+  const forms = L => ({
+    iso: L.c,
+    ini: L.j ? L.c + ZWJ : L.c,
+    med: L.j ? ZWJ + L.c + ZWJ : ZWJ + L.c,
+    fin: ZWJ + L.c
+  });
+  const FORM_NAME = { iso: "отдельно", ini: "в начале", med: "в середине", fin: "в конце" };
+  // which shape a letter takes at position i of a word (by its neighbours, not by its place in the word)
+  function formAt(bases, i) {
+    const prev = i > 0 && joinsNext(bases[i - 1]);
+    const next = i < bases.length - 1 && joinsNext(bases[i]);
+    return prev && next ? "med" : prev ? "fin" : next ? "ini" : "iso";
+  }
+  const EXTRA_EXAMPLES = {
+    "ث": { ar: "ثَلَاثَة", tr: "саласа", ru: "три" },
+    "ذ": { ar: "ذَهَب", tr: "захаб", ru: "золото" },
+    "ض": { ar: "ضَيْف", tr: "дайф", ru: "гость" }
+  };
+  const SAME_SHAPE = { "ا": "اأإآ" };
+  function exampleFor(L) {
+    const shapes = SAME_SHAPE[L.c] || L.c;
+    const pool = WORDS.concat(Object.values(EXTRA_EXAMPLES).map(x => Object.assign({ cat: "noun" }, x)));
+    let best = null;
+    pool.forEach(w => {
+      const cl = clusters(w.ar);
+      const i = cl.findIndex(c => shapes.includes(c[0]));
+      if (i < 0) return;
+      const score = (i === 0 ? 0 : 10) + cl.length;   // prefer the letter at the start, and short words
+      if (!best || score < best.score) best = { w, i, score };
+    });
+    return best;
+  }
+
+  const A = { i: 1, build: [] };
+  function renderAlphabet() {
+    $("#abc-grid").innerHTML = LETTERS.map((L, i) => `<button class="abc-tile ${L.j ? "" : "nc"}" data-li="${i}" aria-pressed="${i === A.i}" aria-label="${esc(L.ru)}">
+      <span class="ar" lang="ar">${L.c}</span><small>${esc(L.ru)}</small></button>`).join("");
+    renderLetter(false); renderBuilder();
+  }
+  function renderLetter(animate) {
+    const L = LETTERS[A.i], F = forms(L), ex = exampleFor(L);
+    let exHtml = "";
+    if (ex) {
+      const cl = clusters(ex.w.ar), bases = cl.map(c => c[0]);
+      const word = cl.map((c, k) => k === ex.i ? `<span class="hl">${c}</span>` : c).join("");
+      exHtml = `<div class="abc-ex"><span class="eyebrow">Пример</span>
+        <div class="abc-ex-row"><span class="ar" lang="ar">${word}</span>
+        <div><b>${esc(ex.w.ru.split(",")[0])}</b><small>${esc(ex.w.tr)} · здесь форма «${FORM_NAME[formAt(bases, ex.i)]}»</small></div></div></div>`;
+    }
+    $("#abc-card").innerHTML = `<div class="abc-head ${animate ? "enter" : ""}">
+        <span class="abc-big ar" lang="ar">${L.c}</span>
+        <div><span class="eyebrow">${A.i + 1} / 28 · ${L.j ? "соединяется с обеих сторон" : "соединяется только справа"}</span>
+          <h2>${esc(L.ru)} <span class="ar" lang="ar">${L.n}</span></h2>
+          <p class="abc-sound">Звук: <b>${esc(L.s)}</b></p>
+          <p class="abc-desc">${esc(L.d)}</p></div>
+        ${canSpeak ? `<button class="pop-btn ghost abc-say" data-say="${esc(L.n)}" aria-label="Послушать название">▶</button>` : ""}
+      </div>
+      <div class="abc-forms ${animate ? "enter" : ""}">${["fin", "med", "ini", "iso"].map(k => `<div class="abc-form"><span class="ar" lang="ar">${F[k]}</span><small>${FORM_NAME[k]}</small></div>`).join("")}</div>
+      ${L.j ? "" : `<p class="abc-warn">Буква «${esc(L.ru)}» не цепляется к следующей букве, поэтому формы «в начале» и «в середине» совпадают с отдельной и конечной.</p>`}
+      ${exHtml}`;
+  }
+  $("#abc-grid").addEventListener("click", e => {
+    const b = e.target.closest("[data-li]"); if (!b) return;
+    A.i = +b.dataset.li;
+    document.querySelectorAll(".abc-tile").forEach(t => t.setAttribute("aria-pressed", t.dataset.li === b.dataset.li));
+    renderLetter(true);
+    if (matchMedia("(max-width: 960px)").matches) $("#abc-card").scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "nearest" });
+  });
+  $("#abc-card").addEventListener("click", e => { const t = e.target.closest("[data-say]"); if (t) speak(t.dataset.say); });
+
+  // «Собери слово»: tap letters and watch them join
+  const PRESETS = [["كتاب", "китаб", "книга"], ["مدرسة", "мадраса", "школа"], ["باب", "баб", "дверь"], ["جميل", "джамиль", "красивый"]];
+  function renderBuilder() {
+    const b = A.build;
+    const joined = b.join("");
+    $("#abc-build").innerHTML = `<div class="root-head"><span class="eyebrow">Собери слово</span><span class="counter">нажимайте буквы — они сами соединятся</span></div>
+      <div class="build-out"><span class="ar" lang="ar">${joined || "&nbsp;"}</span>${b.length ? "" : `<em>Начните с любой буквы или выберите пример ниже</em>`}</div>
+      <div class="build-parts">${b.map((ch, i) => `<span class="part ${formAt(b, i)}"><span class="ar" lang="ar">${forms(LETTERS.find(L => L.c === ch) || { c: ch, j: joinsNext(ch) })[formAt(b, i)]}</span><small>${FORM_NAME[formAt(b, i)]}</small></span>`).join("")}</div>
+      <div class="build-keys">${LETTERS.map(L => `<button class="key" data-k="${L.c}" lang="ar">${L.c}</button>`).join("")}<button class="key" data-k="ة" lang="ar" title="та марбута">ة</button></div>
+      <div class="build-actions">
+        <button class="pill" data-act="back">⌫ Стереть букву</button><button class="pill" data-act="clear">Очистить</button>
+        <span class="build-presets">${PRESETS.map(p => `<button class="pill" data-preset="${p[0]}"><span class="ar" lang="ar">${p[0]}</span> ${esc(p[2])}</button>`).join("")}</span>
+      </div>`;
+  }
+  $("#abc-build").addEventListener("click", e => {
+    const t = e.target.closest("button"); if (!t) return;
+    if (t.dataset.k) { if (A.build.length < 12) A.build.push(t.dataset.k); }
+    else if (t.dataset.act === "back") A.build.pop();
+    else if (t.dataset.act === "clear") A.build = [];
+    else if (t.dataset.preset) A.build = [...t.dataset.preset];
+    renderBuilder();
   });
 
   // ---------- Game: «Найди слово» ----------
