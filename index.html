@@ -243,6 +243,9 @@ main { padding-block: 6px 48px; }
   .build-presets { margin-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .abc-head.enter, .abc-forms.enter { animation: none; } .abc-tile, .key { transition: none; } }
+.diag { position: fixed; inset: 0; z-index: 90; background: rgba(31,23,21,0.55); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) 16px; }
+.diag-in { width: min(640px, 100%); max-height: 100%; overflow: auto; background: var(--cream); border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.diag pre { margin: 0; white-space: pre-wrap; word-break: break-word; font-size: 11.5px; line-height: 1.45; font-family: ui-monospace, Menlo, monospace; }
 /* Root card */
 .root-card { display: flex; flex-direction: column; gap: 18px; }
 .root-head { display: flex; justify-content: space-between; align-items: center; }
@@ -750,6 +753,8 @@ main { padding-block: 6px 48px; }
   // A sukun on the last letter tells the voice to stop there; words already ending in a vowel (verbs) stay as they are.
   const pausal = ar => /[ً-ْ]$/.test(ar) ? ar : ar + "ْ";
   const canSpeak = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+  const SPLOG = [];
+  const slog = msg => { const ss = window.speechSynthesis; SPLOG.push(`${new Date().toISOString().slice(11, 23)} ${msg}` + (ss ? ` [speaking=${ss.speaking} pending=${ss.pending} paused=${ss.paused}]` : "")); if (SPLOG.length > 40) SPLOG.shift(); };
   let currentUtt = null;          // keep a reference: WebKit/Chrome may garbage-collect an utterance and stay silent
   function makeUtt(text) {
     const u = new SpeechSynthesisUtterance(text);
@@ -764,35 +769,26 @@ main { padding-block: 6px 48px; }
     const text = pausal(t);
     let started = false, failed = "";
     const arm = u => {
-      u.onstart = () => { started = true; };
-      u.onerror = e => { const er = e && e.error; if (er !== "interrupted" && er !== "canceled") failed = er || "error"; };
+      u.onstart = () => { started = true; slog("onstart"); };
+      u.onend = () => slog("onend");
+      u.onerror = e => { const er = e && e.error; slog("onerror " + er); if (er !== "interrupted" && er !== "canceled") failed = er || "error"; };
       currentUtt = u;
     };
     try {
       // Everything runs synchronously inside the tap: iOS only allows speech that starts during the gesture.
-      if (ss.speaking || ss.pending || ss.paused) ss.cancel();
+      slog("tap → speak " + text);
+      if (ss.speaking || ss.pending || ss.paused) { slog("cancel stale"); ss.cancel(); }
       ss.resume();
       const u = makeUtt(text); arm(u); ss.speak(u);
     } catch (e) { return sayFail("speak-throw"); }
     // One retry if WebKit swallowed the first attempt (it happens right after cancel or after the app was in background).
     setTimeout(() => {
       if (started) return;
-      try { ss.cancel(); ss.resume(); const u2 = makeUtt(text); arm(u2); ss.speak(u2); } catch (e) {}
+      slog("retry");
+      try { ss.cancel(); ss.resume(); const u2 = makeUtt(text); arm(u2); ss.speak(u2); } catch (e) { slog("retry threw " + e.message); }
     }, 700);
-    setTimeout(() => { if (!started) sayFail(failed || (arVoice ? "no-start" : "no-voice")); }, 2600);
+    setTimeout(() => { slog(started ? "ok: started" : "FAILED " + (failed || "no-start")); if (!started) sayFail(failed || (arVoice ? "no-start" : "no-voice")); }, 2600);
   }
-  // iOS: unlock speech with a silent utterance on the very first touch.
-  let speechUnlocked = false;
-  const unlockSpeech = e => {
-    if (speechUnlocked || !canSpeak) return;
-    speechUnlocked = true;
-    document.removeEventListener("touchend", unlockSpeech, true);
-    document.removeEventListener("click", unlockSpeech, true);
-    if (e && e.target && e.target.closest && e.target.closest("[data-say]")) return;   // a real word is about to be spoken anyway
-    try { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; window.speechSynthesis.speak(u); } catch (err) {}
-  };
-  document.addEventListener("touchend", unlockSpeech, { capture: true, passive: true });
-  document.addEventListener("click", unlockSpeech, true);
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && canSpeak) { try { window.speechSynthesis.cancel(); } catch (e) {} } });
   let toastTimer = null;
   function sayFail(reason) {
@@ -837,6 +833,29 @@ main { padding-block: 6px 48px; }
     }
   });
 
+  // Hidden speech diagnostics: tap the logo 5 times quickly.
+  let logoTaps = [];
+  document.querySelector(".brand").addEventListener("click", e => {
+    const now = Date.now(); logoTaps = logoTaps.filter(t => now - t < 2000).concat(now);
+    if (logoTaps.length < 5) return;
+    e.preventDefault(); logoTaps = [];
+    let voices = [];
+    try { voices = speechSynthesis.getVoices(); } catch (err) {}
+    const ar = voices.filter(v => (v.lang || "").toLowerCase().startsWith("ar"));
+    const info = [
+      "UA: " + navigator.userAgent,
+      "speechSynthesis: " + ("speechSynthesis" in window) + ", utterance: " + ("SpeechSynthesisUtterance" in window),
+      "voices total: " + voices.length + ", arabic: " + ar.map(v => `${v.name} (${v.lang}${v.localService ? ", local" : ""})`).join("; "),
+      "chosen voice: " + (arVoice ? arVoice.name + " " + arVoice.lang : "none"),
+      "telegram: " + (window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp.platform + " " + window.Telegram.WebApp.version : "no"),
+      "— log —"
+    ].concat(SPLOG.length ? SPLOG : ["(пусто — нажмите ▶ хотя бы раз)"]);
+    let el = document.getElementById("diag");
+    if (!el) { el = document.createElement("div"); el.id = "diag"; el.className = "diag"; document.body.appendChild(el); }
+    el.innerHTML = `<div class="diag-in"><b>Диагностика звука</b><pre>${esc(info.join("\n"))}</pre><button class="pill black" data-close>Закрыть</button></div>`;
+    el.hidden = false;
+    el.querySelector("[data-close]").onclick = () => { el.hidden = true; };
+  });
   // ---------- Alphabet ----------
   // c: letter, n: Arabic name, ru: name in Russian, s: sound (Cyrillic), d: how to say it, j: joins the NEXT letter
   const LETTERS = [
