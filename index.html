@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EFE5D8">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="config.js"></script>
+<style>body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}</style>
+<title>JAMAL Arabic</title>
+</head>
+<body>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: sand-and-wine bento — a mihrab arch holding a tree of life (left), soft glass cards + black pills (right). Single deliberate light look. */
+:root {
+  --sand: #EFE5D8;
+  --sand-2: #E5D6C4;
+  --cream: #FBF6EF;
+  --glass: rgba(251, 246, 239, 0.74);
+  --ink: #1F1715;
+  --muted: #7C6B61;
+  --line: rgba(31, 23, 21, 0.12);
+  --wine: #6B1E2B;
+  --wine-2: #8A2C3A;
+  --wine-deep: #3F101A;
+  --gold: #EBC48F;
+  --sun: #EE7A2F;
+  --sun-deep: #C2551C;
+  --black: #1C1716;
+  --f-ar: "Amiri", "Geeza Pro", "Times New Roman", serif;
+  --f-cal: "Amiri", "Geeza Pro", "Times New Roman", serif;
+  --f-logo: "Aref Ruqaa", "Amiri", "Geeza Pro", serif;
+  --f-ui: "Manrope", "Helvetica Neue", system-ui, sans-serif;
+  --f-disp: "Cormorant Garamond", "Times New Roman", serif;
+  --r: 28px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { background: var(--sand); color: var(--ink); }
+body { font-family: var(--f-ui); font-size: 16px; line-height: 1.55; font-weight: 400; min-height: 100vh;
+  background-image: radial-gradient(1200px 600px at 85% -10%, rgba(238,122,47,0.10), transparent 60%), radial-gradient(900px 700px at -10% 110%, rgba(107,30,43,0.10), transparent 60%); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--sun); outline-offset: 3px; }
+.ar { font-family: var(--f-ar); direction: rtl; unicode-bidi: isolate; }
+.cal { font-family: var(--f-cal); font-weight: 700; direction: rtl; unicode-bidi: isolate; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* Header */
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px 14px; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.brand .logo { width: 48px; height: 48px; flex: none; filter: drop-shadow(0 6px 14px rgba(94,24,36,0.25)); }
+.brand .brand-name { display: flex; flex-direction: column; line-height: 1; }
+.brand .brand-name small { font-family: var(--f-ui); font-size: 10.5px; font-weight: 500; letter-spacing: 0.42em; color: var(--muted); margin-top: 5px; padding-left: 2px; }
+.brand .cal { font-family: var(--f-logo); font-weight: 400; font-size: 38px; line-height: 1; color: var(--wine); }
+.brand span:last-child { font-family: var(--f-disp); font-size: 22px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wine); }
+.nav { display: flex; gap: 4px; padding: 5px; border-radius: 999px; background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.6); }
+.nav a { text-decoration: none; padding: 9px 20px; border-radius: 999px; color: var(--muted); font-weight: 500; font-size: 15px; }
+.nav a[aria-current="page"] { background: var(--black); color: var(--cream); }
+
+main { padding-block: 6px 48px; }
+
+/* Bento */
+.bento { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.card { border-radius: var(--r); padding: 26px; position: relative; overflow: hidden; min-width: 0; }
+.glass { background: var(--glass); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 20px 50px -30px rgba(63,16,26,0.35); }
+.white { background: var(--cream); box-shadow: 0 20px 50px -30px rgba(63,16,26,0.35); }
+.dark { background: var(--black); color: var(--cream); }
+.eyebrow { font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+
+/* Constellation (night sky of the desert) */
+.sky { position: relative; height: 680px; border-radius: var(--r); overflow: hidden;
+  background: radial-gradient(ellipse at 50% 46%, #84303D 0%, var(--wine) 34%, var(--wine-deep) 78%, #2C0A12 100%);
+  box-shadow: 0 30px 60px -30px rgba(63,16,26,0.6); }
+.sky svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sky .tw { animation: tw 3.5s ease-in-out infinite alternate; }
+@keyframes tw { from { opacity: 0.15; } to { opacity: 0.8; } }
+.sky .link { stroke-dasharray: var(--len); animation: draw 0.9s ease-out both; }
+@keyframes draw { from { stroke-dashoffset: var(--len); } to { stroke-dashoffset: 0; } }
+.sky-title { position: absolute; left: 28px; top: 24px; z-index: 3; color: rgba(251,246,239,0.62); font-size: 12.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; }
+.sky-key { position: absolute; right: 28px; top: 22px; z-index: 3; display: flex; gap: 16px; color: rgba(251,246,239,0.62); font-size: 13px; }
+.sky-key span { display: flex; align-items: center; gap: 6px; }
+.sky-key svg { position: static; width: 14px; height: 14px; }
+.core-star { position: absolute; transform: translate(-50%, -50%); z-index: 3; text-align: center; pointer-events: none; }
+.core-star::before { content: ""; position: absolute; left: 50%; top: 45%; width: 260px; height: 260px; transform: translate(-50%, -50%); border-radius: 50%;
+  background: radial-gradient(circle, rgba(235,196,143,0.38) 0%, rgba(235,196,143,0.10) 40%, transparent 70%); z-index: -1; }
+.core-star .cal { display: block; font-size: 66px; line-height: 1.1; color: var(--gold); text-shadow: 0 0 24px rgba(235,196,143,0.55); letter-spacing: 0.08em; }
+.core-star small { display: block; margin-top: 2px; font-size: 14px; color: rgba(251,246,239,0.78); letter-spacing: 0.04em; }
+.node { position: absolute; transform: translate(-50%, -50%); z-index: 4; border: 0; background: none; cursor: pointer; color: var(--cream);
+  display: flex; flex-direction: column; align-items: center; gap: 0; padding: 4px 8px; border-radius: 16px; transition: background 0.2s; animation: appear 0.6s ease-out both; }
+@keyframes appear { from { opacity: 0; transform: translate(-50%, -50%) scale(0.7); } to { opacity: 1; transform: translate(-50%, -50%); } }
+.node:hover { background: rgba(251,246,239,0.08); }
+.node svg { position: static; width: 20px; height: 20px; overflow: visible; }
+.node .ar { font-size: 32px; line-height: 1.45; opacity: 0.78; }
+.node .rl { color: var(--gold); }
+.node .t { font-size: 13px; color: rgba(251,246,239,0.62); line-height: 1.15; }
+.node .c { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(235,196,143,0.7); margin-top: 3px; }
+.node.learned .ar { opacity: 1; }
+.node.learned svg path { filter: drop-shadow(0 0 6px rgba(235,196,143,0.9)); }
+.node[aria-pressed="true"] { background: rgba(251,246,239,0.12); box-shadow: inset 0 0 0 1px rgba(235,196,143,0.5); }
+
+.legend-mini { display: flex; gap: 16px; font-size: 13.5px; margin-top: 6px; }
+.legend-mini i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; border: 1px solid var(--wine); }
+.legend-mini i.on { background: var(--wine); }
+/* motion + popover */
+.sky > svg, .sky > .core-star, .sky > .node, .sky > .sky-key, .sky > .sky-title { transition: opacity 0.35s ease; }
+.sky.out > * { opacity: 0 !important; }
+.root-card .cal, .root-card h1 { transition: opacity 0.3s ease, transform 0.3s ease; }
+.root-card.out .cal, .root-card.out h1 { opacity: 0; transform: translateY(6px); }
+.ray { stroke: #FBF6EF; stroke-opacity: 0.3; stroke-width: 1; stroke-dasharray: 2 5; transition: stroke 0.4s, stroke-opacity 0.4s, stroke-width 0.4s, opacity 0.4s; }
+.ray.on { stroke: #EBC48F; stroke-opacity: 0.7; stroke-width: 1.2; stroke-dasharray: none; }
+.ray.on.link { stroke-dasharray: var(--len); }
+.ray.sel { stroke: #EBC48F; stroke-opacity: 1; stroke-width: 1.8; stroke-dasharray: none; }
+.sky.has-sel .ray:not(.sel) { opacity: 0.3; }
+.node { transition: opacity 0.4s ease, background 0.25s ease; }
+.sky.has-sel .node:not([aria-pressed="true"]) { opacity: 0.32; }
+.sky.has-sel .core-star { opacity: 0.4; }
+.core-star { transition: opacity 0.4s ease; }
+.node[aria-pressed="true"] { background: none; box-shadow: none; z-index: 5; }
+.node:hover { background: none; }
+.node .float { display: flex; flex-direction: column; align-items: center; animation: float 6.5s ease-in-out infinite alternate; }
+@keyframes float { from { transform: translateY(-3px); } to { transform: translateY(4px); } }
+.node .st { display: block; line-height: 0; transition: transform 0.45s cubic-bezier(.2,.8,.2,1); }
+.node:hover .st, .node[aria-pressed="true"] .st { transform: scale(1.4) rotate(45deg); }
+.node .ar { transition: transform 0.4s cubic-bezier(.2,.8,.2,1), opacity 0.4s, color 0.3s; }
+.node:hover .ar { opacity: 1; }
+.node[aria-pressed="true"] .ar { opacity: 1; transform: scale(1.18); }
+.node[aria-pressed="true"] .st svg path { fill: #EBC48F; stroke: #EBC48F; filter: drop-shadow(0 0 8px rgba(235,196,143,1)); }
+.core-star::before { animation: breathe 5s ease-in-out infinite alternate; }
+@keyframes breathe { from { opacity: 0.65; transform: translate(-50%, -50%) scale(0.94); } to { opacity: 1; transform: translate(-50%, -50%) scale(1.06); } }
+.pop { position: absolute; z-index: 8; transform: translateX(-50%); width: 236px; padding: 16px 18px 16px; border-radius: 22px; text-align: center;
+  background: rgba(251,246,239,0.95); color: var(--wine-deep); box-shadow: 0 24px 50px -14px rgba(20,4,8,0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.pop::before { content: ""; position: absolute; left: 50%; top: -6px; width: 12px; height: 12px; background: inherit; transform: translateX(-50%) rotate(45deg); border-radius: 2px; }
+.pop.up::before { top: auto; bottom: -6px; }
+.pop.in { animation: popin 0.38s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes popin { from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.95); } to { opacity: 1; transform: translateX(-50%); } }
+.pop-ru { font-family: var(--f-disp); font-weight: 600; font-size: 27px; line-height: 1.1; text-wrap: balance; }
+.pop-meta { font-size: 13px; color: var(--muted); margin-top: 6px; }
+.pop-act { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+.pop-btn { border: 0; border-radius: 999px; background: var(--black); color: var(--cream); padding: 9px 18px; font-size: 14px; font-weight: 500; cursor: pointer; transition: transform 0.2s ease, background 0.2s; }
+.pop-btn:hover { transform: translateY(-1px); }
+.pop-btn.done { background: transparent; color: var(--wine); box-shadow: inset 0 0 0 1px var(--wine); }
+.pop-btn.ghost { background: rgba(31,23,21,0.07); color: var(--ink); width: 38px; padding: 9px 0; }
+.word-card > * { animation: fadeup 0.4s cubic-bezier(.2,.8,.2,1) both; }
+.word-card > *:nth-child(2) { animation-delay: 0.04s; } .word-card > *:nth-child(3) { animation-delay: 0.08s; } .word-card > *:nth-child(4) { animation-delay: 0.12s; } .word-card > *:nth-child(n+5) { animation-delay: 0.16s; }
+@keyframes fadeup { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.panel.enter { animation: fadeup 0.45s cubic-bezier(.2,.8,.2,1) both; }
+.pill, .circle, .pillgo span, .opt, .tile { transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+.pill:hover, .pillgo:hover span:first-child { transform: translateY(-1px); }
+.pillgo:hover span:last-child { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) {
+  .node .float, .core-star::before, .pop.in, .word-card > *, .panel.enter { animation: none; }
+  .sky > *, .ray, .node, .node .st, .node .ar { transition: none; }
+}
+/* Root card */
+.root-card { display: flex; flex-direction: column; gap: 18px; }
+.root-head { display: flex; justify-content: space-between; align-items: center; }
+.root-card .cal { font-size: 64px; line-height: 1.1; color: var(--wine); }
+.root-card h1 { margin: -6px 0 0; font-family: var(--f-disp); font-weight: 600; font-size: 46px; line-height: 1.05; }
+.root-card h1 em { font-style: italic; color: var(--muted); font-size: 0.6em; }
+.root-nav { display: flex; align-items: center; gap: 10px; }
+.circle { width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--black); color: var(--cream); cursor: pointer; display: grid; place-items: center; font-size: 18px; transition: transform 0.15s; }
+.circle:hover { transform: scale(1.06); }
+.circle.light { background: rgba(31,23,21,0.06); color: var(--ink); }
+.pill { border-radius: 999px; border: 1px solid var(--line); background: transparent; padding: 12px 22px; cursor: pointer; font-weight: 500; font-size: 15px; }
+.pill:hover { background: rgba(31,23,21,0.05); }
+.pill.black { background: var(--black); border-color: var(--black); color: var(--cream); }
+.pill.cream { background: var(--cream); border-color: var(--cream); color: var(--wine-deep); }
+.pillgo { display: inline-flex; align-items: center; gap: 0; border: 0; background: none; cursor: pointer; padding: 0; }
+.pillgo span:first-child { background: var(--black); color: var(--cream); border-radius: 999px; padding: 13px 24px; font-weight: 500; font-size: 15px; }
+.pillgo span:last-child { width: 44px; height: 44px; border-radius: 50%; background: var(--black); color: var(--cream); display: grid; place-items: center; margin-left: -6px; box-shadow: -3px 0 0 var(--glass-solid, #F4EDE4); }
+.pillgo.on-dark span { background: var(--cream); color: var(--black); }
+.pillgo.on-dark span:last-child { box-shadow: -3px 0 0 var(--black); }
+.counter { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: 0.08em; }
+
+/* Word card */
+.word-card { display: flex; flex-direction: column; gap: 14px; min-height: 280px; }
+.word-card .big { font-size: 64px; line-height: 1.45; text-align: center; color: var(--wine-deep); }
+.word-card .big .rl { color: var(--sun-deep); }
+.word-card .tr { text-align: center; color: var(--muted); margin-top: -14px; letter-spacing: 0.06em; }
+.word-card h2 { margin: 0; text-align: center; font-family: var(--f-disp); font-weight: 600; font-size: 34px; line-height: 1.1; text-wrap: balance; }
+.empty { display: grid; place-items: center; text-align: center; gap: 10px; flex: 1; color: var(--muted); font-size: 16px; }
+.empty .cal { font-size: 46px; color: rgba(107,30,43,0.25); }
+.formula { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; font-size: 13px; }
+.chip { display: flex; flex-direction: column; align-items: center; padding: 6px 14px; border-radius: 16px; background: rgba(31,23,21,0.04); border: 1px solid var(--line); }
+.chip .ar, .chip .cal { font-size: 22px; line-height: 1.35; color: var(--wine); }
+.chip .rl { color: var(--sun-deep); }
+.chip small { color: var(--muted); font-size: 13px; }
+.op { color: var(--muted); font-size: 18px; }
+.res { font-family: var(--f-disp); font-size: 20px; font-weight: 600; }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+
+/* Duo of small cards */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.det-card { display: flex; flex-direction: column; justify-content: space-between; gap: 22px; min-height: 210px; }
+.det-card h3 { margin: 0; font-family: var(--f-disp); font-weight: 600; font-size: 36px; line-height: 1; }
+.det-card p { margin: 8px 0 0; color: rgba(251,246,239,0.62); font-size: 15px; }
+.prog-card { min-height: 210px; display: flex; flex-direction: column; justify-content: space-between; }
+.prog-card .blob { position: absolute; right: -56px; top: 42%; width: 140px; height: 140px; border-radius: 50%; transform: translateY(-50%); background: radial-gradient(circle at 35% 35%, #A2404F, var(--wine) 50%, var(--wine-deep)); }
+.prog-card .blob::after { content: ""; position: absolute; inset: -40px; border-radius: 50%; background: radial-gradient(circle, rgba(107,30,43,0.28), transparent 65%); filter: blur(10px); }
+.prog-card .num { font-weight: 300; font-size: 64px; line-height: 0.9; position: relative; }
+.prog-card .num small { display: block; font-size: 18px; color: var(--muted); font-weight: 400; margin-top: 8px; }
+.prog-card .eyebrow, .prog-card .streak { position: relative; }
+.streak { font-size: 14.5px; color: var(--muted); position: relative; max-width: 70%; line-height: 1.4; }
+
+/* Roots sheet */
+.sheet { position: fixed; inset: 0; z-index: 50; background: rgba(63,16,26,0.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.sheet-in { width: min(860px, 100%); max-height: 100%; overflow: auto; background: var(--cream); border-radius: var(--r); padding: 26px; display: flex; flex-direction: column; gap: 18px; }
+.sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.sheet-head h2 { margin: 0; font-family: var(--f-disp); font-weight: 500; font-size: 32px; }
+.roots-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(138px, 1fr)); gap: 10px; }
+.roots-grid button { border: 1px solid var(--line); background: transparent; border-radius: 20px; padding: 12px 10px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: background 0.15s; }
+.roots-grid button:hover { background: var(--sand); }
+.roots-grid button[aria-current="true"] { background: var(--wine); color: var(--cream); border-color: var(--wine); }
+.roots-grid .cal { font-size: 28px; line-height: 1.25; color: var(--wine); }
+.roots-grid button[aria-current="true"] .cal { color: var(--gold); }
+.roots-grid small { font-size: 13.5px; opacity: 0.75; text-align: center; line-height: 1.25; }
+
+/* Detective */
+.det-view { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 820px; margin: 0 auto; }
+.case { border-radius: var(--r); background: linear-gradient(170deg, var(--wine-2) 0%, var(--wine) 40%, var(--wine-deep) 100%); color: var(--cream); overflow: hidden; position: relative; box-shadow: 0 30px 60px -30px rgba(63,16,26,0.6); }
+.case-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 22px 24px 0; flex-wrap: wrap; position: relative; z-index: 1; }
+.case-top .eyebrow { color: rgba(251,246,239,0.6); }
+.seg { display: flex; gap: 2px; padding: 4px; border-radius: 999px; background: rgba(251,246,239,0.1); }
+.seg button { border: 0; background: none; padding: 8px 16px; border-radius: 999px; cursor: pointer; color: rgba(251,246,239,0.7); font-size: 14px; font-weight: 500; }
+.seg button[aria-pressed="true"] { background: var(--cream); color: var(--wine-deep); }
+.case-word { text-align: center; padding: 18px 16px 6px; position: relative; z-index: 1; }
+.case-word .ar { font-size: 92px; line-height: 1.45; display: block; }
+.case-word .rl { color: var(--gold); }
+.case-word .tr { color: rgba(251,246,239,0.65); letter-spacing: 0.1em; }
+.case .glow { position: absolute; width: 320px; height: 320px; left: 50%; top: 150px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, rgba(238,122,47,0.45), transparent 65%); pointer-events: none; }
+.dots { display: flex; justify-content: center; gap: 22px; padding: 14px 16px 4px; position: relative; z-index: 1; flex-wrap: wrap; }
+.dots span { display: flex; align-items: center; gap: 7px; font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(251,246,239,0.45); }
+.dots span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.dots span.now { color: var(--cream); }
+.dots span.ok { color: var(--gold); }
+.panel { margin: 16px; padding: 24px; border-radius: 22px; background: rgba(251,246,239,0.08); border: 1px solid rgba(251,246,239,0.14); display: flex; flex-direction: column; gap: 16px; position: relative; z-index: 1; }
+.panel h2 { margin: 0; font-family: var(--f-disp); font-weight: 600; font-size: 32px; line-height: 1.15; text-wrap: balance; }
+.panel h2 .cal { color: var(--gold); font-size: 1.1em; }
+.panel p { margin: 0; color: rgba(251,246,239,0.68); }
+.tiles { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; direction: rtl; }
+.tile { width: 66px; height: 80px; border-radius: 18px; border: 1px solid rgba(251,246,239,0.3); background: rgba(251,246,239,0.06); color: var(--cream); font-family: var(--f-ar); font-size: 36px; cursor: pointer; display: grid; place-items: center; line-height: 1; transition: background 0.15s; }
+.tile:hover { background: rgba(251,246,239,0.14); }
+.tile[aria-pressed="true"] { border-color: var(--gold); background: rgba(235,196,143,0.22); color: var(--gold); }
+.tile.ok { background: var(--cream); color: var(--wine-deep); border-color: var(--cream); }
+.tile.miss { border-color: var(--sun); }
+.opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.opt { border-radius: 18px; border: 1px solid rgba(251,246,239,0.25); background: rgba(251,246,239,0.05); color: var(--cream); padding: 14px 18px; cursor: pointer; text-align: left; display: flex; flex-direction: column; gap: 2px; font-size: 16.5px; transition: background 0.15s; }
+.opt:hover:not(:disabled) { background: rgba(251,246,239,0.14); }
+.opt small { opacity: 0.6; }
+.opt.ok { background: var(--cream); color: var(--wine-deep); border-color: var(--cream); }
+.opt.bad { opacity: 0.4; text-decoration: line-through; cursor: default; }
+.pattern { text-align: center; font-size: 54px; line-height: 1.4; }
+.pattern .rl { color: var(--sun); }
+.hint { font-size: 14px; padding: 12px 16px; border-radius: 14px; background: rgba(238,122,47,0.18); color: var(--cream); }
+.hint .cal, .hint .ar { color: var(--gold); }
+.shake { animation: shake 0.35s; }
+@keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.solved { align-items: center; text-align: center; }
+.solved .chip { background: rgba(251,246,239,0.08); border-color: rgba(251,246,239,0.2); }
+.solved .chip .ar, .solved .chip .cal { color: var(--cream); }
+.solved .chip .rl { color: var(--gold); }
+.solved .chip small, .solved .op { color: rgba(251,246,239,0.6); }
+.loading { padding: 80px 0; text-align: center; color: var(--muted); font-family: var(--f-disp); font-size: 22px; }
+
+@media (max-width: 960px) {
+  .bento { grid-template-columns: minmax(0, 1fr); }
+  .sky { height: 640px; }
+}
+@media (max-width: 560px) {
+  header.top .wrap { flex-wrap: wrap; }
+  .brand .cal { font-size: 32px; }
+  .brand span:last-child { font-size: 18px; }
+  .card { padding: 22px; }
+  .sky { height: 640px; }
+  .node { padding: 2px 4px; }
+  .node .ar { font-size: 25px; }
+  .node .t { font-size: 12px; }
+  .node .c { font-size: 9.5px; }
+  .core-star .cal { font-size: 50px; }
+  .core-star::before { width: 190px; height: 190px; }
+  .sky-key { left: 22px; right: auto; top: auto; bottom: 18px; }
+  .sky-title { left: 22px; top: 20px; }
+  .root-card .cal { font-size: 52px; }
+  .root-card h1 { font-size: 32px; }
+  .duo { grid-template-columns: minmax(0, 1fr); }
+  .case-word .ar { font-size: 68px; }
+  .tile { width: 56px; height: 68px; font-size: 30px; }
+  .panel { margin: 10px; padding: 18px; }
+  .dots { gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sky .tw, .sky .link, .node, .shake { animation: none; }
+  .node, .circle { transition: none; }
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#tree" aria-label="JAMAL Arabic"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true"> <defs> <linearGradient id="jSun" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#A13A4A"/> <stop offset="1" stop-color="#5E1824"/> </linearGradient> <clipPath id="jDisc"><circle cx="50" cy="50" r="47"/></clipPath> </defs> <g clip-path="url(#jDisc)"> <circle cx="50" cy="50" r="47" fill="url(#jSun)"/> <path d="M6,17 C16,15.6 26,17.4 36,15.8 L36,17.2 C26,18.8 16,17 6,18.4 Z" fill="#E8D3B5" opacity="0.2"/> <path d="M74,45 C82,43.8 90,45.2 98,43.6 L98,45 C90,46.6 82,45.2 74,46.4 Z" fill="#E8D3B5" opacity="0.16"/> <g transform="translate(3 0)"> <path d="M22.8,48 C21,51 20.4,54.5 20.8,58.5" fill="none" stroke="#E8D3B5" stroke-width="1.3" stroke-linecap="round"/> <path d="M20.8,57.4 L19.9,60.6 L21.9,60.4 Z" fill="#E8D3B5"/> <path fill="#E8D3B5" d=" M22,47 C22,40 26,35 31,33 C34,27 37,24 40,24 C44,24 48,31 51,37 C53,39.5 55,40 57,39.5 C61,39 64,36 66,31 C67,28 68,25.5 69.5,23.5 C71,22 73,21.4 75,22 C77,22.6 78.8,23.4 79.6,24.6 C80.2,25.6 79.6,26.6 78.4,26.8 C76.6,27 74.6,26.9 73,27.6 C71.6,28.3 70.8,30 70.2,32 C69,37 67,42 64,45.5 C62,47.5 60.6,48.5 60,50.5 L60.4,56 C60.8,59 61.2,62 61.2,64 L61.6,78.6 C62.4,79.2 63.2,79.7 63.4,80.6 L59.6,80.6 L59.6,78.6 L59.2,65 C58.8,62 58.2,59 57.8,57.5 L57,57.5 C56.8,60 56.6,62.5 56.4,64.5 L56.2,78.6 C56.8,79.2 57.4,79.7 57.6,80.6 L54,80.6 L54,78.6 L54.2,65 C54.2,62 54,59.5 53.6,57.5 C49,59 41,59 36.5,57 L36.4,60 C36.6,63 37.4,65 37.6,66.5 L37.2,78.6 C37.8,79.2 38.4,79.7 38.6,80.6 L35,80.6 L35,78.6 L35.2,67 C34.6,65 33.8,63 33.4,61 L32.6,61 C32.4,63.5 31.8,66 31.4,67.5 L31,78.6 C31.6,79.2 32.2,79.7 32.4,80.6 L28.8,80.6 L28.8,78.6 L29.2,67 C29.6,64 29.2,60 28,56.5 C26.8,53 24.6,49.6 22,47 Z"/> <circle cx="75.2" cy="23.9" r="0.7" fill="#5E1824"/> </g> <path d="M0,83 C18,78.6 40,78.8 60,80.6 C76,82 88,80 100,77 L100,100 L0,100 Z" fill="#E8D3B5"/> </g> </svg><span class="brand-name">JAMAL<small>Arabic</small></span></a>
+    <nav class="nav" aria-label="Режимы">
+      <a href="#tree" id="tab-tree">Созвездие</a>
+      <a href="#detective" id="tab-detective">Детектив</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="loading" id="loading">Загружаю корни…</div>
+
+  <section class="bento" id="view-tree" hidden>
+    <div class="sky" id="arch" aria-label="Созвездие слов корня"></div>
+    <div class="col">
+      <div class="card glass root-card">
+        <div class="root-head"><span class="eyebrow">Корень</span><span class="counter" id="counter"></span></div>
+        <div>
+          <div class="cal" lang="ar" id="root-cal"></div>
+          <h1 id="root-m"></h1>
+        </div>
+        <div class="root-nav">
+          <button class="circle" id="prev" aria-label="Предыдущий корень">←</button>
+          <button class="circle" id="next" aria-label="Следующий корень">→</button>
+          <button class="pill" id="all-btn">Все корни</button>
+        </div>
+      </div>
+      <div class="card white word-card" id="word-card" aria-live="polite"></div>
+      <div class="duo">
+        <div class="card dark det-card">
+          <div><span class="eyebrow" style="color:rgba(251,246,239,0.5)">Детектив</span><h3>Разгадай<br>слово</h3><p>Выведи значение по корню и шаблону</p></div>
+          <button class="pillgo on-dark" id="go-det"><span>Начать</span><span>→</span></button>
+        </div>
+        <div class="card glass prog-card">
+          <div class="blob" aria-hidden="true"></div>
+          <span class="eyebrow">Прогресс</span>
+          <div class="num" id="num"></div>
+          <div class="streak" id="streak"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="det-view" id="view-detective" hidden>
+    <div class="case" id="case"></div>
+  </section>
+</main>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-in" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <div class="sheet-head"><h2 id="sheet-title">Все корни</h2><button class="circle light" id="sheet-close" aria-label="Закрыть">✕</button></div>
+    <div class="roots-grid" id="roots-grid"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const plural = (n, a, b, c) => { const m10 = n % 10, m100 = n % 100; if (m10 === 1 && m100 !== 11) return a; if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return b; return c; };
+  const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---------- Arabic helpers ----------
+  const HAR = /[ؐ-ًؚ-ٰٟ]/;
+  const HAMZA = "أإآءئؤ";
+  const norm = c => HAMZA.includes(c) ? "ء" : c;
+  function clusters(s) { const out = []; for (const ch of s) { if (HAR.test(ch) && out.length) out[out.length - 1] += ch; else out.push(ch); } return out; }
+  function rootIdx(word, letters) {
+    const L = letters.map(norm), idx = []; let k = 0;
+    clusters(word).forEach((c, i) => { if (k < L.length && norm(c[0]) === L[k]) { idx.push(i); k++; } });
+    return idx.length === L.length ? idx : [];
+  }
+  function marked(word, letters) {
+    const set = new Set(rootIdx(word, letters));
+    return clusters(word).map((c, i) => set.has(i) ? `<span class="rl">${c}</span>` : c).join("");
+  }
+  const FAL = ["ف", "ع", "ل"];
+
+  // ---------- Progress (this browser only) ----------
+  const TG = (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData) ? window.Telegram.WebApp : null;
+  const TGU = TG && TG.initDataUnsafe ? TG.initDataUnsafe.user : null;
+  const CFG = window.JAMAL_CONFIG || {};
+  const REMOTE = !!(TG && CFG.supabaseUrl && CFG.anonKey);
+  const KEY = "jamal-progress-v1" + (TGU ? "-" + TGU.id : "");
+  const haptic = kind => { try { TG && TG.HapticFeedback.notificationOccurred(kind); } catch (e) {} };
+  if (TG) { try { TG.ready(); TG.expand(); TG.setHeaderColor("#EFE5D8"); TG.setBackgroundColor("#EFE5D8"); } catch (e) {} }
+  let P = { learned: {}, solved: 0, streak: 0, best: 0, level: "novice" };
+  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === "object") P = { ...P, ...s }; } catch (e) {}
+  async function callApi(body) {
+    const r = await fetch(CFG.supabaseUrl.replace(/\/$/, "") + "/functions/v1/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + CFG.anonKey, "apikey": CFG.anonKey },
+      body: JSON.stringify(Object.assign({ initData: TG.initData }, body))
+    });
+    if (!r.ok) throw new Error(r.status + " " + await r.text());
+    return r.json();
+  }
+  let syncTimer = null;
+  const pushRemote = () => { if (REMOTE) callApi({ action: "save", progress: P }).catch(e => console.warn("sync failed", e)); };
+  const save = () => {
+    try { localStorage.setItem(KEY, JSON.stringify(P)); } catch (e) {}
+    if (!REMOTE) return;
+    clearTimeout(syncTimer);
+    syncTimer = setTimeout(pushRemote, 700);
+  };
+  async function loadRemote() {
+    if (!REMOTE) return;
+    try {
+      const res = await callApi({ action: "load" });
+      const R = res && res.progress;
+      if (R && typeof R === "object") {
+        P = Object.assign({}, P, R, {
+          learned: Object.assign({}, R.learned || {}, P.learned || {}),
+          solved: Math.max(P.solved || 0, R.solved || 0),
+          best: Math.max(P.best || 0, R.best || 0)
+        });
+      }
+      save();
+    } catch (e) { console.warn("load failed", e); }
+  }
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden" && syncTimer) { clearTimeout(syncTimer); pushRemote(); } });
+
+  // ---------- Data ----------
+  let CATS = {}, ROOTS = [], RBY = {}, WORDS = [], WBY = {};
+  const S = { i: 0, word: null };
+  const curRoot = () => ROOTS[S.i];
+  const rootStr = r => r.letters.join(" ");
+  const learnedIn = r => r.words.filter(w => P.learned[w.id]).length;
+
+  Promise.all([fetch("words.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }), loadRemote()]).then(([db]) => {
+    CATS = db.categories; ROOTS = db.roots;
+    ROOTS.forEach(r => { RBY[r.id] = r; r.words.forEach((w, i) => { w.id = `${r.id}-${i}`; w.root = r.id; WORDS.push(w); WBY[w.id] = w; }); });
+    $("#loading").hidden = true;
+    route();
+    window.addEventListener("hashchange", route);
+    let lastW = 0;
+    new ResizeObserver(() => { const w = $("#arch").clientWidth; if (w && w !== lastW) { lastW = w; drawTree(false); } }).observe($("#arch"));
+  }).catch(() => { $("#loading").textContent = "Не удалось загрузить корни. Обновите страницу."; });
+
+  // ---------- Routing ----------
+  function route() {
+    const v = location.hash === "#detective" ? "detective" : "tree";
+    $("#view-tree").hidden = v !== "tree";
+    $("#view-detective").hidden = v !== "detective";
+    ["tree", "detective"].forEach(k => { const a = $("#tab-" + k); if (k === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    if (v === "tree") showRoot(true);
+    else if (!D || D.fresh) newCase(D && D.preferRoot);
+    window.scrollTo(0, 0);
+  }
+
+  // ---------- Tree screen ----------
+  function showRoot(animate) {
+    const r = curRoot();
+    $("#root-cal").textContent = rootStr(r);
+    $("#root-m").innerHTML = `${esc(r.meaning)} <em>· ${r.words.length} ${plural(r.words.length, "слово", "слова", "слов")}</em>`;
+    $("#counter").textContent = `${String(S.i + 1).padStart(2, "0")} / ${ROOTS.length}`;
+    drawTree(animate); renderWord(); renderProgress();
+  }
+  let switching = null;
+  function go(i) {
+    S.i = (i + ROOTS.length) % ROOTS.length; S.word = null;
+    const el = $("#arch"), rc = document.querySelector(".root-card");
+    if (reduceMotion()) { showRoot(true); return; }
+    el.classList.add("out"); rc.classList.add("out");
+    clearTimeout(switching);
+    switching = setTimeout(() => { showRoot(true); el.classList.remove("out"); rc.classList.remove("out"); }, 280);
+  }
+  $("#prev").onclick = () => go(S.i - 1);
+  $("#next").onclick = () => go(S.i + 1);
+  $("#go-det").onclick = () => { D = { fresh: true, preferRoot: curRoot().id }; location.hash = "#detective"; };
+
+  function renderProgress() {
+    const n = Object.keys(P.learned).filter(id => WBY[id]).length;
+    $("#num").innerHTML = `${n}<small>из ${WORDS.length} слов</small>`;
+    $("#streak").textContent = P.streak ? `Серия без ошибок: ${P.streak}` : (TGU && TGU.first_name ? "Ахлан, " + TGU.first_name + "! " : "") + "Учите слова здесь или в детективе";
+  }
+
+  // sheet
+  const sheet = $("#sheet");
+  $("#all-btn").onclick = () => {
+    $("#roots-grid").innerHTML = ROOTS.map((r, i) => `<button data-i="${i}" aria-current="${i === S.i}"><span class="cal" lang="ar">${rootStr(r)}</span><small>${esc(r.meaning)}</small><small>${learnedIn(r)} / ${r.words.length}</small></button>`).join("");
+    sheet.hidden = false; $("#sheet-close").focus();
+  };
+  $("#sheet-close").onclick = () => { sheet.hidden = true; };
+  sheet.addEventListener("click", e => {
+    if (e.target === sheet) { sheet.hidden = true; return; }
+    const b = e.target.closest("[data-i]"); if (b) { sheet.hidden = true; go(+b.dataset.i); }
+  });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !sheet.hidden) sheet.hidden = true; });
+
+  // ---------- Constellation drawing ----------
+  function rng(seed) { let h = 2166136261; for (const c of seed) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return () => { h = Math.imul(h ^ (h >>> 15), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; }; }
+  const f = n => n.toFixed(1);
+  const STAR = (fill, stroke) => `<svg viewBox="-10 -10 20 20" aria-hidden="true"><path d="M0,-9.5 C1,-2 2,-1 9.5,0 C2,1 1,2 0,9.5 C-1,2 -2,1 -9.5,0 C-2,-1 -1,-2 0,-9.5Z" fill="${fill}" stroke="${stroke}" stroke-width="1"/></svg>`;
+  const ORDER = ["verb", "noun", "doer", "object", "place", "tool", "quality"];
+
+  function drawTree(animate) {
+    const r = curRoot(); const el = $("#arch");
+    const W = el.clientWidth, H = el.clientHeight; if (!W) return;
+    const rnd = rng(r.id), small = W < 520, anim = animate && !reduceMotion();
+    const cx = W / 2, cy = H / 2 + 8;
+    const words = ORDER.flatMap(k => r.words.filter(w => w.cat === k));
+    const n = words.length;
+    const rx = Math.min(W / 2 - (small ? 58 : 100), 290), ry = Math.min(H / 2 - (small ? 96 : 104), 236);
+    const off = (n % 2 === 0 ? Math.PI / n : 0) + (rnd() - 0.5) * 0.3;
+    const pts = words.map((w, i) => {
+      const a = -Math.PI / 2 + off + i * 2 * Math.PI / n + (rnd() - 0.5) * 0.3;
+      const k = 0.84 + rnd() * 0.16;
+      let x = cx + Math.cos(a) * rx * k, y = cy + Math.sin(a) * ry * k;
+      // keep words clear of the central root on narrow screens
+      const clearY = small ? 118 : 0;
+      if (Math.abs(y - cy) < clearY) y = cy + Math.sign(Math.sin(a) || 1) * clearY;
+      return { w, x, y };
+    });
+    const starDy = small ? 34 : 40;
+
+    let svg = "";
+    // background stars
+    for (let i = 0; i < (small ? 55 : 90); i++) {
+      const x = rnd() * W, y = rnd() * H, rad = 0.4 + rnd() * 1.2, op = 0.15 + rnd() * 0.55;
+      svg += `<circle cx="${f(x)}" cy="${f(y)}" r="${f(rad)}" fill="#FBF6EF" opacity="${op.toFixed(2)}" ${rnd() > 0.7 ? `class="tw" style="animation-delay:${f(rnd() * 3)}s"` : ""}/>`;
+    }
+    // faint outline joining the stars
+    svg += `<polygon points="${pts.map(p => `${f(p.x)},${f(p.y - starDy)}`).join(" ")}" fill="none" stroke="#EBC48F" stroke-opacity="0.13" stroke-width="1"/>`;
+    // rays from the root to every word
+    pts.forEach((p, i) => {
+      const sx = p.x, sy = p.y - starDy, dx = sx - cx, dy = sy - cy, L = Math.hypot(dx, dy) || 1, ux = dx / L, uy = dy / L;
+      const start = small ? 62 : 82;
+      const x1 = cx + ux * start, y1 = cy + uy * start, x2 = sx - ux * 13, y2 = sy - uy * 13;
+      const learned = !!P.learned[p.w.id];
+      const len = Math.hypot(x2 - x1, y2 - y1);
+      svg += `<line class="ray${learned ? " on" : ""}${learned && anim ? " link" : ""}${S.word === p.w.id ? " sel" : ""}" data-w="${p.w.id}" x1="${f(x1)}" y1="${f(y1)}" x2="${f(x2)}" y2="${f(y2)}" style="--len:${Math.ceil(len)};animation-delay:${i * 80}ms"/>`;
+    });
+
+    const nodes = pts.map((p, i) => {
+      const learned = !!P.learned[p.w.id];
+      return `<button class="node ${learned ? "learned" : ""}" style="left:${f(p.x)}px;top:${f(p.y)}px;animation-delay:${anim ? 150 + i * 90 : 0}ms${anim ? "" : ";animation:none"}" data-word="${p.w.id}" aria-pressed="${S.word === p.w.id}" aria-label="${esc(p.w.tr)}">
+        <span class="float" style="animation-delay:-${(i * 1.9).toFixed(1)}s"><span class="st">${starFor(learned)}</span>
+        <span class="ar" lang="ar">${marked(p.w.ar, r.letters)}</span><span class="t">${esc(p.w.tr)}</span><span class="c">${esc(CATS[p.w.cat].name)}</span></span></button>`;
+    }).join("");
+
+    el.innerHTML = `<svg aria-hidden="true">${svg}</svg>
+      <span class="sky-title">Созвездие корня</span>
+      <div class="sky-key"><span>${STAR("none", "rgba(251,246,239,0.7)")}новое</span><span>${STAR("#EBC48F", "#EBC48F")}выучено</span></div>
+      <div class="core-star" style="left:${f(cx)}px;top:${f(cy)}px"><span class="cal" lang="ar">${rootStr(r)}</span><small>${esc(r.meaning)}</small></div>
+      ${nodes}<div class="pop" id="pop" hidden></div>`;
+    if (S.word) showPop(false); else el.classList.remove("has-sel");
+  }
+  const starFor = learned => learned ? STAR("#EBC48F", "#EBC48F") : STAR("none", "rgba(251,246,239,0.7)");
+
+  function showPop(animate = true) {
+    const el = $("#arch"), pop = $("#pop"); if (!pop) return;
+    const w = S.word && WBY[S.word];
+    const node = w && el.querySelector(`.node[data-word="${w.id}"]`);
+    if (!w || !node) { pop.hidden = true; el.classList.remove("has-sel"); return; }
+    const c = CATS[w.cat], learned = !!P.learned[w.id];
+    pop.innerHTML = `<div class="pop-ru">${esc(w.ru)}</div>
+      <div class="pop-meta">${esc(c.name)} · ${esc(c.hint)}</div>
+      <div class="pop-act"><button class="pop-btn ${learned ? "done" : ""}" data-learn="${w.id}">${learned ? "✓ Выучено" : "Запомнил"}</button>${arVoice ? `<button class="pop-btn ghost" data-say="${esc(w.ar)}" aria-label="Послушать">▶</button>` : ""}</div>`;
+    pop.hidden = false;
+    const W = el.clientWidth, H = el.clientHeight;
+    const nx = parseFloat(node.style.left), ny = parseFloat(node.style.top), nh = node.offsetHeight / 2;
+    const pw = pop.offsetWidth, ph = pop.offsetHeight;
+    const below = ny + nh + 10 + ph < H - 14;
+    pop.style.left = Math.min(Math.max(nx, 14 + pw / 2), W - 14 - pw / 2) + "px";
+    pop.style.top = (below ? ny + nh + 6 : ny - nh - 6 - ph) + "px";
+    pop.classList.toggle("up", !below);
+    if (animate) { pop.classList.remove("in"); void pop.offsetWidth; pop.classList.add("in"); }
+    el.classList.add("has-sel");
+  }
+  function refreshNode(id) {
+    const learned = !!P.learned[id];
+    const n = document.querySelector(`.node[data-word="${id}"]`);
+    if (n) { n.classList.toggle("learned", learned); n.querySelector(".st").innerHTML = starFor(learned); }
+    const l = document.querySelector(`#arch line[data-w="${id}"]`);
+    if (l) { l.classList.remove("link"); l.classList.toggle("on", learned); }
+  }
+  function toggleLearn(id) {
+    if (P.learned[id]) delete P.learned[id]; else P.learned[id] = true;
+    save(); refreshNode(id); showPop(false); renderWord(); renderProgress();
+  }
+
+  $("#arch").addEventListener("click", e => {
+    const lb = e.target.closest("#pop [data-learn]"); if (lb) { toggleLearn(lb.dataset.learn); return; }
+    const sb = e.target.closest("#pop [data-say]"); if (sb) { speak(sb.dataset.say); return; }
+    if (e.target.closest("#pop")) return;
+    const b = e.target.closest("[data-word]");
+    S.word = b && b.dataset.word !== S.word ? b.dataset.word : null;
+    document.querySelectorAll(".node").forEach(n => n.setAttribute("aria-pressed", n.dataset.word === S.word));
+    document.querySelectorAll("#arch line[data-w]").forEach(l => l.classList.toggle("sel", l.dataset.w === S.word));
+    showPop(); renderWord();
+  });
+
+  // ---------- Word card ----------
+  let arVoice = null;
+  function findVoice() { try { arVoice = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith("ar")) || null; } catch (e) {} }
+  if ("speechSynthesis" in window) { findVoice(); speechSynthesis.onvoiceschanged = () => { findVoice(); if (S.word) renderWord(); }; }
+  function speak(t) { try { const u = new SpeechSynthesisUtterance(t); u.lang = arVoice.lang; u.voice = arVoice; u.rate = 0.8; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) {} }
+
+  function renderWord() {
+    const r = curRoot(); const card = $("#word-card");
+    const w = S.word && WBY[S.word];
+    if (!w) {
+      card.innerHTML = `<span class="eyebrow">Слово</span>
+        <div class="empty"><span class="cal" lang="ar">${rootStr(r)}</span><div>Нажмите на звезду,<br>чтобы открыть слово</div>
+          <div class="legend-mini"><span><i></i>новое</span><span><i class="on"></i>выучено</span></div></div>`;
+      return;
+    }
+    const c = CATS[w.cat]; const learned = !!P.learned[w.id];
+    card.innerHTML = `<span class="eyebrow">${esc(c.name)} · ${esc(c.hint)}</span>
+      <div class="big ar" lang="ar">${marked(w.ar, r.letters)}</div>
+      <div class="tr">${esc(w.tr)}</div>
+      <h2>${esc(w.ru)}</h2>
+      <div class="formula">
+        <span class="chip"><span class="cal" lang="ar">${rootStr(r)}</span><small>${esc(r.meaning)}</small></span>
+        <span class="op">+</span>
+        <span class="chip"><span class="ar" lang="ar">${marked(w.pattern, FAL)}</span><small>${esc(c.name.toLowerCase())}</small></span>
+        <span class="op">=</span>
+        <span class="res">${esc(w.ru.split(",")[0])}</span>
+      </div>
+      <div class="actions">
+        <button class="pill ${learned ? "" : "black"}" data-learn="${w.id}">${learned ? "✓ Выучено" : "Запомнил"}</button>
+        ${arVoice ? `<button class="pill" data-say="${esc(w.ar)}">▶ Послушать</button>` : ""}
+      </div>`;
+  }
+  $("#word-card").addEventListener("click", e => {
+    const t = e.target.closest("button"); if (!t) return;
+    if (t.dataset.say) speak(t.dataset.say);
+    else if (t.dataset.learn) {
+      toggleLearn(t.dataset.learn);
+    }
+  });
+
+  // ---------- Detective ----------
+  let D = null;
+  const STEP_NAMES = ["Корень", "Смысл", "Шаблон", "Вывод"];
+
+  function newCase(preferRoot) {
+    const pool = WORDS.filter(w => w.cat !== "verb" && (!preferRoot || w.root === preferRoot));
+    const fresh = pool.filter(w => !P.learned[w.id]);
+    const src = fresh.length ? fresh : pool;
+    let w = pick(src);
+    if (D && D.word && src.length > 1) while (w.id === D.word.id) w = pick(src);
+    const r = RBY[w.root];
+    const otherMeanings = shuffle(ROOTS.filter(x => x.id !== r.id).map(x => x.meaning)).slice(0, 3);
+    const otherCats = shuffle(Object.keys(CATS).filter(k => k !== w.cat && k !== "verb")).slice(0, 3);
+    const sameRoot = shuffle(r.words.filter(x => x.cat !== w.cat && x.cat !== "verb"));
+    const unrelated = shuffle(WORDS.filter(x => x.root !== r.id && x.cat !== w.cat && x.cat !== "verb"));
+    const decoys = [...new Set([...sameRoot, ...unrelated].map(x => x.ru))].filter(x => x !== w.ru).slice(0, 2);
+    D = {
+      word: w, root: r, step: P.level === "novice" ? 1 : 0, sel: new Set(), errors: 0, rootTries: 0, hint: "",
+      opts: [null, shuffle([r.meaning, ...otherMeanings]), shuffle([w.cat, ...otherCats]), shuffle([w.ru, ...decoys])],
+      wrong: [new Set(), new Set(), new Set(), new Set()], done: false
+    };
+    renderCase();
+  }
+
+  function renderCase() {
+    const { word: w, root: r, step } = D;
+    const showRoot = step > 0 || D.done;
+    let body = "";
+    if (D.done) body = solvedPanel();
+    else if (step === 0) body = `<h2>Найдите три буквы корня</h2>
+      <p>Остальные буквы пришли из шаблона и смысла не несут.</p>
+      <div class="tiles">${clusters(w.ar).map((c, i) => `<button class="tile" data-tile="${i}" aria-pressed="${D.sel.has(i)}" lang="ar">${c}</button>`).join("")}</div>
+      ${D.hint ? `<div class="hint">${D.hint}</div>` : ""}`;
+    else if (step === 1) body = `<h2>Корень <span class="cal" lang="ar">${rootStr(r)}</span> означает…</h2>${optsGrid(D.opts[1].map(m => ({ v: m, t: esc(m) })))}`;
+    else if (step === 2) body = `<h2>Что добавляет шаблон?</h2>
+      <div class="pattern ar" lang="ar">${marked(w.pattern, FAL)}</div>
+      <p>Оранжевые ф‑‘‑л — места для букв корня. Всё остальное — форма, которая меняет смысл.</p>
+      ${optsGrid(D.opts[2].map(k => ({ v: k, t: `${esc(CATS[k].name)}<small>${esc(CATS[k].hint)}</small>` })))}`;
+    else body = `<h2>«${esc(r.meaning)}» + ${esc(CATS[w.cat].name.toLowerCase())} = ?</h2>
+      <p>Сложите улики: смысл корня и «${esc(CATS[w.cat].hint)}».</p>
+      ${optsGrid(D.opts[3].map(m => ({ v: m, t: esc(m) })))}`;
+    $("#case").innerHTML = `<div class="glow" aria-hidden="true"></div>
+      <div class="case-top"><span class="eyebrow">Улика ${String(P.solved + 1).padStart(2, "0")}</span>
+        <div class="seg" role="group" aria-label="Уровень"><button data-level="novice" aria-pressed="${P.level === "novice"}">Новичок</button><button data-level="middle" aria-pressed="${P.level === "middle"}">Средний</button></div></div>
+      <div class="case-word"><span class="ar" lang="ar">${showRoot ? marked(w.ar, r.letters) : w.ar}</span><span class="tr">${esc(w.tr)}</span></div>
+      <div class="dots">${STEP_NAMES.map((n, i) => `<span class="${D.done || i < step ? "ok" : i === step ? "now" : ""}">${n}</span>`).join("")}</div>
+      <div class="panel ${D.done ? "solved" : ""} ${D.lastStep !== step || D.lastDone !== D.done ? "enter" : ""}">${body}</div>`;
+    D.lastStep = step; D.lastDone = D.done;
+  }
+  const optsGrid = items => `<div class="opts">${items.map(o => { const bad = D.wrong[D.step].has(o.v); return `<button class="opt ${bad ? "bad" : ""}" data-opt="${esc(o.v)}" ${bad ? "disabled" : ""}>${o.t}</button>`; }).join("")}</div>`;
+
+  function solvedPanel() {
+    const { word: w, root: r } = D; const c = CATS[w.cat];
+    return `<span class="eyebrow" style="color:var(--gold)">Раскрыто</span>
+      <h2>${esc(w.ru)}</h2>
+      <div class="formula">
+        <span class="chip"><span class="cal" lang="ar">${rootStr(r)}</span><small>${esc(r.meaning)}</small></span>
+        <span class="op">+</span>
+        <span class="chip"><span class="ar" lang="ar">${marked(w.pattern, FAL)}</span><small>${esc(c.name.toLowerCase())}</small></span>
+        <span class="op">=</span>
+        <span class="chip"><span class="ar" lang="ar">${marked(w.ar, r.letters)}</span><small>${esc(w.tr)}</small></span>
+      </div>
+      <p>${D.errors === 0 ? "Без единой ошибки." : `Ошибок: ${D.errors}.`} В созвездии корня зажглась новая звезда.</p>
+      <div class="actions"><button class="pillgo on-dark" data-next><span>Следующее слово</span><span>→</span></button><button class="pill" style="color:var(--cream);border-color:rgba(251,246,239,0.3)" data-open>В созвездии</button></div>`;
+  }
+
+  function advance() {
+    D.step++;
+    if (D.step > 3) {
+      D.done = true;
+      P.learned[D.word.id] = true; P.solved++;
+      P.streak = D.errors === 0 ? P.streak + 1 : 0; P.best = Math.max(P.best, P.streak);
+      save();
+    }
+    renderCase();
+  }
+
+  $("#case").addEventListener("click", e => {
+    const t = e.target.closest("button"); if (!t || !D) return;
+    if (t.dataset.level) { if (t.dataset.level !== P.level) { P.level = t.dataset.level; save(); newCase(); } return; }
+    if ("next" in t.dataset) return newCase();
+    if ("open" in t.dataset) { S.i = ROOTS.indexOf(D.root); S.word = D.word.id; location.hash = "#tree"; return; }
+    if (t.dataset.tile !== undefined) return clickTile(+t.dataset.tile);
+    if (t.dataset.opt !== undefined) {
+      const v = t.dataset.opt; const correct = [null, D.root.meaning, D.word.cat, D.word.ru][D.step];
+      if (v === correct) { haptic("success"); t.classList.add("ok"); document.querySelectorAll(".opt").forEach(b => b.disabled = true); setTimeout(advance, 450); }
+      else { haptic("error"); D.errors++; D.wrong[D.step].add(v); t.classList.add("bad", "shake"); t.disabled = true; }
+    }
+  });
+
+  function clickTile(i) {
+    const answer = rootIdx(D.word.ar, D.root.letters);
+    if (D.sel.has(i)) D.sel.delete(i); else if (D.sel.size < 3) D.sel.add(i);
+    renderCase();
+    if (D.sel.size < 3) return;
+    const tiles = document.querySelectorAll(".tile");
+    if (answer.every(x => D.sel.has(x))) { tiles.forEach((t, k) => { if (D.sel.has(k)) t.classList.add("ok"); }); setTimeout(advance, 600); return; }
+    D.errors++; D.rootTries++;
+    tiles.forEach((t, k) => { if (D.sel.has(k) && !answer.includes(k)) t.classList.add("miss", "shake"); });
+    setTimeout(() => {
+      D.sel = new Set();
+      D.hint = D.rootTries >= 2
+        ? `Корень — <span class="cal" lang="ar">${rootStr(D.root)}</span>. Выберите эти три буквы.`
+        : `Подсказка: буквы <span class="ar" lang="ar">م ت ا و ي ة</span> чаще всего приходят из шаблона.`;
+      renderCase();
+    }, 700);
+  }
+})();
+</script>
+
+</body>
+</html>
