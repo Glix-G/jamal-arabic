@@ -164,6 +164,7 @@ main { padding-block: 6px 48px; }
   padding: 14px 18px; border-radius: 18px; background: var(--black); color: var(--cream); font-size: 14.5px; line-height: 1.45; box-shadow: 0 20px 40px -12px rgba(0,0,0,0.45);
   opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast small { display: block; margin-top: 4px; font-size: 12px; opacity: 0.6; }
 /* Alphabet */
 .abc { display: flex; flex-direction: column; gap: 16px; }
 .abc-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 16px; align-items: start; }
@@ -749,29 +750,55 @@ main { padding-block: 6px 48px; }
   // A sukun on the last letter tells the voice to stop there; words already ending in a vowel (verbs) stay as they are.
   const pausal = ar => /[ً-ْ]$/.test(ar) ? ar : ar + "ْ";
   const canSpeak = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+  let currentUtt = null;          // keep a reference: WebKit/Chrome may garbage-collect an utterance and stay silent
+  function makeUtt(text) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = (arVoice && arVoice.lang) || "ar-SA";
+    if (arVoice) u.voice = arVoice;
+    u.rate = 0.8;
+    return u;
+  }
   function speak(t) {
     const ss = window.speechSynthesis;
-    if (!canSpeak || !ss) return sayFail();
-    let u;
+    if (!canSpeak || !ss) return sayFail("no-api");
+    const text = pausal(t);
+    let started = false, failed = "";
+    const arm = u => {
+      u.onstart = () => { started = true; };
+      u.onerror = e => { const er = e && e.error; if (er !== "interrupted" && er !== "canceled") failed = er || "error"; };
+      currentUtt = u;
+    };
     try {
-      u = new SpeechSynthesisUtterance(pausal(t));
-      u.lang = (arVoice && arVoice.lang) || "ar-SA";
-      if (arVoice) u.voice = arVoice;
-      u.rate = 0.8;
-    } catch (e) { return sayFail(); }
-    let started = false;
-    u.onstart = () => { started = true; };
-    u.onerror = e => { if (e && (e.error === "interrupted" || e.error === "canceled")) return; sayFail(); };
-    const go = () => { try { ss.resume(); ss.speak(u); } catch (e) { sayFail(); } };
-    // iOS/WebKit drops speech if cancel() and speak() run back to back — only cancel when something is playing.
-    if (ss.speaking || ss.pending) { ss.cancel(); setTimeout(go, 120); } else go();
-    setTimeout(() => { if (!started && !ss.speaking) sayFail(); }, 2500);
+      // Everything runs synchronously inside the tap: iOS only allows speech that starts during the gesture.
+      if (ss.speaking || ss.pending || ss.paused) ss.cancel();
+      ss.resume();
+      const u = makeUtt(text); arm(u); ss.speak(u);
+    } catch (e) { return sayFail("speak-throw"); }
+    // One retry if WebKit swallowed the first attempt (it happens right after cancel or after the app was in background).
+    setTimeout(() => {
+      if (started) return;
+      try { ss.cancel(); ss.resume(); const u2 = makeUtt(text); arm(u2); ss.speak(u2); } catch (e) {}
+    }, 700);
+    setTimeout(() => { if (!started) sayFail(failed || (arVoice ? "no-start" : "no-voice")); }, 2600);
   }
+  // iOS: unlock speech with a silent utterance on the very first touch.
+  let speechUnlocked = false;
+  const unlockSpeech = e => {
+    if (speechUnlocked || !canSpeak) return;
+    speechUnlocked = true;
+    document.removeEventListener("touchend", unlockSpeech, true);
+    document.removeEventListener("click", unlockSpeech, true);
+    if (e && e.target && e.target.closest && e.target.closest("[data-say]")) return;   // a real word is about to be spoken anyway
+    try { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; window.speechSynthesis.speak(u); } catch (err) {}
+  };
+  document.addEventListener("touchend", unlockSpeech, { capture: true, passive: true });
+  document.addEventListener("click", unlockSpeech, true);
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && canSpeak) { try { window.speechSynthesis.cancel(); } catch (e) {} } });
   let toastTimer = null;
-  function sayFail() {
+  function sayFail(reason) {
     let el = document.getElementById("toast");
     if (!el) { el = document.createElement("div"); el.id = "toast"; el.className = "toast"; el.setAttribute("role", "status"); document.body.appendChild(el); }
-    el.textContent = "Звук не воспроизвёлся. Проверьте громкость и режим «Без звука». На некоторых телефонах в Telegram арабского голоса нет.";
+    el.innerHTML = "Звук не воспроизвёлся. Проверьте громкость и режим «Без звука» и нажмите ещё раз." + (reason ? `<small>код: ${esc(reason)} · голос: ${esc(arVoice ? arVoice.name : "нет")}</small>` : "");
     el.classList.add("show");
     clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("show"), 5000);
   }
