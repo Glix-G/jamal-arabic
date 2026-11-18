@@ -223,7 +223,46 @@ main { padding-block: 6px 48px; }
 .roots-grid button[aria-current="true"] .cal { color: var(--gold); }
 .roots-grid small { font-size: 13.5px; opacity: 0.75; text-align: center; line-height: 1.25; }
 
-/* Detective */
+/* Game: «Найди слово» */
+.ask { text-align: center; padding: 26px 20px 8px; position: relative; z-index: 1; }
+.ask h2 { margin: 6px 0 0; font-family: var(--f-disp); font-weight: 600; font-size: 46px; line-height: 1.05; color: var(--cream); text-wrap: balance; }
+.ask .eyebrow { color: var(--gold); }
+.case-top .cal { color: var(--gold); font-size: 1.35em; letter-spacing: 0.08em; text-transform: none; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 22px 22px 24px; position: relative; z-index: 1; }
+.choice { border-radius: 22px; border: 1px solid rgba(251,246,239,0.22); background: rgba(251,246,239,0.06); color: var(--cream); padding: 16px 12px 14px; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 128px; justify-content: center; transition: background 0.2s, transform 0.2s, opacity 0.3s, border-color 0.2s; }
+.choice:hover:not(:disabled) { background: rgba(251,246,239,0.14); transform: translateY(-2px); }
+.choice .ar { font-size: 44px; line-height: 1.4; }
+.choice .rl { color: var(--gold); }
+.choice .tr { font-size: 14px; color: rgba(251,246,239,0.6); }
+.choice .ru { margin-top: 6px; font-size: 13.5px; padding: 3px 10px; border-radius: 999px; background: rgba(251,246,239,0.12); color: var(--cream); }
+.choice.bad { opacity: 0.55; border-style: dashed; cursor: default; }
+.choice.dim { opacity: 0.45; cursor: default; }
+.choice.ok { background: var(--cream); color: var(--wine-deep); border-color: var(--cream); box-shadow: 0 16px 40px -14px rgba(235,196,143,0.7); cursor: default; }
+.choice.ok .rl { color: var(--sun-deep); }
+.choice.ok .tr { color: var(--muted); }
+.explain { margin: 0 22px 24px; padding: 22px; border-radius: 22px; background: rgba(251,246,239,0.08); border: 1px solid rgba(251,246,239,0.16); display: flex; flex-direction: column; gap: 14px; position: relative; z-index: 1; animation: fadeup 0.45s cubic-bezier(.2,.8,.2,1) both; }
+.ex-word { display: flex; align-items: center; gap: 16px; }
+.ex-word .ar { font-size: 40px; line-height: 1.3; color: var(--cream); }
+.ex-word .rl { color: var(--gold); }
+.ex-word b { display: block; font-family: var(--f-disp); font-size: 26px; font-weight: 600; line-height: 1.1; }
+.ex-word small { color: rgba(251,246,239,0.6); font-size: 14px; }
+.ex-hint { margin: 0; font-size: 16px; line-height: 1.5; color: rgba(251,246,239,0.85); }
+.explain .actions { justify-content: flex-start; }
+.pill.ghost-dark { color: var(--cream); border-color: rgba(251,246,239,0.3); }
+.pill.ghost-dark:hover { background: rgba(251,246,239,0.08); }
+.ask.enter, .choices.enter { animation: fadeup 0.45s cubic-bezier(.2,.8,.2,1) both; }
+.choices.enter { animation-delay: 0.06s; }
+@media (max-width: 560px) {
+  .ask h2 { font-size: 36px; }
+  .choices { gap: 10px; padding: 18px 14px 18px; }
+  .choice { min-height: 112px; padding: 12px 8px; }
+  .choice .ar { font-size: 34px; }
+  .explain { margin: 0 14px 16px; padding: 18px; }
+  .ex-word .ar { font-size: 32px; }
+}
+@media (prefers-reduced-motion: reduce) { .explain, .ask.enter, .choices.enter { animation: none; } .choice { transition: none; } }
+/* Detective (legacy styles, unused) */
 .det-view { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 820px; margin: 0 auto; }
 .case { border-radius: var(--r); background: linear-gradient(170deg, var(--wine-2) 0%, var(--wine) 40%, var(--wine-deep) 100%); color: var(--cream); overflow: hidden; position: relative; box-shadow: 0 30px 60px -30px rgba(63,16,26,0.6); }
 .case-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 22px 24px 0; flex-wrap: wrap; position: relative; z-index: 1; }
@@ -307,7 +346,7 @@ main { padding-block: 6px 48px; }
     <a class="brand" href="#tree" aria-label="JAMAL Arabic"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true"> <defs> <linearGradient id="jSun" x1="0" y1="0" x2="0" y2="1"> <stop offset="0" stop-color="#A13A4A"/> <stop offset="1" stop-color="#5E1824"/> </linearGradient> <clipPath id="jDisc"><circle cx="50" cy="50" r="47"/></clipPath> </defs> <g clip-path="url(#jDisc)"> <circle cx="50" cy="50" r="47" fill="url(#jSun)"/> <path d="M6,17 C16,15.6 26,17.4 36,15.8 L36,17.2 C26,18.8 16,17 6,18.4 Z" fill="#E8D3B5" opacity="0.2"/> <path d="M74,45 C82,43.8 90,45.2 98,43.6 L98,45 C90,46.6 82,45.2 74,46.4 Z" fill="#E8D3B5" opacity="0.16"/> <g transform="translate(3 0)"> <path d="M22.8,48 C21,51 20.4,54.5 20.8,58.5" fill="none" stroke="#E8D3B5" stroke-width="1.3" stroke-linecap="round"/> <path d="M20.8,57.4 L19.9,60.6 L21.9,60.4 Z" fill="#E8D3B5"/> <path fill="#E8D3B5" d=" M22,47 C22,40 26,35 31,33 C34,27 37,24 40,24 C44,24 48,31 51,37 C53,39.5 55,40 57,39.5 C61,39 64,36 66,31 C67,28 68,25.5 69.5,23.5 C71,22 73,21.4 75,22 C77,22.6 78.8,23.4 79.6,24.6 C80.2,25.6 79.6,26.6 78.4,26.8 C76.6,27 74.6,26.9 73,27.6 C71.6,28.3 70.8,30 70.2,32 C69,37 67,42 64,45.5 C62,47.5 60.6,48.5 60,50.5 L60.4,56 C60.8,59 61.2,62 61.2,64 L61.6,78.6 C62.4,79.2 63.2,79.7 63.4,80.6 L59.6,80.6 L59.6,78.6 L59.2,65 C58.8,62 58.2,59 57.8,57.5 L57,57.5 C56.8,60 56.6,62.5 56.4,64.5 L56.2,78.6 C56.8,79.2 57.4,79.7 57.6,80.6 L54,80.6 L54,78.6 L54.2,65 C54.2,62 54,59.5 53.6,57.5 C49,59 41,59 36.5,57 L36.4,60 C36.6,63 37.4,65 37.6,66.5 L37.2,78.6 C37.8,79.2 38.4,79.7 38.6,80.6 L35,80.6 L35,78.6 L35.2,67 C34.6,65 33.8,63 33.4,61 L32.6,61 C32.4,63.5 31.8,66 31.4,67.5 L31,78.6 C31.6,79.2 32.2,79.7 32.4,80.6 L28.8,80.6 L28.8,78.6 L29.2,67 C29.6,64 29.2,60 28,56.5 C26.8,53 24.6,49.6 22,47 Z"/> <circle cx="75.2" cy="23.9" r="0.7" fill="#5E1824"/> </g> <path d="M0,83 C18,78.6 40,78.8 60,80.6 C76,82 88,80 100,77 L100,100 L0,100 Z" fill="#E8D3B5"/> </g> </svg><span class="brand-name">JAMAL<small>Arabic</small></span></a>
     <nav class="nav" aria-label="Режимы">
       <a href="#tree" id="tab-tree">Созвездие</a>
-      <a href="#detective" id="tab-detective">Детектив</a>
+      <a href="#find" id="tab-find">Найди слово</a>
     </nav>
   </div>
 </header>
@@ -333,7 +372,7 @@ main { padding-block: 6px 48px; }
       <div class="card white word-card" id="word-card" aria-live="polite"></div>
       <div class="duo">
         <div class="card dark det-card">
-          <div><span class="eyebrow" style="color:rgba(251,246,239,0.5)">Детектив</span><h3>Разгадай<br>слово</h3><p>Выведи значение по корню и шаблону</p></div>
+          <div><span class="eyebrow" style="color:rgba(251,246,239,0.5)">Игра</span><h3>Найди<br>слово</h3><p>Различай слова одного корня по форме</p></div>
           <button class="pillgo on-dark" id="go-det"><span>Начать</span><span>→</span></button>
         </div>
         <div class="card glass prog-card">
@@ -346,7 +385,7 @@ main { padding-block: 6px 48px; }
     </div>
   </section>
 
-  <section class="det-view" id="view-detective" hidden>
+  <section class="det-view" id="view-find" hidden>
     <div class="case" id="case"></div>
   </section>
 </main>
@@ -389,7 +428,7 @@ main { padding-block: 6px 48px; }
   const CFG = window.JAMAL_CONFIG || {};
   const REMOTE = !!(TG && CFG.supabaseUrl && CFG.anonKey);
   const KEY = "jamal-progress-v1" + (TGU ? "-" + TGU.id : "");
-  const haptic = kind => { try { TG && TG.HapticFeedback.notificationOccurred(kind); } catch (e) {} };
+  window.JAMAL_HAPTIC = kind => { try { TG && TG.HapticFeedback.notificationOccurred(kind); } catch (e) {} };
   if (TG) { try { TG.ready(); TG.expand(); TG.setHeaderColor("#EFE5D8"); TG.setBackgroundColor("#EFE5D8"); } catch (e) {} }
   let P = { learned: {}, solved: 0, streak: 0, best: 0, level: "novice" };
   try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && typeof s === "object") P = { ...P, ...s }; } catch (e) {}
@@ -436,7 +475,12 @@ main { padding-block: 6px 48px; }
 
   Promise.all([fetch("words.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }), loadRemote()]).then(([db]) => {
     CATS = db.categories; ROOTS = db.roots;
-    ROOTS.forEach(r => { RBY[r.id] = r; r.words.forEach((w, i) => { w.id = `${r.id}-${i}`; w.root = r.id; WORDS.push(w); WBY[w.id] = w; }); });
+    const LEGACY = {};
+    ROOTS.forEach(r => { RBY[r.id] = r; r.words.forEach((w, i) => { w.id = w.id || `${r.id}-${i}`; w.root = r.id; if (w.legacy) LEGACY[w.legacy] = w.id; WORDS.push(w); WBY[w.id] = w; }); });
+    // move progress saved under old numbered codes (e.g. "ktb-3") to permanent codes
+    let moved = false;
+    Object.keys(P.learned || {}).forEach(k => { if (!WBY[k] && LEGACY[k]) { P.learned[LEGACY[k]] = true; delete P.learned[k]; moved = true; } });
+    if (moved) save();
     $("#loading").hidden = true;
     route();
     window.addEventListener("hashchange", route);
@@ -446,12 +490,12 @@ main { padding-block: 6px 48px; }
 
   // ---------- Routing ----------
   function route() {
-    const v = location.hash === "#detective" ? "detective" : "tree";
+    const v = location.hash === "#find" || location.hash === "#detective" ? "find" : "tree";
     $("#view-tree").hidden = v !== "tree";
-    $("#view-detective").hidden = v !== "detective";
-    ["tree", "detective"].forEach(k => { const a = $("#tab-" + k); if (k === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    $("#view-find").hidden = v !== "find";
+    ["tree", "find"].forEach(k => { const a = $("#tab-" + k); if (k === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
     if (v === "tree") showRoot(true);
-    else if (!D || D.fresh) newCase(D && D.preferRoot);
+    else if (!G || G.fresh) newRound(G && G.preferRoot);
     window.scrollTo(0, 0);
   }
 
@@ -474,12 +518,12 @@ main { padding-block: 6px 48px; }
   }
   $("#prev").onclick = () => go(S.i - 1);
   $("#next").onclick = () => go(S.i + 1);
-  $("#go-det").onclick = () => { D = { fresh: true, preferRoot: curRoot().id }; location.hash = "#detective"; };
+  $("#go-det").onclick = () => { G = { fresh: true, preferRoot: curRoot().id }; location.hash = "#find"; };
 
   function renderProgress() {
     const n = Object.keys(P.learned).filter(id => WBY[id]).length;
     $("#num").innerHTML = `${n}<small>из ${WORDS.length} слов</small>`;
-    $("#streak").textContent = P.streak ? `Серия без ошибок: ${P.streak}` : (TGU && TGU.first_name ? "Ахлан, " + TGU.first_name + "! " : "") + "Учите слова здесь или в детективе";
+    $("#streak").textContent = P.streak ? `Серия без ошибок: ${P.streak}` : (TGU && TGU.first_name ? "Ахлан, " + TGU.first_name + "! " : "") + "Учите слова здесь или в игре «Найди слово»";
   }
 
   // sheet
@@ -638,113 +682,88 @@ main { padding-block: 6px 48px; }
     }
   });
 
-  // ---------- Detective ----------
-  let D = null;
-  const STEP_NAMES = ["Корень", "Смысл", "Шаблон", "Вывод"];
+  // ---------- Game: «Найди слово» ----------
+  // Question in Russian, four Arabic words of the SAME root. Learner picks the one that matches.
+  let G = null;
+  const buzz = kind => { try { window.JAMAL_HAPTIC && window.JAMAL_HAPTIC(kind); } catch (e) {} };
+  const SAME = "Глагол «он сделал»: в слове только три буквы корня с короткими гласными.";
+  const PATTERN_HINT = {
+    "فَعَلَ": SAME, "فَعِلَ": SAME, "فَعُلَ": SAME,
+    "فَاعَلَ": "Глагол с долгим «а̄» после первой буквы корня.",
+    "فَاعِل": "Долгое «а̄» после первой буквы корня (ка̄тиб) — тот, кто делает.",
+    "فَاعِلَة": "Долгое «а̄» после первой буквы и «-а» на конце — та, что делает, или прибор.",
+    "مُفَعِّل": "«му-» в начале и удвоенная средняя буква — тот, кто делает. Часто профессия.",
+    "مُفَاعِل": "«му-» в начале — тот, кто делает. Часто профессия.",
+    "مَفْعُول": "«ма-» в начале и «-ӯ-» перед последней буквой — то, что сделали.",
+    "مَفْعَل": "«ма-» в начале — место, где это делают.",
+    "مَفْعِل": "«ма-» в начале — место, где это делают.",
+    "مَفْعَلَة": "«ма-» в начале и «-а» на конце — место, где это делают.",
+    "مِفْعَال": "«ми-» в начале и долгое «а̄» — инструмент, которым это делают.",
+    "فَعَّال": "Удвоенная средняя буква и долгое «а̄» — профессия.",
+    "فُعَّال": "Удвоенная средняя буква и долгое «а̄» — те, кто это делает.",
+    "فَعَّالَة": "Удвоенная средняя буква, долгое «а̄» и «-а» на конце — прибор или предмет.",
+    "فَاعُول": "Долгие «а̄» и «ӯ» — устройство.",
+    "فَعِيل": "Долгое «ӣ» перед последней буквой — признак: какой?",
+    "أَفْعَل": "«а-» в начале — «более» или «самый».",
+    "تَفْعِيل": "«та-» в начале и долгое «ӣ» — само действие."
+  };
+  const hintFor = w => PATTERN_HINT[w.pattern] || "Короткая форма без приставок — само действие или вещь.";
+  const short = ru => ru.split(",")[0].trim();
 
-  function newCase(preferRoot) {
-    const pool = WORDS.filter(w => w.cat !== "verb" && (!preferRoot || w.root === preferRoot));
+  function newRound(preferRoot) {
+    const pool = WORDS.filter(w => RBY[w.root].words.length >= 3 && (!preferRoot || w.root === preferRoot));
     const fresh = pool.filter(w => !P.learned[w.id]);
     const src = fresh.length ? fresh : pool;
     let w = pick(src);
-    if (D && D.word && src.length > 1) while (w.id === D.word.id) w = pick(src);
+    if (G && G.word && src.length > 1) while (w.id === G.word.id) w = pick(src);
     const r = RBY[w.root];
-    const otherMeanings = shuffle(ROOTS.filter(x => x.id !== r.id).map(x => x.meaning)).slice(0, 3);
-    const otherCats = shuffle(Object.keys(CATS).filter(k => k !== w.cat && k !== "verb")).slice(0, 3);
-    const sameRoot = shuffle(r.words.filter(x => x.cat !== w.cat && x.cat !== "verb"));
-    const unrelated = shuffle(WORDS.filter(x => x.root !== r.id && x.cat !== w.cat && x.cat !== "verb"));
-    const decoys = [...new Set([...sameRoot, ...unrelated].map(x => x.ru))].filter(x => x !== w.ru).slice(0, 2);
-    D = {
-      word: w, root: r, step: P.level === "novice" ? 1 : 0, sel: new Set(), errors: 0, rootTries: 0, hint: "",
-      opts: [null, shuffle([r.meaning, ...otherMeanings]), shuffle([w.cat, ...otherCats]), shuffle([w.ru, ...decoys])],
-      wrong: [new Set(), new Set(), new Set(), new Set()], done: false
-    };
-    renderCase();
+    const others = shuffle(r.words.filter(x => x.id !== w.id && short(x.ru) !== short(w.ru))).slice(0, 3);
+    G = { word: w, root: r, opts: shuffle([w, ...others]), wrong: new Set(), done: false, preferRoot, fresh: false };
+    renderRound(true);
   }
 
-  function renderCase() {
-    const { word: w, root: r, step } = D;
-    const showRoot = step > 0 || D.done;
-    let body = "";
-    if (D.done) body = solvedPanel();
-    else if (step === 0) body = `<h2>Найдите три буквы корня</h2>
-      <p>Остальные буквы пришли из шаблона и смысла не несут.</p>
-      <div class="tiles">${clusters(w.ar).map((c, i) => `<button class="tile" data-tile="${i}" aria-pressed="${D.sel.has(i)}" lang="ar">${c}</button>`).join("")}</div>
-      ${D.hint ? `<div class="hint">${D.hint}</div>` : ""}`;
-    else if (step === 1) body = `<h2>Корень <span class="cal" lang="ar">${rootStr(r)}</span> означает…</h2>${optsGrid(D.opts[1].map(m => ({ v: m, t: esc(m) })))}`;
-    else if (step === 2) body = `<h2>Что добавляет шаблон?</h2>
-      <div class="pattern ar" lang="ar">${marked(w.pattern, FAL)}</div>
-      <p>Оранжевые ф‑‘‑л — места для букв корня. Всё остальное — форма, которая меняет смысл.</p>
-      ${optsGrid(D.opts[2].map(k => ({ v: k, t: `${esc(CATS[k].name)}<small>${esc(CATS[k].hint)}</small>` })))}`;
-    else body = `<h2>«${esc(r.meaning)}» + ${esc(CATS[w.cat].name.toLowerCase())} = ?</h2>
-      <p>Сложите улики: смысл корня и «${esc(CATS[w.cat].hint)}».</p>
-      ${optsGrid(D.opts[3].map(m => ({ v: m, t: esc(m) })))}`;
+  function renderRound(enter) {
+    const { word: w, root: r } = G;
+    const choices = G.opts.map(o => {
+      const isAns = o.id === w.id, bad = G.wrong.has(o.id);
+      const cls = G.done ? (isAns ? "ok" : "dim") : (bad ? "bad" : "");
+      const reveal = bad || (G.done && !isAns) ? `<span class="ru">${esc(short(o.ru))}</span>` : "";
+      return `<button class="choice ${cls}" data-pick="${o.id}" ${G.done || bad ? "disabled" : ""}>
+        <span class="ar" lang="ar">${marked(o.ar, r.letters)}</span><span class="tr">${esc(o.tr)}</span>${reveal}</button>`;
+    }).join("");
+    const explain = G.done ? `<div class="explain">
+        <div class="ex-word"><span class="ar" lang="ar">${marked(w.ar, r.letters)}</span><div><b>${esc(w.ru)}</b><small>${esc(w.tr)}</small></div></div>
+        <p class="ex-hint">💡 ${esc(hintFor(w))}</p>
+        <div class="actions"><button class="pillgo on-dark" data-next><span>Следующее слово</span><span>→</span></button><button class="pill ghost-dark" data-open>В созвездии</button></div>
+      </div>` : "";
     $("#case").innerHTML = `<div class="glow" aria-hidden="true"></div>
-      <div class="case-top"><span class="eyebrow">Улика ${String(P.solved + 1).padStart(2, "0")}</span>
-        <div class="seg" role="group" aria-label="Уровень"><button data-level="novice" aria-pressed="${P.level === "novice"}">Новичок</button><button data-level="middle" aria-pressed="${P.level === "middle"}">Средний</button></div></div>
-      <div class="case-word"><span class="ar" lang="ar">${showRoot ? marked(w.ar, r.letters) : w.ar}</span><span class="tr">${esc(w.tr)}</span></div>
-      <div class="dots">${STEP_NAMES.map((n, i) => `<span class="${D.done || i < step ? "ok" : i === step ? "now" : ""}">${n}</span>`).join("")}</div>
-      <div class="panel ${D.done ? "solved" : ""} ${D.lastStep !== step || D.lastDone !== D.done ? "enter" : ""}">${body}</div>`;
-    D.lastStep = step; D.lastDone = D.done;
-  }
-  const optsGrid = items => `<div class="opts">${items.map(o => { const bad = D.wrong[D.step].has(o.v); return `<button class="opt ${bad ? "bad" : ""}" data-opt="${esc(o.v)}" ${bad ? "disabled" : ""}>${o.t}</button>`; }).join("")}</div>`;
-
-  function solvedPanel() {
-    const { word: w, root: r } = D; const c = CATS[w.cat];
-    return `<span class="eyebrow" style="color:var(--gold)">Раскрыто</span>
-      <h2>${esc(w.ru)}</h2>
-      <div class="formula">
-        <span class="chip"><span class="cal" lang="ar">${rootStr(r)}</span><small>${esc(r.meaning)}</small></span>
-        <span class="op">+</span>
-        <span class="chip"><span class="ar" lang="ar">${marked(w.pattern, FAL)}</span><small>${esc(c.name.toLowerCase())}</small></span>
-        <span class="op">=</span>
-        <span class="chip"><span class="ar" lang="ar">${marked(w.ar, r.letters)}</span><small>${esc(w.tr)}</small></span>
-      </div>
-      <p>${D.errors === 0 ? "Без единой ошибки." : `Ошибок: ${D.errors}.`} В созвездии корня зажглась новая звезда.</p>
-      <div class="actions"><button class="pillgo on-dark" data-next><span>Следующее слово</span><span>→</span></button><button class="pill" style="color:var(--cream);border-color:rgba(251,246,239,0.3)" data-open>В созвездии</button></div>`;
-  }
-
-  function advance() {
-    D.step++;
-    if (D.step > 3) {
-      D.done = true;
-      P.learned[D.word.id] = true; P.solved++;
-      P.streak = D.errors === 0 ? P.streak + 1 : 0; P.best = Math.max(P.best, P.streak);
-      save();
-    }
-    renderCase();
+      <div class="case-top"><span class="eyebrow">Корень <span class="cal" lang="ar">${rootStr(r)}</span> · ${esc(r.meaning)}</span><span class="eyebrow">${P.streak ? `Серия ${P.streak}` : ""}</span></div>
+      <div class="ask ${enter ? "enter" : ""}"><span class="eyebrow">${G.done ? (G.wrong.size ? `Нашли с ${G.wrong.size + 1}-й попытки` : "Верно с первой попытки!") : "Где здесь"}</span><h2>«${esc(short(w.ru))}»${G.done ? "" : "?"}</h2></div>
+      <div class="choices ${enter ? "enter" : ""}">${choices}</div>${explain}`;
   }
 
   $("#case").addEventListener("click", e => {
-    const t = e.target.closest("button"); if (!t || !D) return;
-    if (t.dataset.level) { if (t.dataset.level !== P.level) { P.level = t.dataset.level; save(); newCase(); } return; }
-    if ("next" in t.dataset) return newCase();
-    if ("open" in t.dataset) { S.i = ROOTS.indexOf(D.root); S.word = D.word.id; location.hash = "#tree"; return; }
-    if (t.dataset.tile !== undefined) return clickTile(+t.dataset.tile);
-    if (t.dataset.opt !== undefined) {
-      const v = t.dataset.opt; const correct = [null, D.root.meaning, D.word.cat, D.word.ru][D.step];
-      if (v === correct) { haptic("success"); t.classList.add("ok"); document.querySelectorAll(".opt").forEach(b => b.disabled = true); setTimeout(advance, 450); }
-      else { haptic("error"); D.errors++; D.wrong[D.step].add(v); t.classList.add("bad", "shake"); t.disabled = true; }
+    const t = e.target.closest("button"); if (!t || !G) return;
+    if ("next" in t.dataset) return newRound(G.preferRoot);
+    if ("open" in t.dataset) { S.i = ROOTS.indexOf(G.root); S.word = G.word.id; location.hash = "#tree"; return; }
+    const id = t.dataset.pick; if (!id || G.done) return;
+    if (id === G.word.id) {
+      buzz("success");
+      G.done = true;
+      P.solved = (P.solved || 0) + 1;
+      if (G.wrong.size === 0) { P.learned[G.word.id] = true; P.streak = (P.streak || 0) + 1; }
+      else P.streak = 0;
+      P.best = Math.max(P.best || 0, P.streak);
+      save();
+      renderRound(false);
+      const ex = document.querySelector("#case .explain"); if (ex && matchMedia("(max-width: 560px)").matches) ex.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "nearest" });
+    } else {
+      buzz("error");
+      G.wrong.add(id);
+      renderRound(false);
+      const b = document.querySelector(`.choice[data-pick="${id}"]`); if (b) b.classList.add("shake");
     }
   });
-
-  function clickTile(i) {
-    const answer = rootIdx(D.word.ar, D.root.letters);
-    if (D.sel.has(i)) D.sel.delete(i); else if (D.sel.size < 3) D.sel.add(i);
-    renderCase();
-    if (D.sel.size < 3) return;
-    const tiles = document.querySelectorAll(".tile");
-    if (answer.every(x => D.sel.has(x))) { tiles.forEach((t, k) => { if (D.sel.has(k)) t.classList.add("ok"); }); setTimeout(advance, 600); return; }
-    D.errors++; D.rootTries++;
-    tiles.forEach((t, k) => { if (D.sel.has(k) && !answer.includes(k)) t.classList.add("miss", "shake"); });
-    setTimeout(() => {
-      D.sel = new Set();
-      D.hint = D.rootTries >= 2
-        ? `Корень — <span class="cal" lang="ar">${rootStr(D.root)}</span>. Выберите эти три буквы.`
-        : `Подсказка: буквы <span class="ar" lang="ar">م ت ا و ي ة</span> чаще всего приходят из шаблона.`;
-      renderCase();
-    }, 700);
-  }
 })();
 </script>
 
