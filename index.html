@@ -160,6 +160,10 @@ main { padding-block: 6px 48px; }
   .node .float, .core-star::before, .pop.in, .word-card > *, .panel.enter { animation: none; }
   .sky > *, .ray, .node, .node .st, .node .ar { transition: none; }
 }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); z-index: 80; width: min(420px, calc(100% - 32px));
+  padding: 14px 18px; border-radius: 18px; background: var(--black); color: var(--cream); font-size: 14.5px; line-height: 1.45; box-shadow: 0 20px 40px -12px rgba(0,0,0,0.45);
+  opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
 /* Root card */
 .root-card { display: flex; flex-direction: column; gap: 18px; }
 .root-head { display: flex; justify-content: space-between; align-items: center; }
@@ -608,7 +612,7 @@ main { padding-block: 6px 48px; }
     const c = CATS[w.cat], learned = !!P.learned[w.id];
     pop.innerHTML = `<div class="pop-ru">${esc(w.ru)}</div>
       <div class="pop-meta">${esc(c.name)} · ${esc(c.hint)}</div>
-      <div class="pop-act"><button class="pop-btn ${learned ? "done" : ""}" data-learn="${w.id}">${learned ? "✓ Выучено" : "Запомнил"}</button>${arVoice ? `<button class="pop-btn ghost" data-say="${esc(w.ar)}" aria-label="Послушать">▶</button>` : ""}</div>`;
+      <div class="pop-act"><button class="pop-btn ${learned ? "done" : ""}" data-learn="${w.id}">${learned ? "✓ Выучено" : "Запомнил"}</button>${canSpeak ? `<button class="pop-btn ghost" data-say="${esc(w.ar)}" aria-label="Послушать">▶</button>` : ""}</div>`;
     pop.hidden = false;
     const W = el.clientWidth, H = el.clientHeight;
     const nx = parseFloat(node.style.left), ny = parseFloat(node.style.top), nh = node.offsetHeight / 2;
@@ -650,7 +654,33 @@ main { padding-block: 6px 48px; }
   // Read a single word in pause form (waqf): no case ending, so كَاتِب sounds "katib", not "katibun".
   // A sukun on the last letter tells the voice to stop there; words already ending in a vowel (verbs) stay as they are.
   const pausal = ar => /[ً-ْ]$/.test(ar) ? ar : ar + "ْ";
-  function speak(t) { try { const u = new SpeechSynthesisUtterance(pausal(t)); u.lang = arVoice.lang; u.voice = arVoice; u.rate = 0.8; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) {} }
+  const canSpeak = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+  function speak(t) {
+    const ss = window.speechSynthesis;
+    if (!canSpeak || !ss) return sayFail();
+    let u;
+    try {
+      u = new SpeechSynthesisUtterance(pausal(t));
+      u.lang = (arVoice && arVoice.lang) || "ar-SA";
+      if (arVoice) u.voice = arVoice;
+      u.rate = 0.8;
+    } catch (e) { return sayFail(); }
+    let started = false;
+    u.onstart = () => { started = true; };
+    u.onerror = e => { if (e && (e.error === "interrupted" || e.error === "canceled")) return; sayFail(); };
+    const go = () => { try { ss.resume(); ss.speak(u); } catch (e) { sayFail(); } };
+    // iOS/WebKit drops speech if cancel() and speak() run back to back — only cancel when something is playing.
+    if (ss.speaking || ss.pending) { ss.cancel(); setTimeout(go, 120); } else go();
+    setTimeout(() => { if (!started && !ss.speaking) sayFail(); }, 2500);
+  }
+  let toastTimer = null;
+  function sayFail() {
+    let el = document.getElementById("toast");
+    if (!el) { el = document.createElement("div"); el.id = "toast"; el.className = "toast"; el.setAttribute("role", "status"); document.body.appendChild(el); }
+    el.textContent = "Звук не воспроизвёлся. Проверьте громкость и режим «Без звука». На некоторых телефонах в Telegram арабского голоса нет.";
+    el.classList.add("show");
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("show"), 5000);
+  }
 
   function renderWord() {
     const r = curRoot(); const card = $("#word-card");
@@ -675,7 +705,7 @@ main { padding-block: 6px 48px; }
       </div>
       <div class="actions">
         <button class="pill ${learned ? "" : "black"}" data-learn="${w.id}">${learned ? "✓ Выучено" : "Запомнил"}</button>
-        ${arVoice ? `<button class="pill" data-say="${esc(w.ar)}">▶ Послушать</button>` : ""}
+        ${canSpeak ? `<button class="pill" data-say="${esc(w.ar)}">▶ Послушать</button>` : ""}
       </div>`;
   }
   $("#word-card").addEventListener("click", e => {
