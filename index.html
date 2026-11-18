@@ -647,7 +647,10 @@ main { padding-block: 6px 48px; }
   let arVoice = null;
   function findVoice() { try { arVoice = speechSynthesis.getVoices().find(v => v.lang && v.lang.toLowerCase().startsWith("ar")) || null; } catch (e) {} }
   if ("speechSynthesis" in window) { findVoice(); speechSynthesis.onvoiceschanged = () => { findVoice(); if (S.word) renderWord(); }; }
-  function speak(t) { try { const u = new SpeechSynthesisUtterance(t); u.lang = arVoice.lang; u.voice = arVoice; u.rate = 0.8; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) {} }
+  // Read a single word in pause form (waqf): no case ending, so كَاتِب sounds "katib", not "katibun".
+  // A sukun on the last letter tells the voice to stop there; words already ending in a vowel (verbs) stay as they are.
+  const pausal = ar => /[ً-ْ]$/.test(ar) ? ar : ar + "ْ";
+  function speak(t) { try { const u = new SpeechSynthesisUtterance(pausal(t)); u.lang = arVoice.lang; u.voice = arVoice; u.rate = 0.8; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch (e) {} }
 
   function renderWord() {
     const r = curRoot(); const card = $("#word-card");
