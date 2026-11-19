@@ -123,7 +123,7 @@
       {"id": "hfz-hifz", "legacy": "hfz-1", "ar": "حِفْظ", "tr": "хифз", "ru": "хранение, заучивание", "pattern": "فِعْل", "cat": "noun"},
       {"id": "hfz-hafiz", "legacy": "hfz-2", "ar": "حَافِظ", "tr": "хафиз", "ru": "хранитель", "pattern": "فَاعِل", "cat": "doer"},
       {"id": "hfz-mahfuz", "legacy": "hfz-3", "ar": "مَحْفُوظ", "tr": "махфуз", "ru": "сохранённый", "pattern": "مَفْعُول", "cat": "object"},
-      {"id": "hfz-mahfaza", "legacy": "hfz-4", "ar": "مَحْفَظَة", "tr": "махфаза", "ru": "кошелёк, портфель", "pattern": "مَفْعَلَة", "cat": "place"}
+      {"id": "hfz-mahfaza", "legacy": "hfz-4", "ar": "مَحْفَظَة", "tr": "махфаза", "ru": "кошелёк, портфель", "pattern": "مَفْعَلَة", "cat": "tool", "hint": "«ма-» в начале и «-а» на конце — обычно место, а здесь вместилище: то, в чём хранят."}
     ]},
     { "id": "sjd", "letters": ["س", "ج", "د"], "meaning": "совершать земной поклон", "verified": true, "words": [
       {"id": "sjd-sadzhada", "legacy": "sjd-0", "ar": "سَجَدَ", "tr": "саджада", "ru": "он поклонился до земли", "pattern": "فَعَلَ", "cat": "verb"},

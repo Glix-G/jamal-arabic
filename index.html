@@ -377,6 +377,10 @@ main { padding-block: 6px 48px; }
 .vb-how .formula { direction: rtl; justify-content: flex-start; margin-top: 4px; }
 .vb-how .chip .ar { font-size: 26px; }
 .vb-how .chip .hl { color: var(--sun-deep); }
+.vb-how .chip small { direction: ltr; unicode-bidi: isolate; }
+.formula .keep { display: inline-flex; align-items: center; gap: 8px; }
+.abc-card .pop-btn.ghost { background: rgba(251,246,239,0.14); color: var(--cream); }
+.abc-card .pop-btn.ghost:hover { background: rgba(251,246,239,0.24); }
 .cheat { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
 .cheat span { display: flex; flex-direction: column; align-items: center; padding: 4px 8px 8px; border-radius: 16px; background: var(--sand); text-align: center; }
 .cheat .ar { font-size: 26px; line-height: 1.5; color: var(--sun-deep); }
@@ -385,7 +389,7 @@ main { padding-block: 6px 48px; }
   .gr-grid, .vb-top, .vb-how { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 560px) {
-  .gr-top .counter { display: none; }
+  .gr-top .counter, .vb-pick .counter { display: none; }
   .gr-top h1 { font-size: 34px; }
   .gr-card h3, .vb-how h3 { font-size: 26px; }
   .gr-row > .ar { font-size: 25px; }
@@ -406,6 +410,10 @@ main { padding-block: 6px 48px; }
   .vb-ar .f { font-size: 25px; }
   .vb-ar .p { font-size: 16px; min-width: 2.4em; }
   .vb-row b { font-size: 14.5px; }
+  .vb-how .formula { gap: 6px; }
+  .vb-how .chip { padding: 4px 10px; }
+  .vb-how .chip .ar { font-size: 22px; }
+  .vb-how .chip small { font-size: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .gr-grid.enter > *, .vb-rows.enter { animation: none; } }
 /* Root card */
@@ -1287,7 +1295,7 @@ main { padding-block: 6px 48px; }
       </div>
       <div class="card white gr-card">
         <span class="eyebrow sun">Солнечные буквы</span><h3>«Л» исчезает</h3>
-        <p>Перед солнечной буквой ${arIn("ل")} не читается, а следующая буква удваивается (над ней знак шадда ${arIn("ّـ")}): ${arIn("الشَّمْس")} — «аш-шамс», а не «аль-шамс».</p>
+        <p>Перед солнечной буквой ${arIn("ل")} не читается, а следующая буква удваивается (над ней знак шадда ${arIn("ـّ")}): ${arIn("الشَّمْس")} — «аш-шамс», а не «аль-шамс».</p>
         <div class="gr-list">${ex(ART_SUN)}</div>
       </div>
       <div class="card white gr-card">
@@ -1312,12 +1320,12 @@ main { padding-block: 6px 48px; }
   ];
   const ARR = `<span class="arr">←</span>`;
   function tNum() {
-    const gen = GEN.map(([m, f, rm, rf]) => grRow(m + ARR + hlEnd(f, 1), `${rm} → ${rf}`, `${tr(m)} → ${tr(f)}`, { say: m + "، " + f })).join("");
+    const gen = GEN.map(([m, f, rm, rf]) => grRow(m + ARR + hlEnd(f, 1), `${rm} → ${rf}`, `${tr(m)} → ${tr(f)}`, { say: pausal(m) + "، " + pausal(f) })).join("");
     const dual = DUAL.map(([w, st, r1, r2]) => grRow(st + "َ" + `<span class="hl">انِ</span>`, r2, `${tr(st + "َانِ")} · после предлога: ${tr(st + "َيْنِ")}`)).join("");
     const smp = SMP.map(([w, r1, r2]) => grRow(w + "ُ" + `<span class="hl">ونَ</span>`, r2, `${tr(w + "ُونَ")} · после предлога: ${tr(w + "ِينَ")}`)).join("");
     const sfp = SFP.map(([w, r1, r2]) => { const st = w.slice(0, -1); return grRow(st + `<span class="hl">ات</span>`, r2, `${tr(st + "ات")} · от ${tr(w)}`); }).join("");
     const broken = BROKEN.map(([s, p, r1, r2, pat, root]) => grRow(marked(s, [...root]) + ARR + marked(p, [...root]), `${r1} → ${r2}`,
-      `${esc(tr(s))} → ${esc(tr(p))} · схема ${arIn(marked(pat, FAL))}`, { say: s + "، " + p, subHtml: true })).join("");
+      `${esc(tr(s))} → ${esc(tr(p))} · схема ${arIn(marked(pat, FAL))}`, { say: pausal(s) + "، " + pausal(p), subHtml: true })).join("");
     return `<div class="card white gr-card">
         <span class="eyebrow">Род</span><h3>Мужской и женский</h3>
         <p>Женский род чаще всего узнаётся по окончанию ${arIn("ة")} — «та марбута». Оно читается как «-а», а перед окончаниями — как «-ат».</p>
@@ -1560,7 +1568,7 @@ main { padding-block: 6px 48px; }
     $("#vb-how").innerHTML = `<div>
         <span class="eyebrow">Как образуется</span><h3>${H.h}</h3>
         <p>${H.p}</p>
-        <div class="formula">${H.f.map(x => x === "+" || x === "=" ? `<span class="op">${x}</span>` : x).join("")}</div>
+        <div class="formula">${H.f.slice(0, -2).map(x => x === "+" ? `<span class="op">${x}</span>` : x).join("")}<span class="keep"><span class="op">=</span>${H.f[H.f.length - 1]}</span></div>
       </div>
       <div>
         <span class="eyebrow">Шпаргалка</span>
@@ -1598,11 +1606,11 @@ main { padding-block: 6px 48px; }
     "فُعَّال": "Удвоенная средняя буква и долгое «а̄» — те, кто это делает.",
     "فَعَّالَة": "Удвоенная средняя буква, долгое «а̄» и «-а» на конце — прибор или предмет.",
     "فَاعُول": "Долгие «а̄» и «ӯ» — устройство.",
-    "فَعِيل": "Долгое «ӣ» перед последней буквой — признак: какой?",
+    "فَعِيل": "Долгое «ӣ» перед последней буквой — чаще всего признак (какой?), иногда человек: сафӣр — посол.",
     "أَفْعَل": "«а-» в начале — «более» или «самый».",
     "تَفْعِيل": "«та-» в начале и долгое «ӣ» — само действие."
   };
-  const hintFor = w => PATTERN_HINT[w.pattern] || "Короткая форма без приставок — само действие или вещь.";
+  const hintFor = w => w.hint || PATTERN_HINT[w.pattern] || "Короткая форма без приставок — само действие или вещь.";
   const short = ru => ru.split(",")[0].trim();
 
   function newRound(preferRoot) {
