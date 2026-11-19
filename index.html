@@ -223,9 +223,14 @@ main { padding-block: 6px 48px; }
 @media (max-width: 960px) {
   .abc-top { grid-template-columns: minmax(0, 1fr); }
 }
+@media (max-width: 900px) {
+  header.top .wrap { flex-wrap: wrap; }
+  .nav { width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { flex: 1 0 auto; text-align: center; padding: 9px 14px; white-space: nowrap; }
+}
 @media (max-width: 560px) {
-  .nav { width: 100%; }
-  .nav a { flex: 1; text-align: center; padding: 9px 6px; font-size: 13.5px; }
+  .nav a { padding: 9px 12px; font-size: 13.5px; }
   .abc-grid-card .counter, .abc-build .counter { display: none; }
   .abc-grid { gap: 5px; }
   .abc-tile { border-radius: 12px; }
@@ -246,6 +251,163 @@ main { padding-block: 6px 48px; }
 .diag { position: fixed; inset: 0; z-index: 90; background: rgba(31,23,21,0.55); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) 16px; }
 .diag-in { width: min(640px, 100%); max-height: 100%; overflow: auto; background: var(--cream); border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
 .diag pre { margin: 0; white-space: pre-wrap; word-break: break-word; font-size: 11.5px; line-height: 1.45; font-family: ui-monospace, Menlo, monospace; }
+/* Grammar («Правила») + Verbs («Глаголы») */
+.gr, .vb { display: flex; flex-direction: column; gap: 16px; }
+.gr-top { display: flex; flex-direction: column; gap: 14px; }
+.gr-top h1 { margin: 0; font-family: var(--f-disp); font-weight: 600; font-size: 44px; line-height: 1.05; }
+.gr-top p { margin: 6px 0 0; color: var(--muted); max-width: 680px; }
+.tabs-l { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(31,23,21,0.06); overflow-x: auto; scrollbar-width: none; align-self: flex-start; max-width: 100%; }
+.tabs-l::-webkit-scrollbar { display: none; }
+.tabs-l button { flex: none; border: 0; background: none; padding: 9px 16px; border-radius: 999px; cursor: pointer; color: var(--muted); font-size: 14.5px; font-weight: 500; white-space: nowrap; transition: background 0.2s, color 0.2s; }
+.tabs-l button:hover { color: var(--ink); }
+.tabs-l button[aria-pressed="true"] { background: var(--black); color: var(--cream); }
+.gr-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.gr-grid > .wide { grid-column: 1 / -1; }
+.gr-grid.enter > * { animation: fadeup 0.4s cubic-bezier(.2,.8,.2,1) both; }
+.gr-grid.enter > *:nth-child(2) { animation-delay: 0.05s; } .gr-grid.enter > *:nth-child(n+3) { animation-delay: 0.1s; }
+.gr-card { display: flex; flex-direction: column; gap: 14px; }
+.gr-card h3 { margin: 0; font-family: var(--f-disp); font-weight: 600; font-size: 30px; line-height: 1.1; }
+.gr-card p { margin: 0; font-size: 15px; line-height: 1.55; }
+.gr-card .ar { font-size: 1.25em; }
+.gr-card p.note { font-size: 14px; color: var(--muted); padding-top: 12px; border-top: 1px solid var(--line); }
+.gr-card .eyebrow.sun { color: var(--sun-deep); }
+.gr-list { display: flex; flex-direction: column; }
+.gr-sub { margin: 10px 0 2px; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.gr-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; width: 100%; padding: 7px 8px; margin: 0 -8px; width: calc(100% + 16px);
+  border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; text-align: left; cursor: pointer; color: inherit; transition: background 0.15s; }
+.gr-sub + .gr-row, .gr-list > .gr-row:first-child { border-top-color: transparent; }
+.gr-row:hover { background: rgba(31,23,21,0.04); border-radius: 12px; }
+.gr-row b { display: block; font-weight: 600; font-size: 15.5px; line-height: 1.3; }
+.gr-row small { display: block; color: var(--muted); font-size: 13px; line-height: 1.35; }
+.gr-row small .ar { font-size: 1.3em; color: var(--wine); }
+.gr-row > .ar { font-size: 30px; line-height: 1.55; color: var(--wine-deep); text-align: right; }
+.gr-row .hl, .gr-row .rl { color: var(--sun-deep); }
+.gr-row .arr { color: var(--muted); font-family: var(--f-ui); font-size: 0.55em; margin: 0 6px; vertical-align: middle; }
+.gr-row.dual b::after, .vb-row.dual b::after { content: "двойств."; margin-left: 8px; font-size: 10.5px; font-weight: 500; letter-spacing: 0.06em; padding: 1px 7px; border-radius: 999px; background: rgba(31,23,21,0.07); color: var(--muted); vertical-align: 2px; }
+.dk .gr-row { border-top-color: rgba(251,246,239,0.13); }
+.dk .gr-sub + .gr-row, .dk .gr-list > .gr-row:first-child { border-top-color: transparent; }
+.dk .gr-row:hover { background: rgba(251,246,239,0.07); }
+.dk .gr-row > .ar { color: var(--cream); }
+.dk .gr-row small, .dk .gr-sub, .dk p.note, .dk .eyebrow { color: rgba(251,246,239,0.62); }
+.dk .gr-row small .ar { color: var(--gold); }
+.dk .gr-row .hl, .dk .gr-row .rl { color: var(--gold); }
+.dk .gr-row .arr { color: rgba(251,246,239,0.5); }
+.dk p.note { border-top-color: rgba(251,246,239,0.14); }
+.dk .gr-row.dual b::after, .vb-row.dual b::after { background: rgba(251,246,239,0.12); color: rgba(251,246,239,0.7); }
+.dk p .ar { color: var(--gold); }
+.picks { display: flex; flex-wrap: wrap; gap: 6px; }
+.picks button { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 5px 14px 6px; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s; }
+.picks button .ar { font-size: 19px; line-height: 1.3; color: var(--wine); }
+.picks button:hover { background: rgba(31,23,21,0.05); }
+.picks button[aria-pressed="true"] { background: var(--black); border-color: var(--black); color: var(--cream); }
+.picks button[aria-pressed="true"] .ar { color: var(--gold); }
+.dk .picks button { border-color: rgba(251,246,239,0.25); }
+.dk .picks button .ar { color: var(--gold); }
+.dk .picks button:hover { background: rgba(251,246,239,0.08); }
+.dk .picks button[aria-pressed="true"] { background: var(--cream); border-color: var(--cream); color: var(--wine-deep); }
+.dk .picks button[aria-pressed="true"] .ar { color: var(--wine); }
+.sm-grid { display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); gap: 6px; direction: rtl; }
+.sm { display: grid; place-items: center; border-radius: 12px; font-family: var(--f-ar); font-size: 26px; line-height: 1.5; font-weight: 700; }
+.sm.sun { background: rgba(238,122,47,0.16); color: var(--sun-deep); }
+.sm.moon { background: rgba(107,30,43,0.07); color: var(--wine); }
+.sm-key { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+.sm-key i { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-right: 6px; vertical-align: -1px; }
+.case-t { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 8px; align-items: stretch; }
+.case-t > .eyebrow { align-self: end; text-align: center; }
+.case-n { display: flex; flex-direction: column; justify-content: center; }
+.case-n b { font-family: var(--f-disp); font-size: 22px; font-weight: 600; line-height: 1.1; }
+.case-n small { color: rgba(251,246,239,0.62); font-size: 12.5px; line-height: 1.3; }
+.case-c { border: 0; border-radius: 16px; background: rgba(251,246,239,0.08); color: var(--cream); cursor: pointer; padding: 6px 4px 8px; display: flex; flex-direction: column; align-items: center; transition: background 0.15s; }
+.case-c:hover { background: rgba(251,246,239,0.15); }
+.case-c .ar { font-size: 30px; line-height: 1.5; }
+.case-c .hl { color: var(--gold); }
+.case-c small { font-size: 12.5px; color: rgba(251,246,239,0.62); }
+.pl-t { width: 100%; border-collapse: collapse; }
+.pl-t th { font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 500; text-align: center; padding: 0 4px 6px; }
+.pl-t th:first-child { text-align: left; }
+.pl-t td { border-top: 1px solid var(--line); padding: 6px 4px; text-align: center; font-size: 14px; }
+.pl-t td:first-child { text-align: left; font-weight: 500; }
+.pl-t td .ar { font-size: 24px; line-height: 1.5; color: var(--wine-deep); }
+.pl-t td .hl { color: var(--sun-deep); }
+/* Verbs */
+.vb-top { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); gap: 16px; align-items: start; }
+.vb-pick { display: flex; flex-direction: column; gap: 18px; }
+.vb-head .ar { display: block; font-size: 52px; line-height: 1.45; color: var(--wine); font-weight: 700; }
+.vb-head .ar .dash { color: var(--muted); font-weight: 400; margin: 0 10px; }
+.vb-head h2 { margin: 0; font-family: var(--f-disp); font-weight: 600; font-size: 36px; line-height: 1.1; }
+.vb-meta { margin: 6px 0 0; color: var(--muted); font-size: 14.5px; }
+.vb-meta .cal { color: var(--wine); font-size: 1.3em; }
+.vb-meta b { color: var(--ink); }
+.vb-head .actions { justify-content: flex-start; margin-top: 14px; }
+.vb-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; }
+.vb-list button { border: 1px solid var(--line); background: rgba(251,246,239,0.7); border-radius: 16px; padding: 4px 4px 7px; cursor: pointer; display: flex; flex-direction: column; align-items: center; transition: background 0.2s, transform 0.2s; }
+.vb-list button:hover { background: var(--cream); transform: translateY(-2px); }
+.vb-list .ar { font-size: 26px; line-height: 1.45; color: var(--wine); }
+.vb-list small { font-size: 12px; color: var(--muted); line-height: 1.1; }
+.vb-list button[aria-pressed="true"] { background: var(--wine); border-color: var(--wine); }
+.vb-list button[aria-pressed="true"] .ar { color: var(--gold); }
+.vb-list button[aria-pressed="true"] small { color: rgba(251,246,239,0.75); }
+.vb-table { gap: 14px; }
+.vb-ctrl { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.vb-table .seg { overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+.vb-table .seg::-webkit-scrollbar { display: none; }
+.vb-table .seg button { flex: none; white-space: nowrap; padding: 8px 14px; }
+.vb-tg { display: flex; gap: 6px; }
+.tg { border: 1px solid rgba(251,246,239,0.3); background: none; color: rgba(251,246,239,0.78); border-radius: 999px; padding: 7px 13px; font-size: 13.5px; cursor: pointer; transition: background 0.15s; }
+.tg:hover { background: rgba(251,246,239,0.08); }
+.tg[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--wine-deep); }
+.vb-rows { display: flex; flex-direction: column; }
+.vb-rows.enter { animation: fadeup 0.4s cubic-bezier(.2,.8,.2,1) both; }
+.vb-grp { margin: 10px 0 2px; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(251,246,239,0.55); font-weight: 500; }
+.vb-grp:first-child { margin-top: 0; }
+.vb-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 4px 10px; margin: 0 -10px; border: 0; border-radius: 14px; background: none; color: var(--cream); text-align: left; cursor: pointer; transition: background 0.15s; }
+.vb-row:hover { background: rgba(251,246,239,0.08); }
+.vb-row b { display: block; font-weight: 600; font-size: 15.5px; line-height: 1.3; }
+.vb-row small { display: block; color: rgba(251,246,239,0.6); font-size: 13px; line-height: 1.3; }
+.vb-ar { display: flex; align-items: baseline; gap: 12px; }
+.vb-ar .p { font-size: 20px; color: rgba(251,246,239,0.5); min-width: 2.6em; text-align: right; }
+.vb-ar .f { font-size: 32px; line-height: 1.5; }
+.vb-af { color: var(--gold); }
+.vb-neg { color: #F9A266; }
+.vb-legend { margin: 0; font-size: 13.5px; color: rgba(251,246,239,0.62); padding-top: 12px; border-top: 1px solid rgba(251,246,239,0.14); }
+.vb-how { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px 32px; align-items: start; }
+.vb-how h3 { margin: 6px 0 10px; font-family: var(--f-disp); font-weight: 600; font-size: 30px; line-height: 1.1; }
+.vb-how p { margin: 0 0 10px; font-size: 15px; line-height: 1.55; }
+.vb-how p .ar { font-size: 1.3em; color: var(--wine); }
+.vb-how .formula { direction: rtl; justify-content: flex-start; margin-top: 4px; }
+.vb-how .chip .ar { font-size: 26px; }
+.vb-how .chip .hl { color: var(--sun-deep); }
+.cheat { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 8px; }
+.cheat span { display: flex; flex-direction: column; align-items: center; padding: 4px 8px 8px; border-radius: 16px; background: var(--sand); text-align: center; }
+.cheat .ar { font-size: 26px; line-height: 1.5; color: var(--sun-deep); }
+.cheat small { font-size: 12.5px; color: var(--muted); line-height: 1.25; }
+@media (max-width: 960px) {
+  .gr-grid, .vb-top, .vb-how { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .gr-top .counter { display: none; }
+  .gr-top h1 { font-size: 34px; }
+  .gr-card h3, .vb-how h3 { font-size: 26px; }
+  .gr-row > .ar { font-size: 25px; }
+  .sm-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; }
+  .sm { font-size: 22px; }
+  .case-t { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1fr); gap: 6px; }
+  .case-n b { font-size: 17px; }
+  .case-c .ar { font-size: 23px; }
+  .case-c small { font-size: 11px; }
+  .pl-t td .ar { font-size: 19px; }
+  .pl-t td { font-size: 12.5px; }
+  .vb-head .ar { font-size: 40px; }
+  .vb-head h2 { font-size: 30px; }
+  .vb-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .vb-list .ar { font-size: 21px; }
+  .vb-list small { font-size: 10.5px; }
+  .vb-ar { gap: 8px; }
+  .vb-ar .f { font-size: 25px; }
+  .vb-ar .p { font-size: 16px; min-width: 2.4em; }
+  .vb-row b { font-size: 14.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .gr-grid.enter > *, .vb-rows.enter { animation: none; } }
 /* Root card */
 .root-card { display: flex; flex-direction: column; gap: 18px; }
 .root-head { display: flex; justify-content: space-between; align-items: center; }
@@ -433,6 +595,8 @@ main { padding-block: 6px 48px; }
     <a class="brand" href="#abc" aria-label="JAMAL Arabic"><img class="logo" src="logo.png" alt="" width="48" height="48"><span class="brand-name">JAMAL<small>Arabic</small></span></a>
     <nav class="nav" aria-label="Режимы">
       <a href="#abc" id="tab-abc">Алфавит</a>
+      <a href="#grammar" id="tab-grammar">Правила</a>
+      <a href="#verbs" id="tab-verbs">Глаголы</a>
       <a href="#tree" id="tab-tree">Созвездие</a>
       <a href="#find" id="tab-find">Найди слово</a>
     </nav>
@@ -452,6 +616,26 @@ main { padding-block: 6px 48px; }
       <div class="card abc-card" id="abc-card" aria-live="polite"></div>
     </div>
     <div class="card white abc-build" id="abc-build"></div>
+  </section>
+
+  <section class="gr" id="view-grammar" hidden>
+    <div class="card glass gr-top">
+      <div class="root-head"><span class="eyebrow">Правила · основы грамматики</span><span class="counter">нажмите на строку, чтобы услышать</span></div>
+      <div>
+        <h1 id="gr-title"></h1>
+        <p id="gr-lead"></p>
+      </div>
+      <div class="tabs-l" id="gr-tabs" role="group" aria-label="Темы"></div>
+    </div>
+    <div id="gr-body"></div>
+  </section>
+
+  <section class="vb" id="view-verbs" hidden>
+    <div class="vb-top">
+      <div class="card glass vb-pick" id="vb-pick"></div>
+      <div class="card abc-card vb-table" id="vb-table" aria-live="polite"></div>
+    </div>
+    <div class="card white vb-how" id="vb-how"></div>
   </section>
 
   <section class="bento" id="view-tree" hidden>
@@ -591,13 +775,16 @@ main { padding-block: 6px 48px; }
   // ---------- Routing ----------
   function route() {
     const h = location.hash;
-    const v = h === "#find" || h === "#detective" ? "find" : h === "#tree" ? "tree" : "abc";
-    $("#view-abc").hidden = v !== "abc";
-    $("#view-tree").hidden = v !== "tree";
-    $("#view-find").hidden = v !== "find";
-    ["abc", "tree", "find"].forEach(k => { const a = $("#tab-" + k); if (k === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    const v = h === "#find" || h === "#detective" ? "find" : h === "#tree" ? "tree" : h === "#grammar" ? "grammar" : h === "#verbs" ? "verbs" : "abc";
+    const VIEWS = ["abc", "grammar", "verbs", "tree", "find"];
+    VIEWS.forEach(k => { $("#view-" + k).hidden = k !== v; });
+    VIEWS.forEach(k => { const a = $("#tab-" + k); if (k === v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    const nav = $(".nav"), cur = $("#tab-" + v);
+    if (nav.scrollWidth > nav.clientWidth) { const nr = nav.getBoundingClientRect(), cr = cur.getBoundingClientRect(); nav.scrollLeft += cr.left - nr.left - (nr.width - cr.width) / 2; }
     if (v === "tree") showRoot(true);
     else if (v === "abc") renderAlphabet();
+    else if (v === "grammar") renderGrammar(false);
+    else if (v === "verbs") renderVerbs(false);
     else if (!G || G.fresh) newRound(G && G.preferRoot);
     window.scrollTo(0, 0);
   }
@@ -982,6 +1169,412 @@ main { padding-block: 6px 48px; }
     else if (t.dataset.act === "clear") A.build = [];
     else if (t.dataset.preset) A.build = [...t.dataset.preset];
     renderBuilder();
+  });
+
+  // ---------- Transliteration (Arabic with harakat → Cyrillic) ----------
+  const TRL = { "ب": "б", "ت": "т", "ث": "с", "ج": "дж", "ح": "х", "خ": "х", "د": "д", "ذ": "з", "ر": "р", "ز": "з", "س": "с", "ش": "ш", "ص": "с", "ض": "д",
+    "ط": "т", "ظ": "з", "ع": "‘", "غ": "г", "ف": "ф", "ق": "к", "ك": "к", "ل": "л", "م": "м", "ن": "н", "ه": "х" };
+  const VOW = { "َ": "а", "ُ": "у", "ِ": "и", "ً": "ан", "ٌ": "ун", "ٍ": "ин", "ْ": "" };
+  const SOLAR = "تثدذرزسشصضطظلن";
+  function trWord(w) {
+    let pre = "", s = w, skipShadda = false;
+    if (s.startsWith("ال") && s.length > 3) {
+      const solar = SOLAR.includes(s[2]) && s.slice(3, 5).includes("ّ");
+      pre = solar ? "а" + TRL[s[2]] + "-" : "аль-";
+      skipShadda = solar; s = s.slice(2);
+    }
+    let out = "", cons = "", consEnd = 0;
+    for (let i = 0; i < s.length; i++) {
+      const ch = s[i], prev = s[i - 1], next = s[i + 1];
+      if (ch in VOW) { out += VOW[ch]; continue; }
+      if (ch === "ّ") { if (skipShadda) { skipShadda = false; continue; } if (cons) out = out.slice(0, consEnd) + cons + out.slice(consEnd); continue; }
+      if (ch === "ا" || ch === "ى") {
+        if (i === 0 || prev === "ً" || (prev === "و" && s[i - 2] === "ُ")) continue;
+        out += out.endsWith("а") ? "̄" : "а"; continue;
+      }
+      if (ch === "و" || ch === "ي") {
+        if (prev === (ch === "و" ? "ُ" : "ِ") && !(next in VOW) && next !== "ّ") { out = out.slice(0, -1) + (ch === "و" ? "ӯ" : "ӣ"); continue; }
+        cons = ch === "و" ? "в" : "й"; out += cons; consEnd = out.length; continue;
+      }
+      if (ch === "ة") { if (next in VOW) out += "т"; continue; }
+      if ("أإؤئء".includes(ch)) { if (i > 0) out += "’"; continue; }
+      if (TRL[ch]) { cons = TRL[ch]; out += cons; consEnd = out.length; }
+    }
+    return (pre + out).replace(/йа/g, "я").replace(/йу/g, "ю");
+  }
+  const tr = s => s.split(" ").map(trWord).join(" ");
+  const plain = html => html.replace(/<[^>]+>/g, "");
+  const sayIt = t => { if (canSpeak) speak(t); };
+  // highlight the last n letter clusters (case endings, suffixes)
+  const hlEnd = (w, n) => { const c = clusters(w); return c.slice(0, -n).join("") + `<span class="hl">${c.slice(-n).join("")}</span>`; };
+  // a clickable row: Russian on the left, Arabic on the right
+  const grRow = (arHtml, ru, sub, o = {}) => `<button class="gr-row${o.dual ? " dual" : ""}" data-say="${esc(o.say || plain(arHtml))}">
+      <span><b>${o.ruHtml ? ru : esc(ru)}</b><small>${o.subHtml ? sub : esc(sub == null ? tr(plain(arHtml)) : sub)}</small></span><span class="ar" lang="ar">${arHtml}</span></button>`;
+  const arIn = s => `<span class="ar" lang="ar">${s}</span>`;
+
+  // ---------- Grammar («Правила») ----------
+  const GR = { t: "pron", poss: 0, cas: 0 };
+  const TOPICS = [
+    ["pron", "Местоимения", "Местоимения", "Кто делает и чьё это: личные, слитные и указательные местоимения."],
+    ["art", "Артикль", "Артикль ال", "Как сделать слово определённым и почему ال иногда звучит не как «аль»."],
+    ["num", "Род и число", "Род и число", "Женский род, двойственное число и два способа образовать множественное."],
+    ["case", "Падежи", "Падежи", "Три падежа — три гласные на конце слова: -у, -и, -а."],
+    ["sent", "Фраза", "Как строится фраза", "Предложение без глагола «быть», прилагательное, «книга студента» и порядок слов."]
+  ];
+  const PRON = [
+    { g: "1-е лицо" }, ["أَنَا", "я"], ["نَحْنُ", "мы"],
+    { g: "2-е лицо" }, ["أَنْتَ", "ты", "к мужчине"], ["أَنْتِ", "ты", "к женщине"], ["أَنْتُمَا", "вы двое", "", 1], ["أَنْتُمْ", "вы", "к мужчинам или смешанной группе"], ["أَنْتُنَّ", "вы", "только к женщинам"],
+    { g: "3-е лицо" }, ["هُوَ", "он"], ["هِيَ", "она"], ["هُمَا", "они двое", "", 1], ["هُمْ", "они", "мужчины или смешанная группа"], ["هُنَّ", "они", "только женщины"]
+  ];
+  const POSS_NOUNS = [
+    { ar: "كِتَاب", ru: "книга", g: "f" }, { ar: "بَيْت", ru: "дом", g: "m" }, { ar: "اِسْم", ru: "имя", g: "n" },
+    { ar: "مَدْرَسَة", st: "مَدْرَسَت", ru: "школа", g: "f" }, { ar: "قَلَم", ru: "ручка", g: "f" }
+  ];
+  const MY = { m: "мой", f: "моя", n: "моё" }, OUR = { m: "наш", f: "наша", n: "наше" }, YOUR = { m: "твой", f: "твоя", n: "твоё" }, YOURS = { m: "ваш", f: "ваша", n: "ваше" };
+  const POSS = [
+    { s: "ي", ru: MY, who: "я" }, { s: "نَا", ru: OUR, who: "мы" },
+    { s: "كَ", ru: YOUR, who: "ты, к мужчине" }, { s: "كِ", ru: YOUR, who: "ты, к женщине" }, { s: "كُمَا", ru: YOURS, who: "вы двое", dual: 1 },
+    { s: "كُمْ", ru: YOURS, who: "вы, мужчины" }, { s: "كُنَّ", ru: YOURS, who: "вы, женщины" },
+    { s: "هُ", ru: "его", who: "он" }, { s: "هَا", ru: "её", who: "она" }, { s: "هُمَا", ru: "их", who: "они двое", dual: 1 },
+    { s: "هُمْ", ru: "их", who: "они, мужчины" }, { s: "هُنَّ", ru: "их", who: "они, женщины" }
+  ];
+  const DEMO = [
+    ["هَذَا", "этот, это", "ха̄за̄ · рядом, мужской род"], ["هَذِهِ", "эта, это", "ха̄зихи · рядом, женский род"], ["هَؤُلَاءِ", "эти", "ха̄’ула̄’и · о людях"],
+    ["ذَلِكَ", "тот", "за̄лика · далеко, мужской род"], ["تِلْكَ", "та", "тилька · далеко, женский род"], ["أُولَئِكَ", "те", "ула̄’ика · о людях"]
+  ];
+  function tPron() {
+    const n = POSS_NOUNS[GR.poss], stem = n.st || n.ar;
+    const possRows = POSS.map(p => {
+      const v = p.s === "ي" ? "ِ" : "ُ";
+      const ru = (typeof p.ru === "string" ? p.ru : p.ru[n.g]) + " " + n.ru;
+      return grRow(stem + v + `<span class="hl">${p.s}</span>`, ru, tr(stem + v + p.s) + " · " + p.who, { dual: p.dual });
+    }).join("");
+    const pron = PRON.map(p => p.g ? `<div class="gr-sub">${p.g}</div>` : grRow(p[0], p[1], tr(p[0]) + (p[2] ? " · " + p[2] : ""), { dual: p[3] })).join("");
+    return `<div class="card abc-card gr-card dk">
+        <span class="eyebrow">Личные местоимения</span><h3>Я, ты, он…</h3>
+        <p>«Ты» мужчине и женщине — разные слова. А ещё есть двойственное число: отдельные слова для «вы двое» и «они двое».</p>
+        <div class="gr-list">${pron}</div>
+        <p class="note">В настоящем времени глагол «быть» не используется: ${arIn("أَنَا طَالِبٌ")} — «я студент», дословно «я — студент».</p>
+      </div>
+      <div class="col">
+        <div class="card white gr-card">
+          <span class="eyebrow">Слитные местоимения</span><h3>Мой, твой, его</h3>
+          <p>Местоимение прилепляется к концу слова: ${arIn("كِتَاب")} + ${arIn("ـِي")} = ${arIn("كِتَابِي")} «моя книга». Выберите слово:</p>
+          <div class="picks" data-g="poss">${POSS_NOUNS.map((x, i) => `<button aria-pressed="${i === GR.poss}" data-i="${i}">${arIn(x.ar)} ${esc(x.ru)}</button>`).join("")}</div>
+          <div class="gr-list">${possRows}</div>
+          ${n.st ? `<p class="note">Буква ${arIn("ة")} (та марбута) перед окончанием превращается в обычную ${arIn("ت")}: ${arIn("مَدْرَسَة")} → ${arIn("مَدْرَسَتِي")}.</p>` : ""}
+          ${n.ar === "اِسْم" ? `<p class="note">${arIn("اِسْمِي ...")} — так говорят «меня зовут…», дословно «моё имя…».</p>` : ""}
+          <p class="note">После предлогов те же окончания значат «мне, тебе, ему»: ${arIn("مَعِي")} — со мной, ${arIn("لَكَ")} — тебе, ${arIn("عِنْدَهُ")} — у него.</p>
+        </div>
+        <div class="card glass gr-card">
+          <span class="eyebrow">Указательные местоимения</span><h3>Этот и тот</h3>
+          <div class="gr-list">${DEMO.map(d => grRow(d[0], d[1], d[2])).join("")}</div>
+          <p class="note">${arIn("هَذَا كِتَابٌ")} — «Это книга». ${arIn("هَذِهِ مَدْرَسَةٌ")} — «Это школа»: слово с ${arIn("ة")} женского рода, поэтому ${arIn("هَذِهِ")}.</p>
+        </div>
+      </div>`;
+  }
+
+  const ART_SUN = [["الشَّمْس", "солнце"], ["الدَّرْس", "урок"], ["الرَّجُل", "мужчина"], ["السَّيَّارَة", "машина"], ["النُّور", "свет"], ["التَّاجِر", "торговец"]];
+  const ART_MOON = [["القَمَر", "луна"], ["الكِتَاب", "книга"], ["البَيْت", "дом"], ["المَدْرَسَة", "школа"], ["الوَلَد", "мальчик"], ["الجَمَل", "верблюд"]];
+  function tArt() {
+    const tiles = LETTERS.map(L => `<span class="sm ${SOLAR.includes(L.c) ? "sun" : "moon"}" lang="ar" title="${esc(L.ru)}">${L.c}</span>`).join("");
+    const ex = (list) => list.map(([w, ru]) => { const c = clusters(w); return grRow(`<span class="hl">${c.slice(0, 2).join("")}</span>${c.slice(2).join("")}`, ru, null); }).join("");
+    return `<div class="card glass gr-card wide">
+        <span class="eyebrow">Определённость</span><h3>${arIn("ال")} — как английское «the»</h3>
+        <p>${arIn("كِتَابٌ")} «китабун» — какая-то книга. ${arIn("الكِتَابُ")} «аль-китабу» — та самая книга, о которой речь. Артикль пишется слитно со словом, и у слова с ${arIn("ال")} не бывает окончания «-н» (танвина).</p>
+        <div class="sm-grid">${tiles}</div>
+        <div class="sm-key"><span><i style="background:rgba(238,122,47,0.35)"></i>солнечные буквы — 14</span><span><i style="background:rgba(107,30,43,0.18)"></i>лунные буквы — 14</span></div>
+      </div>
+      <div class="card white gr-card">
+        <span class="eyebrow sun">Солнечные буквы</span><h3>«Л» исчезает</h3>
+        <p>Перед солнечной буквой ${arIn("ل")} не читается, а следующая буква удваивается (над ней знак шадда ${arIn("ّـ")}): ${arIn("الشَّمْس")} — «аш-шамс», а не «аль-шамс».</p>
+        <div class="gr-list">${ex(ART_SUN)}</div>
+      </div>
+      <div class="card white gr-card">
+        <span class="eyebrow">Лунные буквы</span><h3>«Л» звучит</h3>
+        <p>Перед лунной буквой артикль читается полностью: ${arIn("القَمَر")} — «аль-камар». Названия групп взяты как раз из этих слов: солнце и луна.</p>
+        <div class="gr-list">${ex(ART_MOON)}</div>
+      </div>
+      <div class="card abc-card gr-card dk wide">
+        <span class="eyebrow">Как запомнить</span>
+        <p>Почти все солнечные буквы произносятся кончиком языка у зубов: т, д, с, з, р, л, н, их межзубные и твёрдые пары, а ещё ш. Попробуйте сказать «аль-шамс» быстро — язык сам захочет сказать «аш-шамс».</p>
+      </div>`;
+  }
+
+  const GEN = [["مُعَلِّم", "مُعَلِّمَة", "учитель", "учительница"], ["طَالِب", "طَالِبَة", "студент", "студентка"], ["كَبِير", "كَبِيرَة", "большой", "большая"], ["جَمِيل", "جَمِيلَة", "красивый", "красивая"]];
+  const DUAL = [["كِتَاب", "كِتَاب", "книга", "две книги"], ["مُعَلِّم", "مُعَلِّم", "учитель", "два учителя"], ["مَدْرَسَة", "مَدْرَسَت", "школа", "две школы"]];
+  const SMP = [["مُعَلِّم", "учитель", "учителя"], ["مُهَنْدِس", "инженер", "инженеры"], ["مُسَافِر", "путешественник", "путешественники"]];
+  const SFP = [["مُعَلِّمَة", "учительница", "учительницы"], ["طَالِبَة", "студентка", "студентки"], ["سَيَّارَة", "машина", "машины"]];
+  const BROKEN = [
+    ["كِتَاب", "كُتُب", "книга", "книги", "فُعُل", "كتب"], ["دَرْس", "دُرُوس", "урок", "уроки", "فُعُول", "درس"], ["بَيْت", "بُيُوت", "дом", "дома", "فُعُول", "بيت"],
+    ["وَلَد", "أَوْلَاد", "мальчик", "мальчики, дети", "أَفْعَال", "ولد"], ["قَلَم", "أَقْلَام", "ручка", "ручки", "أَفْعَال", "قلم"], ["رَجُل", "رِجَال", "мужчина", "мужчины", "فِعَال", "رجل"],
+    ["طَالِب", "طُلَّاب", "студент", "студенты", "فُعَّال", "طلب"], ["مَدْرَسَة", "مَدَارِس", "школа", "школы", "مَفَاعِل", "درس"], ["مَكْتَب", "مَكَاتِب", "письменный стол", "столы", "مَفَاعِل", "كتب"]
+  ];
+  const ARR = `<span class="arr">←</span>`;
+  function tNum() {
+    const gen = GEN.map(([m, f, rm, rf]) => grRow(m + ARR + hlEnd(f, 1), `${rm} → ${rf}`, `${tr(m)} → ${tr(f)}`, { say: m + "، " + f })).join("");
+    const dual = DUAL.map(([w, st, r1, r2]) => grRow(st + "َ" + `<span class="hl">انِ</span>`, r2, `${tr(st + "َانِ")} · после предлога: ${tr(st + "َيْنِ")}`)).join("");
+    const smp = SMP.map(([w, r1, r2]) => grRow(w + "ُ" + `<span class="hl">ونَ</span>`, r2, `${tr(w + "ُونَ")} · после предлога: ${tr(w + "ِينَ")}`)).join("");
+    const sfp = SFP.map(([w, r1, r2]) => { const st = w.slice(0, -1); return grRow(st + `<span class="hl">ات</span>`, r2, `${tr(st + "ات")} · от ${tr(w)}`); }).join("");
+    const broken = BROKEN.map(([s, p, r1, r2, pat, root]) => grRow(marked(s, [...root]) + ARR + marked(p, [...root]), `${r1} → ${r2}`,
+      `${esc(tr(s))} → ${esc(tr(p))} · схема ${arIn(marked(pat, FAL))}`, { say: s + "، " + p, subHtml: true })).join("");
+    return `<div class="card white gr-card">
+        <span class="eyebrow">Род</span><h3>Мужской и женский</h3>
+        <p>Женский род чаще всего узнаётся по окончанию ${arIn("ة")} — «та марбута». Оно читается как «-а», а перед окончаниями — как «-ат».</p>
+        <div class="gr-list">${gen}</div>
+        <p class="note">Без ${arIn("ة")}, но женского рода: ${arIn("شَمْس")} солнце, ${arIn("أُمّ")} мать, ${arIn("بِنْت")} девочка — их надо запомнить.</p>
+      </div>
+      <div class="card glass gr-card">
+        <span class="eyebrow">Двойственное число</span><h3>Ровно два</h3>
+        <p>Для двух предметов есть своё окончание ${arIn("ـَانِ")}. Числительное «два» не нужно: ${arIn("كِتَابَانِ")} — это уже «две книги».</p>
+        <div class="gr-list">${dual}</div>
+        <p class="note">После предлогов и в роли дополнения окончание меняется на ${arIn("ـَيْنِ")}. Подробнее — в теме «Падежи».</p>
+      </div>
+      <div class="card white gr-card">
+        <span class="eyebrow">Правильное множественное</span><h3>Окончание на конце</h3>
+        <p><b>Мужское</b> ${arIn("ـُونَ")} — для мужчин (или смешанной группы людей), чаще всего у названий профессий:</p>
+        <div class="gr-list">${smp}</div>
+        <p><b>Женское</b> ${arIn("ـَات")} — ${arIn("ة")} убираем, ставим ${arIn("ات")}:</p>
+        <div class="gr-list">${sfp}</div>
+      </div>
+      <div class="card glass gr-card">
+        <span class="eyebrow">Важное правило</span><h3>Вещи — как «она»</h3>
+        <p>Множественное число предметов и животных (не людей) согласуется как <b>женский род единственного числа</b>.</p>
+        <div class="gr-list">${grRow("هَذِهِ كُتُبٌ", "Это книги", null)}${grRow("البُيُوتُ كَبِيرَةٌ", "Дома большие", null)}</div>
+        <p class="note">Дословно «эта книги» и «дома большая» — для арабского это норма.</p>
+      </div>
+      <div class="card abc-card gr-card dk wide">
+        <span class="eyebrow">Ломаное множественное</span><h3>Слово перестраивается изнутри</h3>
+        <p>У очень многих слов множественное число образуется не окончанием, а перестановкой гласных вокруг тех же трёх букв корня. Схем много, поэтому множественное запоминают вместе со словом — но самые частые схемы быстро начинаешь узнавать.</p>
+        <div class="gr-list">${broken}</div>
+      </div>`;
+  }
+
+  const CASE_NOUNS = [{ ar: "كِتَاب", ru: "книга" }, { ar: "بَيْت", ru: "дом" }, { ar: "مَدْرَسَة", ru: "школа" }, { ar: "شَمْس", ru: "солнце" }, { ar: "وَلَد", ru: "мальчик" }];
+  const CASES = [
+    { n: "Именительный", q: "кто? что?", v: "ُ", t: "ٌ", e: "-у" },
+    { n: "Родительный", q: "кого? чего? где?", v: "ِ", t: "ٍ", e: "-и" },
+    { n: "Винительный", q: "кого? что?", v: "َ", t: "ً", e: "-а" }
+  ];
+  function tCase() {
+    const n = CASE_NOUNS[GR.cas], b = n.ar, solar = SOLAR.includes(b[0]);
+    const defB = "ال" + (solar ? b[0] + "ّ" + b.slice(1) : b);
+    const cell = (w, k) => `<button class="case-c" data-say="${esc(w)}"><span class="ar" lang="ar">${hlEnd(w, k)}</span><small>${esc(tr(w))}</small></button>`;
+    const rows = CASES.map(c => {
+      const alif = c.v === "َ" && !b.endsWith("ة");
+      return `<span class="case-n"><b>${c.n}</b><small>${c.q} · ${c.e}</small></span>${cell(defB + c.v, 1)}${cell(b + c.t + (alif ? "ا" : ""), alif ? 2 : 1)}`;
+    }).join("");
+    const pl = [["Двойственное", "مُعَلِّمَانِ", "مُعَلِّمَيْنِ", "مُعَلِّمَيْنِ", 2], ["Мн. мужское", "مُعَلِّمُونَ", "مُعَلِّمِينَ", "مُعَلِّمِينَ", 2], ["Мн. женское", "مُعَلِّمَاتٌ", "مُعَلِّمَاتٍ", "مُعَلِّمَاتٍ", 2], ["Ломаное", "كُتُبٌ", "كُتُبٍ", "كُتُبًا", 1]];
+    return `<div class="card abc-card gr-card dk wide">
+        <span class="eyebrow">Три падежа</span><h3>Конец слова подсказывает его роль</h3>
+        <p>В арабском всего три падежа. Падеж виден по последней гласной: -у, -и или -а. Без артикля к ней добавляется «-н» (танвин): ${arIn("كِتَابٌ")} «китабун».</p>
+        <div class="picks" data-g="case">${CASE_NOUNS.map((x, i) => `<button aria-pressed="${i === GR.cas}" data-i="${i}">${arIn(x.ar)} ${esc(x.ru)}</button>`).join("")}</div>
+        <div class="case-t"><span></span><span class="eyebrow">с артиклем ال</span><span class="eyebrow">без артикля</span>${rows}</div>
+        ${b.endsWith("ة") ? `<p class="note">У слов на ${arIn("ة")} в винительном падеже без артикля не пишут лишнюю ${arIn("ا")}: ${arIn("مَدْرَسَةً")}.</p>` : `<p class="note">В винительном падеже без артикля пишется ещё и ${arIn("ا")}, но она не читается как долгое «а̄»: ${arIn("كِتَابًا")} — «китабан».</p>`}
+      </div>
+      <div class="card white gr-card">
+        <span class="eyebrow">Когда какой падеж</span><h3>Три роли</h3>
+        <div class="gr-list">
+          <div class="gr-sub">Именительный — подлежащее и сказуемое</div>
+          ${grRow(hlEnd("الكِتَابُ", 1) + " " + hlEnd("جَدِيدٌ", 1), "Книга новая.", null)}
+          <div class="gr-sub">Родительный — после предлогов</div>
+          ${grRow("فِي " + hlEnd("البَيْتِ", 1), "в доме", null)}${grRow("مِنَ " + hlEnd("المَدْرَسَةِ", 1), "из школы", null)}
+          <div class="gr-sub">Родительный — второе слово в «книге студента»</div>
+          ${grRow("كِتَابُ " + hlEnd("الوَلَدِ", 1), "книга мальчика", null)}
+          <div class="gr-sub">Винительный — прямое дополнение</div>
+          ${grRow("قَرَأْتُ " + hlEnd("الكِتَابَ", 1), "Я прочитал книгу.", null)}
+        </div>
+      </div>
+      <div class="col">
+        <div class="card glass gr-card">
+          <span class="eyebrow">Множественное и двойственное</span><h3>Окончания меняются целиком</h3>
+          <table class="pl-t"><thead><tr><th></th><th>Им.</th><th>Род.</th><th>Вин.</th></tr></thead><tbody>
+            ${pl.map(r => `<tr><td>${r[0]}</td>${[1, 2, 3].map(k => `<td>${arIn(hlEnd(r[k], r[4]))}</td>`).join("")}</tr>`).join("")}
+          </tbody></table>
+          <p class="note">У двойственного и правильного множественного родительный и винительный совпадают: ${arIn("ـَيْنِ")}, ${arIn("ـِينَ")}, ${arIn("ـَاتٍ")}.</p>
+        </div>
+        <div class="card white gr-card">
+          <span class="eyebrow">В живой речи</span>
+          <p>В конце фразы и в разговоре падежные окончания обычно не произносят: говорят «аль-китаб», а не «аль-китабу». Поэтому в созвездии слова звучат без них. А в Коране, стихах и при чтении книжного текста окончания произносят — кроме паузы в конце фразы.</p>
+        </div>
+      </div>`;
+  }
+
+  function tSent() {
+    return `<div class="card abc-card gr-card dk">
+        <span class="eyebrow">Именное предложение</span><h3>Без глагола «быть»</h3>
+        <p>В настоящем времени «есть / является» не говорят. Обычно подлежащее — с ${arIn("ال")} или местоимение, а сказуемое — без ${arIn("ال")}.</p>
+        <div class="gr-list">${grRow("أَنَا طَالِبٌ", "Я студент.", null)}${grRow("هِيَ مُعَلِّمَةٌ", "Она учительница.", null)}${grRow("البَيْتُ كَبِيرٌ", "Дом большой.", null)}${grRow("الشَّمْسُ جَمِيلَةٌ", "Солнце красивое.", null)}</div>
+      </div>
+      <div class="card white gr-card">
+        <span class="eyebrow">Прилагательное</span><h3>Идёт после слова</h3>
+        <p>Прилагательное стоит <b>после</b> существительного и повторяет за ним всё: род, число, падеж и артикль.</p>
+        <div class="gr-list">${grRow("بَيْتٌ كَبِيرٌ", "большой дом", null)}${grRow("مَدْرَسَةٌ " + hlEnd("جَمِيلَةٌ", 1), "красивая школа", null)}${grRow("البَيْتُ <span class=\"hl\">ال</span>كَبِيرُ", "(тот самый) большой дом", null)}</div>
+        <p class="note">Сравните: ${arIn("البَيْتُ الكَبِيرُ")} — «большой дом», а ${arIn("البَيْتُ كَبِيرٌ")} — «Дом большой». Вся разница в артикле.</p>
+      </div>
+      <div class="card glass gr-card">
+        <span class="eyebrow">Идафа</span><h3>«Книга студента»</h3>
+        <p>Два существительных подряд: первое — без ${arIn("ال")} и без «-н», второе — в родительном падеже. Так выражают «чей?» и «чего?».</p>
+        <div class="gr-list">${grRow("كِتَابُ الطَّالِبِ", "книга студента", null)}${grRow("بَابُ البَيْتِ", "дверь дома", null)}${grRow("مُعَلِّمُ المَدْرَسَةِ", "учитель школы", null)}</div>
+        <p class="note">${arIn("كِتَابِي")} «моя книга» — тоже идафа, только вместо второго слова местоимение.</p>
+      </div>
+      <div class="card white gr-card">
+        <span class="eyebrow">Глагольное предложение</span><h3>Сначала глагол</h3>
+        <p>Обычный порядок: глагол → кто → что. Если глагол стоит первым, он остаётся в единственном числе, даже когда действующих много (род при этом совпадает: мужской или женский).</p>
+        <div class="gr-list">${grRow("كَتَبَ الطَّالِبُ الدَّرْسَ", "Студент написал урок.", null)}${grRow("ذَهَبَ الأَوْلَادُ إِلَى المَدْرَسَةِ", "Дети пошли в школу.", null)}${grRow("الأَوْلَادُ ذَهَبُوا", "Дети ушли.", "подлежащее впереди — глагол во множественном")}</div>
+      </div>`;
+  }
+
+  const TOPIC_FN = { pron: tPron, art: tArt, num: tNum, case: tCase, sent: tSent };
+  function renderGrammar(animate) {
+    const T = TOPICS.find(t => t[0] === GR.t);
+    $("#gr-title").textContent = T[2];
+    $("#gr-lead").textContent = T[3];
+    $("#gr-tabs").innerHTML = TOPICS.map(t => `<button data-topic="${t[0]}" aria-pressed="${t[0] === GR.t}">${t[1]}</button>`).join("");
+    $("#gr-body").innerHTML = `<div class="gr-grid ${animate ? "enter" : ""}">${TOPIC_FN[GR.t]()}</div>`;
+  }
+  $("#view-grammar").addEventListener("click", e => {
+    const t = e.target.closest("button"); if (!t) return;
+    if (t.dataset.topic) { GR.t = t.dataset.topic; renderGrammar(true); return; }
+    const g = t.closest("[data-g]");
+    if (g && t.dataset.i != null) { GR[g.dataset.g === "poss" ? "poss" : "cas"] = +t.dataset.i; renderGrammar(false); return; }
+    if (t.dataset.say) sayIt(t.dataset.say);
+  });
+
+  // ---------- Verbs («Глаголы») ----------
+  // r: root, p: vowel of the past stem, v: vowel of the present stem; Russian: infinitive, past (masc.), present (6 persons), imperative (ты, вы)
+  const VERBS = [
+    { r: "كتب", id: "ktb", p: "َ", v: "ُ", ru: "писать", past: "писал", pres: "пишу пишешь пишет пишем пишете пишут", imp: "пиши пишите" },
+    { r: "درس", id: "drs", p: "َ", v: "ُ", ru: "изучать", past: "изучал", pres: "изучаю изучаешь изучает изучаем изучаете изучают", imp: "изучай изучайте" },
+    { r: "فهم", id: "fhm", p: "ِ", v: "َ", ru: "понимать", past: "понимал", pres: "понимаю понимаешь понимает понимаем понимаете понимают", imp: "понимай понимайте" },
+    { r: "عرف", id: "erf", p: "َ", v: "ِ", ru: "знать", past: "знал", pres: "знаю знаешь знает знаем знаете знают", imp: "знай знайте" },
+    { r: "جلس", id: "jls", p: "َ", v: "ِ", ru: "садиться", past: "садился", pres: "сажусь садишься садится садимся садитесь садятся", imp: "садись садитесь" },
+    { r: "فتح", id: "fth", p: "َ", v: "َ", ru: "открывать", past: "открывал", pres: "открываю открываешь открывает открываем открываете открывают", imp: "открывай открывайте" },
+    { r: "شرب", id: "shrb", p: "ِ", v: "َ", ru: "пить", past: "пил", pres: "пью пьёшь пьёт пьём пьёте пьют", imp: "пей пейте" },
+    { r: "عمل", id: "eml", p: "ِ", v: "َ", ru: "работать", past: "работал", pres: "работаю работаешь работает работаем работаете работают", imp: "работай работайте" },
+    { r: "دخل", id: "dhl", p: "َ", v: "ُ", ru: "входить", past: "входил", pres: "вхожу входишь входит входим входите входят", imp: "входи входите" },
+    { r: "خرج", id: "hrj", p: "َ", v: "ُ", ru: "выходить", past: "выходил", pres: "выхожу выходишь выходит выходим выходите выходят", imp: "выходи выходите" },
+    { r: "لعب", id: "leb", p: "ِ", v: "َ", ru: "играть", past: "играл", pres: "играю играешь играет играем играете играют", imp: "играй играйте" },
+    { r: "نظر", id: "nzr", p: "َ", v: "ُ", ru: "смотреть", past: "смотрел", pres: "смотрю смотришь смотрит смотрим смотрите смотрят", imp: "смотри смотрите" },
+    { r: "غسل", id: "gsl", p: "َ", v: "ِ", ru: "мыть", past: "мыл", pres: "мою моешь моет моем моете моют", imp: "мой мойте" },
+    { r: "طبخ", id: "tbh", p: "َ", v: "ُ", ru: "готовить", past: "готовил", pres: "готовлю готовишь готовит готовим готовите готовят", imp: "готовь готовьте" },
+    { r: "حفظ", id: "hfz", p: "ِ", v: "َ", ru: "запоминать", past: "запоминал", pres: "запоминаю запоминаешь запоминает запоминаем запоминаете запоминают", imp: "запоминай запоминайте" }
+  ];
+  const PERS = [
+    { k: "ana", ar: "أَنَا", g: 1 }, { k: "nahnu", ar: "نَحْنُ", g: 1 },
+    { k: "anta", ar: "أَنْتَ", g: 2, sub: "к мужчине" }, { k: "anti", ar: "أَنْتِ", g: 2, sub: "к женщине" }, { k: "antuma", ar: "أَنْتُمَا", g: 2, sub: "вдвоём", dual: 1 },
+    { k: "antum", ar: "أَنْتُمْ", g: 2, sub: "мужчины" }, { k: "antunna", ar: "أَنْتُنَّ", g: 2, sub: "женщины" },
+    { k: "huwa", ar: "هُوَ", g: 3 }, { k: "hiya", ar: "هِيَ", g: 3 }, { k: "humaM", ar: "هُمَا", g: 3, sub: "двое мужчин", dual: 1 }, { k: "humaF", ar: "هُمَا", g: 3, sub: "две женщины", dual: 1 },
+    { k: "hum", ar: "هُمْ", g: 3, sub: "мужчины" }, { k: "hunna", ar: "هُنَّ", g: 3, sub: "женщины" }
+  ];
+  // past: [vowel on the last root letter, ending]
+  const PAST = { ana: ["ْ", "تُ"], nahnu: ["ْ", "نَا"], anta: ["ْ", "تَ"], anti: ["ْ", "تِ"], antuma: ["ْ", "تُمَا"], antum: ["ْ", "تُمْ"], antunna: ["ْ", "تُنَّ"],
+    huwa: ["َ", ""], hiya: ["َ", "تْ"], humaM: ["َ", "ا"], humaF: ["َ", "تَا"], hum: ["ُ", "وا"], hunna: ["ْ", "نَ"] };
+  // present: [prefix, vowel on the last root letter, ending]
+  const PRES = { ana: ["أَ", "ُ", ""], nahnu: ["نَ", "ُ", ""], anta: ["تَ", "ُ", ""], anti: ["تَ", "ِ", "ينَ"], antuma: ["تَ", "َ", "انِ"], antum: ["تَ", "ُ", "ونَ"], antunna: ["تَ", "ْ", "نَ"],
+    huwa: ["يَ", "ُ", ""], hiya: ["تَ", "ُ", ""], humaM: ["يَ", "َ", "انِ"], humaF: ["تَ", "َ", "انِ"], hum: ["يَ", "ُ", "ونَ"], hunna: ["يَ", "ْ", "نَ"] };
+  const SHORT_END = { "ينَ": "ي", "انِ": "ا", "ونَ": "وا" };
+  // sub = subjunctive (after لَنْ), jus = jussive (imperative, لَا prohibition)
+  const mood = ([pre, mk, suf], m) => m === "ind" ? [pre, mk, suf] : [pre, mk === "ُ" && !suf ? (m === "sub" ? "َ" : "ْ") : mk, SHORT_END[suf] || suf];
+  const TENSES = [["past", "Прошедшее"], ["pres", "Настоящее"], ["fut", "Будущее"], ["imp", "Повелительное"]];
+  function conj(V, t, k, neg) {
+    const [F, A, L] = [...V.r];
+    if (t === "past") { const [mk, suf] = PAST[k]; return { n: neg ? "مَا" : "", a: "", s: F + "َ" + A + V.p + L + mk, b: suf }; }
+    const [pre, mk, suf] = mood(PRES[k], t === "imp" ? "jus" : neg && t === "fut" ? "sub" : "ind");
+    const s = F + "ْ" + A + V.v + L + mk;
+    if (t === "pres") return { n: neg ? "لَا" : "", a: pre, s, b: suf };
+    if (t === "fut") return neg ? { n: "لَنْ", a: pre, s, b: suf } : { n: "", a: "سَ" + pre, s, b: suf };
+    return neg ? { n: "لَا", a: pre, s, b: suf } : { n: "", a: "ا" + (V.v === "ُ" ? "ُ" : "ِ"), s, b: suf };
+  }
+  const formText = f => (f.n ? f.n + " " : "") + f.a + f.s + f.b;
+  const formHtml = f => (f.n ? `<span class="vb-neg">${f.n}</span> ` : "") + `<span class="vb-af">${f.a}</span>${f.s}<span class="vb-af">${f.b}</span>`;
+  const RU_I = { ana: 0, anta: 1, anti: 1, huwa: 2, hiya: 2, nahnu: 3, antuma: 4, antum: 4, antunna: 4, humaM: 5, humaF: 5, hum: 5, hunna: 5 };
+  const RU_P = ["я", "ты", "он", "мы", "вы", "они"], BE = ["буду", "будешь", "будет", "будем", "будете", "будут"];
+  function ruForm(V, t, k, neg) {
+    const i = RU_I[k], pron = k === "hiya" ? "она" : RU_P[i], ne = neg ? "не " : "";
+    if (t === "imp") return ne + V.imp.split(" ")[i === 1 ? 0 : 1] + "!";
+    if (t === "pres") return `${pron} ${ne}${V.pres.split(" ")[i]}`;
+    if (t === "fut") return `${pron} ${ne}${BE[i]} ${V.ru}`;
+    const refl = V.past.endsWith("ся"), b = refl ? V.past.slice(0, -2) : V.past;
+    const m = refl ? b + "ся" : b, f = refl ? b + "ась" : b + "а", pl = refl ? b + "ись" : b + "и";
+    const form = i >= 3 ? pl : (k === "anti" || k === "hiya") ? f : k === "ana" ? (refl ? m + " (-ась)" : m + "(а)") : m;
+    return `${pron} ${ne}${form}`;
+  }
+  const VB = { i: 0, t: "pres", neg: false, dual: false };
+  const VOWEL_RU = { "ُ": "у", "َ": "а", "ِ": "и" };
+  function renderVerbs(animate) {
+    const V = VERBS[VB.i], R = ROOTS.find(r => r.id === V.id);
+    const past3 = formText(conj(V, "past", "huwa")), pres3 = formText(conj(V, "pres", "huwa"));
+    $("#vb-pick").innerHTML = `<div class="root-head"><span class="eyebrow">Глагол · ${VB.i + 1} / ${VERBS.length}</span><span class="counter">словарная форма — «он сделал»</span></div>
+      <div class="vb-head">
+        <span class="ar" lang="ar">${past3}<span class="dash">—</span>${pres3}</span>
+        <h2>${esc(V.ru)}</h2>
+        <p class="vb-meta">Корень <span class="cal" lang="ar">${[...V.r].join(" ")}</span> · гласная в настоящем времени: <b>${VOWEL_RU[V.v]}</b></p>
+        <div class="actions">${canSpeak ? `<button class="pill black" data-say="${esc(past3 + "، " + pres3)}">▶ Послушать</button>` : ""}${R ? `<button class="pill" data-root="${R.id}">Корень в созвездии →</button>` : ""}</div>
+      </div>
+      <div class="vb-list">${VERBS.map((x, i) => `<button data-v="${i}" aria-pressed="${i === VB.i}"><span class="ar" lang="ar">${formText(conj(x, "past", "huwa"))}</span><small>${esc(x.ru)}</small></button>`).join("")}</div>`;
+
+    let lastG = 0;
+    const rows = PERS.filter(p => (VB.dual || !p.dual) && (VB.t !== "imp" || p.g === 2)).map(p => {
+      const f = conj(V, VB.t, p.k, VB.neg), text = formText(f);
+      const head = p.g !== lastG ? `<div class="vb-grp">${p.g}-е лицо</div>` : ""; lastG = p.g;
+      const sayPron = VB.t === "imp" ? "" : p.ar + " ";
+      return head + `<button class="vb-row${p.dual ? " dual" : ""}" data-say="${esc(sayPron + text)}">
+        <span><b>${esc(ruForm(V, VB.t, p.k, VB.neg))}</b><small>${p.sub ? esc(p.sub) + " · " : ""}${esc(tr(text))}</small></span>
+        <span class="vb-ar" lang="ar" dir="rtl"><span class="p ar">${p.ar}</span><span class="f ar">${formHtml(f)}</span></span></button>`;
+    }).join("");
+    $("#vb-table").innerHTML = `<div class="vb-ctrl">
+        <div class="seg" role="group" aria-label="Время">${TENSES.map(([k, n]) => `<button data-t="${k}" aria-pressed="${k === VB.t}">${n}</button>`).join("")}</div>
+        <div class="vb-tg"><button class="tg" data-tg="neg" aria-pressed="${VB.neg}">Отрицание</button><button class="tg" data-tg="dual" aria-pressed="${VB.dual}">Двойственное</button></div>
+      </div>
+      <div class="vb-rows ${animate ? "enter" : ""}">${rows}</div>
+      <p class="vb-legend"><span class="vb-af">Золотым</span> — приставки и окончания, они показывают, кто действует${VB.neg ? `; <span class="vb-neg">оранжевым</span> — частица «не»` : ""}. Нажмите на строку, чтобы послушать.</p>`;
+    renderHow(V);
+  }
+  const chip = (ar, label) => `<span class="chip"><span class="ar" lang="ar">${ar}</span><small>${esc(label)}</small></span>`;
+  const cheat = list => `<div class="cheat">${list.map(([a, l]) => `<span><span class="ar" lang="ar">${a}</span><small>${esc(l)}</small></span>`).join("")}</div>`;
+  function renderHow(V) {
+    const [F, A, L] = [...V.r];
+    const pres = s => formText(conj(V, "pres", s)), past = s => formText(conj(V, "past", s)), imp = s => formText(conj(V, "imp", s));
+    const pastStem = F + "َ" + A + V.p + L + "ْ", presStem = F + "ْ" + A + V.v + L;
+    const H = {
+      past: { h: "Прошедшее: окончания", p: `Берём основу и добавляем окончание — оно показывает, кто сделал. Форма «он» без окончания — это и есть словарная форма: ${arIn(past("huwa"))}.`,
+        f: [chip(pastStem, "основа"), "+", chip("تُ", "я"), "=", chip(past("ana"), ruForm(V, "past", "ana"))],
+        c: [["ـْتُ", "я"], ["ـْنَا", "мы"], ["ـْتَ", "ты (м)"], ["ـْتِ", "ты (ж)"], ["ـْتُمْ", "вы (м)"], ["ـْتُنَّ", "вы (ж)"], ["ـَ", "он"], ["ـَتْ", "она"], ["ـُوا", "они (м)"], ["ـْنَ", "они (ж)"]] },
+      pres: { h: "Настоящее: приставка + окончание", p: `Впереди приставка, сзади — окончание. Гласная внутри (${arIn(pres("huwa"))} — «${VOWEL_RU[V.v]}») у каждого глагола своя, её запоминают вместе со словом.`,
+        f: [chip("يَـ", "он"), "+", chip(presStem + "ُ", "основа"), "=", chip(pres("huwa"), ruForm(V, "pres", "huwa"))],
+        c: [["أَـ", "я"], ["نَـ", "мы"], ["تَـ", "ты, вы, она"], ["يَـ", "он, они"], ["ـِينَ", "ты (ж)"], ["ـُونَ", "вы, они (м)"], ["ـْنَ", "вы, они (ж)"], ["ـَانِ", "двое"]] },
+      fut: { h: "Будущее: سَـ + настоящее", p: `Будущее время — это настоящее с приставкой ${arIn("سَـ")}. Можно сказать и отдельным словом: ${arIn("سَوْفَ " + pres("huwa"))} — так чаще говорят о более далёком будущем.`,
+        f: [chip("سَـ", "будет"), "+", chip(pres("huwa"), "он делает"), "=", chip("سَ" + pres("huwa"), ruForm(V, "fut", "huwa"))],
+        c: [["سَـ", "будет (ближе)"], ["سَوْفَ", "будет (дальше)"]] },
+      imp: { h: "Повелительное: от «ты делаешь»", p: `Берём ${arIn(pres("anta"))} «ты ${V.pres.split(" ")[1]}», убираем приставку ${arIn("تَـ")} и последнюю гласную. Слово не может начинаться с буквы без гласной, поэтому впереди ставят ${arIn("اُ")} (если в основе «у») или ${arIn("اِ")} (если «а» или «и»).`,
+        f: [chip(imp("anta").slice(0, 2), "опора"), "+", chip(presStem + "ْ", "основа"), "=", chip(imp("anta"), ruForm(V, "imp", "anta"))],
+        c: [["اُـ", "если в основе «у»"], ["اِـ", "если «а» или «и»"], ["ـْ", "ты (м)"], ["ـِي", "ты (ж)"], ["ـُوا", "вы (м)"], ["ـْنَ", "вы (ж)"]] }
+    }[VB.t];
+    const NEG = {
+      past: `${arIn("مَا")} + прошедшее: ${arIn("مَا " + past("huwa"))}. В книжном языке чаще ${arIn("لَمْ")} + настоящее без последней гласной: ${arIn("لَمْ يَ" + presStem + "ْ")}.`,
+      pres: `${arIn("لَا")} + настоящее: ${arIn("لَا " + pres("huwa"))} — «он не ${V.pres.split(" ")[2]}».`,
+      fut: `${arIn("لَنْ")} вместо ${arIn("سَـ")}: последняя гласная «у» меняется на «а», а у форм на ${arIn("ـِينَ")}, ${arIn("ـُونَ")}, ${arIn("ـَانِ")} отпадает ${arIn("ن")}: ${arIn(formText(conj(V, "fut", "huwa", true)))}, ${arIn(formText(conj(V, "fut", "hum", true)))}.`,
+      imp: `Запрет: ${arIn("لَا")} + «ты делаешь» без последней гласной (а у форм на ${arIn("ـِينَ")}, ${arIn("ـُونَ")} отпадает ${arIn("ن")}): ${arIn(formText(conj(V, "imp", "anta", true)))} — «не ${V.imp.split(" ")[0]}!».`
+    }[VB.t];
+    $("#vb-how").innerHTML = `<div>
+        <span class="eyebrow">Как образуется</span><h3>${H.h}</h3>
+        <p>${H.p}</p>
+        <div class="formula">${H.f.map(x => x === "+" || x === "=" ? `<span class="op">${x}</span>` : x).join("")}</div>
+      </div>
+      <div>
+        <span class="eyebrow">Шпаргалка</span>
+        <div style="margin-top:12px">${cheat(H.c)}</div>
+        <p style="margin-top:16px"><b>Отрицание.</b> ${NEG}</p>
+      </div>`;
+  }
+  $("#view-verbs").addEventListener("click", e => {
+    const t = e.target.closest("button"); if (!t) return;
+    if (t.dataset.v != null) { VB.i = +t.dataset.v; renderVerbs(true); if (matchMedia("(max-width: 960px)").matches) $("#vb-table").scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" }); return; }
+    if (t.dataset.t) { VB.t = t.dataset.t; renderVerbs(true); return; }
+    if (t.dataset.tg) { VB[t.dataset.tg] = !VB[t.dataset.tg]; renderVerbs(true); return; }
+    if (t.dataset.root) { S.i = ROOTS.findIndex(r => r.id === t.dataset.root); S.word = null; location.hash = "#tree"; return; }
+    if (t.dataset.say) sayIt(t.dataset.say);
   });
 
   // ---------- Game: «Найди слово» ----------
