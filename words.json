@@ -196,6 +196,185 @@
       {"id": "hsb-muhasib", "legacy": "hsb-2", "ar": "مُحَاسِب", "tr": "мухасиб", "ru": "бухгалтер", "pattern": "مُفَاعِل", "cat": "doer"},
       {"id": "hsb-mahsub", "legacy": "hsb-3", "ar": "مَحْسُوب", "tr": "махсуб", "ru": "посчитанный", "pattern": "مَفْعُول", "cat": "object"},
       {"id": "hsb-hasub", "legacy": "hsb-4", "ar": "حَاسُوب", "tr": "хасуб", "ru": "компьютер", "pattern": "فَاعُول", "cat": "tool"}
+    ]},
+    { "id": "sme", "letters": ["س", "م", "ع"], "meaning": "слышать", "verified": true, "words": [
+      {"id": "sme-samia", "ar": "سَمِعَ", "tr": "сами‘а", "ru": "он услышал", "pattern": "فَعِلَ", "cat": "verb"},
+      {"id": "sme-sam", "ar": "سَمْع", "tr": "сам‘", "ru": "слух", "pattern": "فَعْل", "cat": "noun"},
+      {"id": "sme-sami", "ar": "سَامِع", "tr": "сами‘", "ru": "слушающий", "pattern": "فَاعِل", "cat": "doer"},
+      {"id": "sme-masmu", "ar": "مَسْمُوع", "tr": "масму‘", "ru": "слышимый, услышанный", "pattern": "مَفْعُول", "cat": "object"},
+      {"id": "sme-sammaa", "ar": "سَمَّاعَة", "tr": "самма‘а", "ru": "наушники, телефонная трубка", "pattern": "فَعَّالَة", "cat": "tool"}
+    ]},
+    { "id": "dhb", "letters": ["ذ", "ه", "ب"], "meaning": "идти, уходить", "verified": true, "words": [
+      {"id": "dhb-zahaba", "ar": "ذَهَبَ", "tr": "захаба", "ru": "он ушёл, пошёл", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "dhb-zahab", "ar": "ذَهَاب", "tr": "захаб", "ru": "уход, поездка туда", "pattern": "فَعَال", "cat": "noun"},
+      {"id": "dhb-zahib", "ar": "ذَاهِب", "tr": "захиб", "ru": "идущий, уходящий", "pattern": "فَاعِل", "cat": "doer"},
+      {"id": "dhb-mazhab", "ar": "مَذْهَب", "tr": "мазхаб", "ru": "учение, школа (букв. «путь»)", "pattern": "مَفْعَل", "cat": "noun", "hint": "«ма-» в начале — место или путь: «то, куда идут». Так называют школу учения."}
+    ]},
+    { "id": "rsm", "letters": ["ر", "س", "م"], "meaning": "рисовать", "verified": true, "words": [
+      {"id": "rsm-rasama", "ar": "رَسَمَ", "tr": "расама", "ru": "он нарисовал", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "rsm-rasm", "ar": "رَسْم", "tr": "расм", "ru": "рисунок, рисование", "pattern": "فَعْل", "cat": "noun"},
+      {"id": "rsm-rassam", "ar": "رَسَّام", "tr": "рассам", "ru": "художник", "pattern": "فَعَّال", "cat": "doer"},
+      {"id": "rsm-marsam", "ar": "مَرْسَم", "tr": "марсам", "ru": "мастерская художника", "pattern": "مَفْعَل", "cat": "place"},
+      {"id": "rsm-marsum", "ar": "مَرْسُوم", "tr": "марсум", "ru": "указ (букв. «начертанное»)", "pattern": "مَفْعُول", "cat": "object"}
+    ]},
+    { "id": "shkr", "letters": ["ش", "ك", "ر"], "meaning": "благодарить", "verified": true, "words": [
+      {"id": "shkr-shakara", "ar": "شَكَرَ", "tr": "шакара", "ru": "он поблагодарил", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "shkr-shukr", "ar": "شُكْر", "tr": "шукр", "ru": "благодарность", "pattern": "فُعْل", "cat": "noun"},
+      {"id": "shkr-shakir", "ar": "شَاكِر", "tr": "шакир", "ru": "благодарный", "pattern": "فَاعِل", "cat": "doer"},
+      {"id": "shkr-mashkur", "ar": "مَشْكُور", "tr": "машкур", "ru": "достойный благодарности", "pattern": "مَفْعُول", "cat": "object"}
+    ]},
+    { "id": "frh", "letters": ["ف", "ر", "ح"], "meaning": "радоваться", "verified": true, "words": [
+      {"id": "frh-fariha", "ar": "فَرِحَ", "tr": "фариха", "ru": "он обрадовался", "pattern": "فَعِلَ", "cat": "verb"},
+      {"id": "frh-farah", "ar": "فَرَح", "tr": "фарах", "ru": "радость", "pattern": "فَعَل", "cat": "noun"},
+      {"id": "frh-farhan", "ar": "فَرْحَان", "tr": "фархан", "ru": "радостный", "pattern": "فَعْلَان", "cat": "quality"}
+    ]},
+    { "id": "dhk", "letters": ["ض", "ح", "ك"], "meaning": "смеяться", "verified": true, "words": [
+      {"id": "dhk-dahika", "ar": "ضَحِكَ", "tr": "дахика", "ru": "он засмеялся", "pattern": "فَعِلَ", "cat": "verb"},
+      {"id": "dhk-dahka", "ar": "ضَحْكَة", "tr": "дахка", "ru": "смешок", "pattern": "فَعْلَة", "cat": "noun"},
+      {"id": "dhk-dahik", "ar": "ضَاحِك", "tr": "дахик", "ru": "смеющийся", "pattern": "فَاعِل", "cat": "doer"},
+      {"id": "dhk-mudhik", "ar": "مُضْحِك", "tr": "мудхик", "ru": "смешной", "pattern": "مُفْعِل", "cat": "quality"}
+    ]},
+    { "id": "lbs", "letters": ["ل", "ب", "س"], "meaning": "надевать, носить одежду", "verified": true, "words": [
+      {"id": "lbs-labisa", "ar": "لَبِسَ", "tr": "лабиса", "ru": "он надел", "pattern": "فَعِلَ", "cat": "verb"},
+      {"id": "lbs-libas", "ar": "لِبَاس", "tr": "либас", "ru": "одежда", "pattern": "فِعَال", "cat": "noun"},
+      {"id": "lbs-labis", "ar": "لَابِس", "tr": "лабис", "ru": "одетый, носящий", "pattern": "فَاعِل", "cat": "doer"}
+    ]},
+    { "id": "rje", "letters": ["ر", "ج", "ع"], "meaning": "возвращаться", "verified": true, "words": [
+      {"id": "rje-radzhaa", "ar": "رَجَعَ", "tr": "раджа‘а", "ru": "он вернулся", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "rje-rudzhu", "ar": "رُجُوع", "tr": "руджу‘", "ru": "возвращение", "pattern": "فُعُول", "cat": "noun"},
+      {"id": "rje-radzhi", "ar": "رَاجِع", "tr": "раджи‘", "ru": "возвращающийся", "pattern": "فَاعِل", "cat": "doer"},
+      {"id": "rje-mardzhi", "ar": "مَرْجِع", "tr": "марджи‘", "ru": "справочник, источник", "pattern": "مَفْعِل", "cat": "place", "hint": "«ма-» в начале — место, куда возвращаются: справочник, к которому обращаются снова и снова."}
+    ]},
+    { "id": "bhth", "letters": ["ب", "ح", "ث"], "meaning": "искать, исследовать", "verified": true, "words": [
+      {"id": "bhth-bahasa", "ar": "بَحَثَ", "tr": "бахаса", "ru": "он искал", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "bhth-bahs", "ar": "بَحْث", "tr": "бахс", "ru": "поиск, исследование", "pattern": "فَعْل", "cat": "noun"},
+      {"id": "bhth-bahis", "ar": "بَاحِث", "tr": "бахис", "ru": "исследователь", "pattern": "فَاعِل", "cat": "doer"}
+    ]},
+    { "id": "hml", "letters": ["ح", "م", "ل"], "meaning": "нести", "verified": true, "words": [
+      {"id": "hml-hamalya", "ar": "حَمَلَ", "tr": "хамаля", "ru": "он понёс", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "hml-himl", "ar": "حِمْل", "tr": "химль", "ru": "груз, ноша", "pattern": "فِعْل", "cat": "noun"},
+      {"id": "hml-hammal", "ar": "حَمَّال", "tr": "хаммаль", "ru": "носильщик", "pattern": "فَعَّال", "cat": "doer"},
+      {"id": "hml-mahmul", "ar": "مَحْمُول", "tr": "махмуль", "ru": "переносной; мобильный телефон", "pattern": "مَفْعُول", "cat": "object"}
+    ]},
+    { "id": "zre", "letters": ["ز", "ر", "ع"], "meaning": "сажать, выращивать", "verified": true, "words": [
+      {"id": "zre-zaraa", "ar": "زَرَعَ", "tr": "зара‘а", "ru": "он посадил", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "zre-ziraa", "ar": "زِرَاعَة", "tr": "зира‘а", "ru": "сельское хозяйство", "pattern": "فِعَالَة", "cat": "noun"},
+      {"id": "zre-muzari", "ar": "مُزَارِع", "tr": "музари‘", "ru": "фермер", "pattern": "مُفَاعِل", "cat": "doer"},
+      {"id": "zre-mazraa", "ar": "مَزْرَعَة", "tr": "мазра‘а", "ru": "ферма", "pattern": "مَفْعَلَة", "cat": "place"}
+    ]},
+    { "id": "sdq", "letters": ["ص", "د", "ق"], "meaning": "говорить правду", "verified": true, "words": [
+      {"id": "sdq-sadaka", "ar": "صَدَقَ", "tr": "садака", "ru": "он сказал правду", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "sdq-sydk", "ar": "صِدْق", "tr": "сыдк", "ru": "правдивость, искренность", "pattern": "فِعْل", "cat": "noun"},
+      {"id": "sdq-sadyk", "ar": "صَدِيق", "tr": "садык", "ru": "друг", "pattern": "فَعِيل", "cat": "doer", "hint": "Долгое «ӣ» перед последней буквой — здесь человек: друг, «тот, кто искренен с тобой»."}
+    ]},
+    { "id": "hdm", "letters": ["خ", "د", "م"], "meaning": "служить", "verified": true, "words": [
+      {"id": "hdm-hadama", "ar": "خَدَمَ", "tr": "хадама", "ru": "он служил", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "hdm-hidma", "ar": "خِدْمَة", "tr": "хидма", "ru": "служба, услуга", "pattern": "فِعْلَة", "cat": "noun"},
+      {"id": "hdm-hadim", "ar": "خَادِم", "tr": "хадим", "ru": "слуга", "pattern": "فَاعِل", "cat": "doer"}
+    ]},
+    { "id": "tlb", "letters": ["ط", "ل", "ب"], "meaning": "просить, требовать", "verified": true, "words": [
+      {"id": "tlb-talaba", "ar": "طَلَبَ", "tr": "талаба", "ru": "он попросил", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "tlb-talab", "ar": "طَلَب", "tr": "талаб", "ru": "просьба, заказ", "pattern": "فَعَل", "cat": "noun"},
+      {"id": "tlb-talib", "ar": "طَالِب", "tr": "талиб", "ru": "студент (букв. «ищущий»)", "pattern": "فَاعِل", "cat": "doer"},
+      {"id": "tlb-matlub", "ar": "مَطْلُوب", "tr": "матлуб", "ru": "нужный, требуемый", "pattern": "مَفْعُول", "cat": "object"}
+    ]},
+    { "id": "nzf", "letters": ["ن", "ظ", "ف"], "meaning": "быть чистым", "verified": true, "words": [
+      {"id": "nzf-nazufa", "ar": "نَظُفَ", "tr": "назуфа", "ru": "он стал чистым", "pattern": "فَعُلَ", "cat": "verb"},
+      {"id": "nzf-nazif", "ar": "نَظِيف", "tr": "назиф", "ru": "чистый", "pattern": "فَعِيل", "cat": "quality"},
+      {"id": "nzf-nazafa", "ar": "نَظَافَة", "tr": "назафа", "ru": "чистота", "pattern": "فَعَالَة", "cat": "noun"},
+      {"id": "nzf-tanzif", "ar": "تَنْظِيف", "tr": "танзиф", "ru": "уборка, чистка", "pattern": "تَفْعِيل", "cat": "noun"}
+    ]},
+    { "id": "sbh", "letters": ["س", "ب", "ح"], "meaning": "плавать", "verified": true, "words": [
+      {"id": "sbh-sabaha", "ar": "سَبَحَ", "tr": "сабаха", "ru": "он поплыл", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "sbh-sibaha", "ar": "سِبَاحَة", "tr": "сибаха", "ru": "плавание", "pattern": "فِعَالَة", "cat": "noun"},
+      {"id": "sbh-sabbah", "ar": "سَبَّاح", "tr": "саббах", "ru": "пловец", "pattern": "فَعَّال", "cat": "doer"},
+      {"id": "sbh-masbah", "ar": "مَسْبَح", "tr": "масбах", "ru": "бассейн", "pattern": "مَفْعَل", "cat": "place"}
+    ]},
+    { "id": "grb", "letters": ["غ", "ر", "ب"], "meaning": "заходить (о солнце)", "verified": true, "words": [
+      {"id": "grb-garaba", "ar": "غَرَبَ", "tr": "гараба", "ru": "(солнце) зашло", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "grb-garb", "ar": "غَرْب", "tr": "гарб", "ru": "запад", "pattern": "فَعْل", "cat": "noun"},
+      {"id": "grb-gurub", "ar": "غُرُوب", "tr": "гуруб", "ru": "закат, заход солнца", "pattern": "فُعُول", "cat": "noun"},
+      {"id": "grb-magrib", "ar": "مَغْرِب", "tr": "магриб", "ru": "место заката; Марокко", "pattern": "مَفْعِل", "cat": "place"},
+      {"id": "grb-garib", "ar": "غَرِيب", "tr": "гариб", "ru": "чужой, странный", "pattern": "فَعِيل", "cat": "quality"}
+    ]},
+    { "id": "shrq", "letters": ["ش", "ر", "ق"], "meaning": "восходить (о солнце)", "verified": true, "words": [
+      {"id": "shrq-sharaka", "ar": "شَرَقَ", "tr": "шарака", "ru": "(солнце) взошло", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "shrq-shark", "ar": "شَرْق", "tr": "шарк", "ru": "восток", "pattern": "فَعْل", "cat": "noun"},
+      {"id": "shrq-shuruk", "ar": "شُرُوق", "tr": "шурук", "ru": "восход солнца", "pattern": "فُعُول", "cat": "noun"},
+      {"id": "shrq-mashrik", "ar": "مَشْرِق", "tr": "машрик", "ru": "место восхода", "pattern": "مَفْعِل", "cat": "place"}
+    ]},
+    { "id": "hbz", "letters": ["خ", "ب", "ز"], "meaning": "печь хлеб", "verified": true, "words": [
+      {"id": "hbz-habaza", "ar": "خَبَزَ", "tr": "хабаза", "ru": "он испёк", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "hbz-hubz", "ar": "خُبْز", "tr": "хубз", "ru": "хлеб", "pattern": "فُعْل", "cat": "noun"},
+      {"id": "hbz-habbaz", "ar": "خَبَّاز", "tr": "хаббаз", "ru": "пекарь", "pattern": "فَعَّال", "cat": "doer"},
+      {"id": "hbz-mahbaz", "ar": "مَخْبَز", "tr": "махбаз", "ru": "пекарня", "pattern": "مَفْعَل", "cat": "place"},
+      {"id": "hbz-mahbuz", "ar": "مَخْبُوز", "tr": "махбуз", "ru": "испечённый; выпечка", "pattern": "مَفْعُول", "cat": "object"}
+    ]},
+    { "id": "hsn", "letters": ["ح", "س", "ن"], "meaning": "быть хорошим", "verified": true, "words": [
+      {"id": "hsn-hasuna", "ar": "حَسُنَ", "tr": "хасуна", "ru": "он был хорош", "pattern": "فَعُلَ", "cat": "verb"},
+      {"id": "hsn-husn", "ar": "حُسْن", "tr": "хусн", "ru": "красота, доброта", "pattern": "فُعْل", "cat": "noun"},
+      {"id": "hsn-hasan", "ar": "حَسَن", "tr": "хасан", "ru": "хороший", "pattern": "فَعَل", "cat": "quality", "hint": "Короткая форма без приставок — здесь признак: какой?"},
+      {"id": "hsn-ahsan", "ar": "أَحْسَن", "tr": "ахсан", "ru": "лучше, лучший", "pattern": "أَفْعَل", "cat": "quality"}
+    ]},
+    { "id": "qrb", "letters": ["ق", "ر", "ب"], "meaning": "быть близким", "verified": true, "words": [
+      {"id": "qrb-karuba", "ar": "قَرُبَ", "tr": "каруба", "ru": "он был близко", "pattern": "فَعُلَ", "cat": "verb"},
+      {"id": "qrb-kurb", "ar": "قُرْب", "tr": "курб", "ru": "близость", "pattern": "فُعْل", "cat": "noun"},
+      {"id": "qrb-karib", "ar": "قَرِيب", "tr": "кариб", "ru": "близкий; родственник", "pattern": "فَعِيل", "cat": "quality"},
+      {"id": "qrb-akrab", "ar": "أَقْرَب", "tr": "акраб", "ru": "ближе, ближайший", "pattern": "أَفْعَل", "cat": "quality"}
+    ]},
+    { "id": "bed", "letters": ["ب", "ع", "د"], "meaning": "быть далёким", "verified": true, "words": [
+      {"id": "bed-bauda", "ar": "بَعُدَ", "tr": "ба‘уда", "ru": "он был далеко", "pattern": "فَعُلَ", "cat": "verb"},
+      {"id": "bed-bud", "ar": "بُعْد", "tr": "бу‘д", "ru": "расстояние, даль", "pattern": "فُعْل", "cat": "noun"},
+      {"id": "bed-baid", "ar": "بَعِيد", "tr": "ба‘ид", "ru": "далёкий", "pattern": "فَعِيل", "cat": "quality"},
+      {"id": "bed-abad", "ar": "أَبْعَد", "tr": "аб‘ад", "ru": "дальше, дальний", "pattern": "أَفْعَل", "cat": "quality"}
+    ]},
+    { "id": "srq", "letters": ["س", "ر", "ق"], "meaning": "красть", "verified": true, "words": [
+      {"id": "srq-saraka", "ar": "سَرَقَ", "tr": "сарака", "ru": "он украл", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "srq-sarika", "ar": "سَرِقَة", "tr": "сарика", "ru": "кража", "pattern": "فَعِلَة", "cat": "noun"},
+      {"id": "srq-sarik", "ar": "سَارِق", "tr": "сарик", "ru": "вор", "pattern": "فَاعِل", "cat": "doer"},
+      {"id": "srq-masruk", "ar": "مَسْرُوق", "tr": "масрук", "ru": "украденный", "pattern": "مَفْعُول", "cat": "object"}
+    ]},
+    { "id": "qte", "letters": ["ق", "ط", "ع"], "meaning": "резать", "verified": true, "words": [
+      {"id": "qte-kataa", "ar": "قَطَعَ", "tr": "ката‘а", "ru": "он отрезал", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "qte-kyta", "ar": "قِطْعَة", "tr": "кыт‘а", "ru": "кусок", "pattern": "فِعْلَة", "cat": "noun"},
+      {"id": "qte-maktu", "ar": "مَقْطُوع", "tr": "макту‘", "ru": "отрезанный", "pattern": "مَفْعُول", "cat": "object"}
+    ]},
+    { "id": "njh", "letters": ["ن", "ج", "ح"], "meaning": "добиться успеха", "verified": true, "words": [
+      {"id": "njh-nadzhaha", "ar": "نَجَحَ", "tr": "наджаха", "ru": "он добился успеха, сдал экзамен", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "njh-nadzhah", "ar": "نَجَاح", "tr": "наджах", "ru": "успех", "pattern": "فَعَال", "cat": "noun"},
+      {"id": "njh-nadzhih", "ar": "نَاجِح", "tr": "наджих", "ru": "успешный", "pattern": "فَاعِل", "cat": "doer"}
+    ]},
+    { "id": "hdr", "letters": ["ح", "ض", "ر"], "meaning": "присутствовать", "verified": true, "words": [
+      {"id": "hdr-hadara", "ar": "حَضَرَ", "tr": "хадара", "ru": "он пришёл, присутствовал", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "hdr-hudur", "ar": "حُضُور", "tr": "худур", "ru": "присутствие", "pattern": "فُعُول", "cat": "noun"},
+      {"id": "hdr-hadir", "ar": "حَاضِر", "tr": "хадир", "ru": "присутствующий", "pattern": "فَاعِل", "cat": "doer"},
+      {"id": "hdr-muhadir", "ar": "مُحَاضِر", "tr": "мухадир", "ru": "лектор", "pattern": "مُفَاعِل", "cat": "doer"},
+      {"id": "hdr-muhadara", "ar": "مُحَاضَرَة", "tr": "мухадара", "ru": "лекция", "pattern": "مُفَاعَلَة", "cat": "noun"}
+    ]},
+    { "id": "slm", "letters": ["س", "ل", "م"], "meaning": "быть невредимым", "verified": true, "words": [
+      {"id": "slm-salima", "ar": "سَلِمَ", "tr": "салима", "ru": "он остался невредим", "pattern": "فَعِلَ", "cat": "verb"},
+      {"id": "slm-salyam", "ar": "سَلَام", "tr": "салям", "ru": "мир; приветствие", "pattern": "فَعَال", "cat": "noun"},
+      {"id": "slm-salim", "ar": "سَالِم", "tr": "салим", "ru": "невредимый", "pattern": "فَاعِل", "cat": "doer"},
+      {"id": "slm-muslim", "ar": "مُسْلِم", "tr": "муслим", "ru": "мусульманин (букв. «предавшийся Богу»)", "pattern": "مُفْعِل", "cat": "doer"},
+      {"id": "slm-islam", "ar": "إِسْلَام", "tr": "ислам", "ru": "ислам (букв. «предание себя Богу»)", "pattern": "إِفْعَال", "cat": "noun"}
+    ]},
+    { "id": "ebd", "letters": ["ع", "ب", "د"], "meaning": "поклоняться", "verified": true, "words": [
+      {"id": "ebd-abada", "ar": "عَبَدَ", "tr": "‘абада", "ru": "он поклонялся", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "ebd-ibada", "ar": "عِبَادَة", "tr": "‘ибада", "ru": "поклонение", "pattern": "فِعَالَة", "cat": "noun"},
+      {"id": "ebd-abd", "ar": "عَبْد", "tr": "‘абд", "ru": "раб, слуга (Божий)", "pattern": "فَعْل", "cat": "noun"},
+      {"id": "ebd-abid", "ar": "عَابِد", "tr": "‘абид", "ru": "поклоняющийся", "pattern": "فَاعِل", "cat": "doer"},
+      {"id": "ebd-mabad", "ar": "مَعْبَد", "tr": "ма‘бад", "ru": "храм", "pattern": "مَفْعَل", "cat": "place"}
+    ]},
+    { "id": "sbr", "letters": ["ص", "ب", "ر"], "meaning": "терпеть", "verified": true, "words": [
+      {"id": "sbr-sabara", "ar": "صَبَرَ", "tr": "сабара", "ru": "он терпел", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "sbr-sabr", "ar": "صَبْر", "tr": "сабр", "ru": "терпение", "pattern": "فَعْل", "cat": "noun"},
+      {"id": "sbr-sabir", "ar": "صَابِر", "tr": "сабир", "ru": "терпеливый", "pattern": "فَاعِل", "cat": "doer"}
+    ]},
+    { "id": "mlk", "letters": ["م", "ل", "ك"], "meaning": "владеть", "verified": true, "words": [
+      {"id": "mlk-malaka", "ar": "مَلَكَ", "tr": "малака", "ru": "он владел", "pattern": "فَعَلَ", "cat": "verb"},
+      {"id": "mlk-malik", "ar": "مَلِك", "tr": "малик", "ru": "король", "pattern": "فَعِل", "cat": "doer", "hint": "Короткое слово без приставок — здесь человек: «тот, кто владеет», король."},
+      {"id": "mlk-mamlaka", "ar": "مَمْلَكَة", "tr": "мамлака", "ru": "королевство", "pattern": "مَفْعَلَة", "cat": "place"},
+      {"id": "mlk-mamlyuk", "ar": "مَمْلُوك", "tr": "мамлюк", "ru": "принадлежащий; невольник", "pattern": "مَفْعُول", "cat": "object"}
     ]}
   ]
 }

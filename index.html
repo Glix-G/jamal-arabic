@@ -209,6 +209,14 @@ main { padding-block: 6px 48px; }
 .build-out { min-height: 104px; display: grid; place-items: center; text-align: center; border-radius: 20px; background: var(--sand); }
 .build-out .ar { font-size: 64px; line-height: 1.5; color: var(--wine-deep); }
 .build-out em { font-style: normal; color: var(--muted); font-size: 15px; line-height: 1.45; grid-row: 1; padding: 14px 18px; max-width: 460px; }
+.build-hit { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.build-hit .eyebrow { color: var(--sun-deep); }
+.hit-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; padding: 8px 16px; border-radius: 18px; background: rgba(107,30,43,0.06); }
+.hit-row .ar { font-size: 30px; line-height: 1.5; color: var(--wine); }
+.hit-row b { display: block; font-family: var(--f-disp); font-size: 22px; font-weight: 600; line-height: 1.1; }
+.hit-row small { color: var(--muted); font-size: 13px; }
+.hit-row .pill { padding: 8px 16px; font-size: 14px; }
+.build-miss { margin: 0; text-align: center; color: var(--muted); font-size: 14px; }
 .build-parts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; direction: rtl; min-height: 0; }
 .part { display: flex; flex-direction: column; align-items: center; padding: 4px 10px 6px; border-radius: 14px; border: 1px solid var(--line); background: var(--cream); }
 .part .ar { font-size: 30px; line-height: 1.45; color: var(--wine); }
@@ -1158,11 +1166,30 @@ main { padding-block: 6px 48px; }
 
   // «Тренируй соединения»: tap letters and watch them join
   const PRESETS = [["كتاب", "китаб", "книга"], ["مدرسة", "мадраса", "школа"], ["باب", "баб", "дверь"], ["جميل", "джамиль", "красивый"]];
+  // Does the built string match a word we know? Harakat and hamza seats are ignored.
+  const bare = s => s.replace(/[\u064B-\u0652\u0670]/g, "").replace(/[أإآ]/g, "ا").replace(/ى/g, "ي");
+  function lookupBuilt(str) {
+    const k = bare(str); if (k.length < 2) return [];
+    const out = WORDS.filter(w => bare(w.ar) === k);
+    const known = new Set(out.map(w => w.ru.split(",")[0].trim()));
+    PRESETS.forEach(p => { if (bare(p[0]) === k && !known.has(p[2])) out.push({ ar: p[0], tr: p[1], ru: p[2] }); });
+    Object.values(EXTRA_EXAMPLES).forEach(x => { if (bare(x.ar) === k && !known.has(x.ru)) out.push(x); });
+    return out;
+  }
+  function builtHit(str) {
+    const hits = lookupBuilt(str);
+    if (!hits.length) return str.length < 2 ? "" : `<p class="build-miss">Пока это просто набор букв: такого слова нет в словаре приложения.</p>`;
+    return `<div class="build-hit"><span class="eyebrow">✓ Это слово</span>${hits.map(w => `<div class="hit-row">
+        <span class="ar" lang="ar">${w.ar}</span><span><b>${esc(w.ru)}</b><small>${esc(w.tr)}</small></span>
+        ${canSpeak ? `<button class="pop-btn ghost" data-say="${esc(w.ar)}" aria-label="Послушать">▶</button>` : ""}
+        ${w.root ? `<button class="pill" data-goto="${w.id}">В созвездии →</button>` : ""}</div>`).join("")}</div>`;
+  }
   function renderBuilder() {
     const b = A.build;
     const joined = b.join("");
     $("#abc-build").innerHTML = `<div class="root-head"><span class="eyebrow">Тренируй соединения</span><span class="counter">буквы сами меняют форму</span></div>
-      <div class="build-out"><span class="ar" lang="ar">${joined || "&nbsp;"}</span>${b.length ? "" : `<em>Нажимайте буквы и смотрите, как они соединяются и меняют форму.<br>Перевода здесь нет — это тренировка письма. Слова с переводом — в кнопках ниже.</em>`}</div>
+      <div class="build-out"><span class="ar" lang="ar">${joined || "&nbsp;"}</span>${b.length ? "" : `<em>Нажимайте буквы и смотрите, как они соединяются и меняют форму.<br>Если наберёте слово из словаря приложения, появится его перевод. Огласовки ставить не нужно.</em>`}</div>
+      ${b.length ? builtHit(joined) : ""}
       <div class="build-parts">${b.map((ch, i) => `<span class="part ${formAt(b, i)}"><span class="ar" lang="ar">${forms(LETTERS.find(L => L.c === ch) || { c: ch, j: joinsNext(ch) })[formAt(b, i)]}</span><small>${FORM_NAME[formAt(b, i)]}</small></span>`).join("")}</div>
       <div class="build-keys">${LETTERS.map(L => `<button class="key" data-k="${L.c}" lang="ar">${L.c}</button>`).join("")}<button class="key" data-k="ة" lang="ar" title="та марбута">ة</button></div>
       <div class="build-actions">
@@ -1172,6 +1199,8 @@ main { padding-block: 6px 48px; }
   }
   $("#abc-build").addEventListener("click", e => {
     const t = e.target.closest("button"); if (!t) return;
+    if (t.dataset.say) { speak(t.dataset.say); return; }
+    if (t.dataset.goto) { const w = WBY[t.dataset.goto]; S.i = ROOTS.indexOf(RBY[w.root]); S.word = w.id; location.hash = "#tree"; return; }
     if (t.dataset.k) { if (A.build.length < 12) A.build.push(t.dataset.k); }
     else if (t.dataset.act === "back") A.build.pop();
     else if (t.dataset.act === "clear") A.build = [];
@@ -1608,7 +1637,13 @@ main { padding-block: 6px 48px; }
     "فَاعُول": "Долгие «а̄» и «ӯ» — устройство.",
     "فَعِيل": "Долгое «ӣ» перед последней буквой — чаще всего признак (какой?), иногда человек: сафӣр — посол.",
     "أَفْعَل": "«а-» в начале — «более» или «самый».",
-    "تَفْعِيل": "«та-» в начале и долгое «ӣ» — само действие."
+    "تَفْعِيل": "«та-» в начале и долгое «ӣ» — само действие.",
+    "فَعْلَان": "«-а̄н» на конце — состояние: какой сейчас? (радостный, голодный)",
+    "مُفْعِل": "«му-» в начале и «и» перед последней буквой — тот, кто делает или вызывает действие: смешной — «вызывающий смех».",
+    "مُفَاعَلَة": "«му-», долгое «а̄» после первой буквы корня и «-а» на конце — действие, в котором участвуют несколько человек: лекция.",
+    "إِفْعَال": "«и-» в начале и долгое «а̄» перед последней буквой — само действие.",
+    "فَعُول": "Долгое «ӯ» перед последней буквой — очень такой, такой всегда.",
+    "مَفَاعِل": "«ма-» в начале и долгое «а̄» после первой буквы корня — ломаное множественное число."
   };
   const hintFor = w => w.hint || PATTERN_HINT[w.pattern] || "Короткая форма без приставок — само действие или вещь.";
   const short = ru => ru.split(",")[0].trim();
