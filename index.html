@@ -16,7 +16,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@300;400;500;600&display=swap">
 <style>
 /* Layout: sand-and-wine bento — a mihrab arch holding a tree of life (left), soft glass cards + black pills (right). Single deliberate light look. */
 :root {
@@ -34,9 +34,9 @@
   --sun: #EE7A2F;
   --sun-deep: #C2551C;
   --black: #1C1716;
-  --f-ar: "Amiri", "Geeza Pro", "Times New Roman", serif;
-  --f-cal: "Amiri", "Geeza Pro", "Times New Roman", serif;
-  --f-logo: "Aref Ruqaa", "Amiri", "Geeza Pro", serif;
+  --f-ar: "Noto Naskh Arabic", "Geeza Pro", "Times New Roman", serif;   /* plain book Naskh: letters join in a line, no calligraphic stacking */
+  --f-cal: "Noto Naskh Arabic", "Geeza Pro", "Times New Roman", serif;
+  --f-logo: "Aref Ruqaa", "Noto Naskh Arabic", "Geeza Pro", serif;
   --f-ui: "Manrope", "Helvetica Neue", system-ui, sans-serif;
   --f-disp: "Cormorant Garamond", "Times New Roman", serif;
   --r: 28px;
@@ -208,7 +208,7 @@ main { padding-block: 6px 48px; }
 .abc-build { display: flex; flex-direction: column; gap: 16px; }
 .build-out { min-height: 104px; display: grid; place-items: center; text-align: center; border-radius: 20px; background: var(--sand); }
 .build-out .ar { font-size: 64px; line-height: 1.5; color: var(--wine-deep); }
-.build-out em { font-style: normal; color: var(--muted); font-size: 15px; grid-row: 1; }
+.build-out em { font-style: normal; color: var(--muted); font-size: 15px; line-height: 1.45; grid-row: 1; padding: 14px 18px; max-width: 460px; }
 .build-parts { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; direction: rtl; min-height: 0; }
 .part { display: flex; flex-direction: column; align-items: center; padding: 4px 10px 6px; border-radius: 14px; border: 1px solid var(--line); background: var(--cream); }
 .part .ar { font-size: 30px; line-height: 1.45; color: var(--wine); }
@@ -1156,13 +1156,13 @@ main { padding-block: 6px 48px; }
   });
   $("#abc-card").addEventListener("click", e => { const t = e.target.closest("[data-say]"); if (t) speak(t.dataset.say); });
 
-  // «Собери слово»: tap letters and watch them join
+  // «Тренируй соединения»: tap letters and watch them join
   const PRESETS = [["كتاب", "китаб", "книга"], ["مدرسة", "мадраса", "школа"], ["باب", "баб", "дверь"], ["جميل", "джамиль", "красивый"]];
   function renderBuilder() {
     const b = A.build;
     const joined = b.join("");
-    $("#abc-build").innerHTML = `<div class="root-head"><span class="eyebrow">Собери слово</span><span class="counter">нажимайте буквы — они сами соединятся</span></div>
-      <div class="build-out"><span class="ar" lang="ar">${joined || "&nbsp;"}</span>${b.length ? "" : `<em>Начните с любой буквы или выберите пример ниже</em>`}</div>
+    $("#abc-build").innerHTML = `<div class="root-head"><span class="eyebrow">Тренируй соединения</span><span class="counter">буквы сами меняют форму</span></div>
+      <div class="build-out"><span class="ar" lang="ar">${joined || "&nbsp;"}</span>${b.length ? "" : `<em>Нажимайте буквы и смотрите, как они соединяются и меняют форму.<br>Перевода здесь нет — это тренировка письма. Слова с переводом — в кнопках ниже.</em>`}</div>
       <div class="build-parts">${b.map((ch, i) => `<span class="part ${formAt(b, i)}"><span class="ar" lang="ar">${forms(LETTERS.find(L => L.c === ch) || { c: ch, j: joinsNext(ch) })[formAt(b, i)]}</span><small>${FORM_NAME[formAt(b, i)]}</small></span>`).join("")}</div>
       <div class="build-keys">${LETTERS.map(L => `<button class="key" data-k="${L.c}" lang="ar">${L.c}</button>`).join("")}<button class="key" data-k="ة" lang="ar" title="та марбута">ة</button></div>
       <div class="build-actions">
