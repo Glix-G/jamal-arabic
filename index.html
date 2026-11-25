@@ -206,8 +206,14 @@ main { padding-block: 6px 48px; }
 .abc-head.enter, .abc-forms.enter { animation: fadeup 0.4s cubic-bezier(.2,.8,.2,1) both; }
 .abc-forms.enter { animation-delay: 0.05s; }
 .abc-build { display: flex; flex-direction: column; gap: 16px; }
-.build-out { min-height: 104px; display: grid; place-items: center; text-align: center; border-radius: 20px; background: var(--sand); }
-.build-out .ar { font-size: 64px; line-height: 1.5; color: var(--wine-deep); }
+.build-out { height: 150px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border-radius: 20px; background: var(--sand); padding: 0 12px; }
+.build-out .ar { font-size: 64px; line-height: 1.4; color: var(--wine-deep); white-space: nowrap; }
+.build-out .ar.long { font-size: 44px; }
+.build-out .ar.xlong { font-size: 38px; }
+.build-status { max-width: 100%; font-size: 15px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.build-status.ok { color: var(--sun-deep); font-weight: 600; }
+.build-detail { display: flex; flex-direction: column; gap: 14px; }
+.build-detail:empty { display: none; }
 .build-out em { font-style: normal; color: var(--muted); font-size: 15px; line-height: 1.45; grid-row: 1; padding: 14px 18px; max-width: 460px; }
 .build-hit { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .build-hit .eyebrow { color: var(--sun-deep); }
@@ -223,7 +229,7 @@ main { padding-block: 6px 48px; }
 .part small { direction: ltr; font-size: 11.5px; color: var(--muted); }
 .build-keys { display: flex; flex-wrap: wrap; gap: 6px; direction: rtl; justify-content: center; }
 .key { width: 44px; height: 48px; border-radius: 12px; border: 1px solid var(--line); background: var(--cream); font-family: var(--f-ar); font-size: 26px; color: var(--wine); cursor: pointer; transition: background 0.15s, transform 0.15s; }
-.key:hover { background: var(--sand-2); transform: translateY(-1px); }
+@media (hover: hover) { .key:hover { background: var(--sand-2); transform: translateY(-1px); } }
 .key:active { transform: scale(0.95); }
 .build-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .build-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-left: auto; }
@@ -251,7 +257,11 @@ main { padding-block: 6px 48px; }
   .abc-forms { gap: 6px; }
   .abc-form .ar { font-size: 38px; }
   .abc-form small { font-size: 11px; }
+  .build-out { height: 148px; }
+  .build-out em { font-size: 14px; padding: 10px 12px; }
   .build-out .ar { font-size: 48px; }
+  .build-out .ar.long { font-size: 32px; }
+  .build-out .ar.xlong { font-size: 24px; }
   .key { width: 38px; height: 44px; font-size: 22px; }
   .build-presets { margin-left: 0; }
 }
@@ -1176,26 +1186,38 @@ main { padding-block: 6px 48px; }
     Object.values(EXTRA_EXAMPLES).forEach(x => { if (bare(x.ar) === k && !known.has(x.ru)) out.push(x); });
     return out;
   }
-  function builtHit(str) {
-    const hits = lookupBuilt(str);
-    if (!hits.length) return str.length < 2 ? "" : `<p class="build-miss">Пока это просто набор букв: такого слова нет в словаре приложения.</p>`;
+  // Short meaning for the status line inside the output box
+  const gist = ru => ru.split(/[,(;]/)[0].trim();
+  function hitRows(hits) {
+    if (!hits.length) return "";
     return `<div class="build-hit"><span class="eyebrow">✓ Это слово</span>${hits.map(w => `<div class="hit-row">
         <span class="ar" lang="ar">${w.ar}</span><span><b>${esc(w.ru)}</b><small>${esc(w.tr)}</small></span>
         ${canSpeak ? `<button class="pop-btn ghost" data-say="${esc(w.ar)}" aria-label="Послушать">▶</button>` : ""}
         ${w.root ? `<button class="pill" data-goto="${w.id}">В созвездии →</button>` : ""}</div>`).join("")}</div>`;
   }
+  // The keyboard is drawn once and never moves: everything that changes size
+  // (letter breakdown, translations) sits BELOW it, and the output box has a fixed height.
+  // Otherwise the keys jump under the finger and the next tap lands on the wrong letter.
   function renderBuilder() {
-    const b = A.build;
-    const joined = b.join("");
-    $("#abc-build").innerHTML = `<div class="root-head"><span class="eyebrow">Тренируй соединения</span><span class="counter">буквы сами меняют форму</span></div>
-      <div class="build-out"><span class="ar" lang="ar">${joined || "&nbsp;"}</span>${b.length ? "" : `<em>Нажимайте буквы и смотрите, как они соединяются и меняют форму.<br>Если наберёте слово из словаря приложения, появится его перевод. Огласовки ставить не нужно.</em>`}</div>
-      ${b.length ? builtHit(joined) : ""}
-      <div class="build-parts">${b.map((ch, i) => `<span class="part ${formAt(b, i)}"><span class="ar" lang="ar">${forms(LETTERS.find(L => L.c === ch) || { c: ch, j: joinsNext(ch) })[formAt(b, i)]}</span><small>${FORM_NAME[formAt(b, i)]}</small></span>`).join("")}</div>
-      <div class="build-keys">${LETTERS.map(L => `<button class="key" data-k="${L.c}" lang="ar">${L.c}</button>`).join("")}<button class="key" data-k="ة" lang="ar" title="та марбута">ة</button></div>
-      <div class="build-actions">
-        <button class="pill" data-act="back">⌫ Стереть букву</button><button class="pill" data-act="clear">Очистить</button>
-        <span class="build-presets">${PRESETS.map(p => `<button class="pill" data-preset="${p[0]}"><span class="ar" lang="ar">${p[0]}</span> ${esc(p[2])}</button>`).join("")}</span>
-      </div>`;
+    const box = $("#abc-build");
+    if (!box.querySelector(".build-keys")) {
+      box.innerHTML = `<div class="root-head"><span class="eyebrow">Тренируй соединения</span><span class="counter">буквы сами меняют форму</span></div>
+        <div class="build-out" aria-live="polite"></div>
+        <div class="build-keys">${LETTERS.map(L => `<button class="key" data-k="${L.c}" lang="ar">${L.c}</button>`).join("")}<button class="key" data-k="ة" lang="ar" title="та марбута">ة</button></div>
+        <div class="build-actions">
+          <button class="pill" data-act="back">⌫ Стереть букву</button><button class="pill" data-act="clear">Очистить</button>
+          <span class="build-presets">${PRESETS.map(p => `<button class="pill" data-preset="${p[0]}"><span class="ar" lang="ar">${p[0]}</span> ${esc(p[2])}</button>`).join("")}</span>
+        </div>
+        <div class="build-detail"></div>`;
+    }
+    const b = A.build, joined = b.join("");
+    const hits = b.length ? lookupBuilt(joined) : [];
+    const status = !b.length ? "" : hits.length ? `<span class="build-status ok">✓ ${esc(hits.map(w => gist(w.ru)).join(" · "))}</span>`
+      : b.length >= 2 ? `<span class="build-status">набор букв — такого слова нет в словаре</span>` : `<span class="build-status">&nbsp;</span>`;
+    box.querySelector(".build-out").innerHTML = b.length
+      ? `<span class="ar${b.length > 9 ? " long xlong" : b.length > 7 ? " long" : ""}" lang="ar">${joined}</span>${status}`
+      : `<em>Нажимайте буквы и смотрите, как они соединяются и меняют форму.<br>Если наберёте слово из словаря приложения, появится его перевод. Огласовки ставить не нужно.</em>`;
+    box.querySelector(".build-detail").innerHTML = b.length ? `<div class="build-parts">${b.map((ch, i) => `<span class="part ${formAt(b, i)}"><span class="ar" lang="ar">${forms(LETTERS.find(L => L.c === ch) || { c: ch, j: joinsNext(ch) })[formAt(b, i)]}</span><small>${FORM_NAME[formAt(b, i)]}</small></span>`).join("")}</div>${hitRows(hits)}` : "";
   }
   $("#abc-build").addEventListener("click", e => {
     const t = e.target.closest("button"); if (!t) return;
